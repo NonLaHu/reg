@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Create User — Admin</title>
+
+    <link rel="stylesheet" th:href="@{/public/css/user-create.css}" />
+</head>
+<body>
+    <a href="/admin" class="back-arrow">&#8592;</a>
+    <div class="theme-toggle">
+        <button id="toggleTheme">🌙 Dark</button>
+    </div>
+<main class="page">
+    <header class="topbar">
+        <h1 class="brand">Admin • Create User</h1>
+        <div id="authState" class="auth-state" aria-live="polite"></div>
+    </header>
+
+    <section class="card form-card" aria-labelledby="formTitle">
+        <h2 id="formTitle">New User</h2>
+
+        <form id="userForm" novalidate>
+            <div class="field">
+                <label for="username">Username <span class="req">*</span></label>
+                <input id="username" name="username" type="text" required maxlength="50" placeholder="Your Full Name"/>
+            </div>
+
+            <div class="field">
+                <label for="email">Serial Id <span class="req">*</span></label>
+                <input id="email" name="email" type="email" required placeholder="john@example.com"/>
+            </div>
+
+            <div class="field">
+                <label for="role">Role <span class="req">*</span></label>
+                <select id="role" name="role" required>
+                    <option value="">Select role</option>
+                    <th:block th:each="role : ${roles}">
+                        <option th:value="${role.name}" th:text="${role.name}">ROLE_NAME</option>
+                    </th:block>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="password">Password <span class="req">*</span></label>
+                <input id="password" name="password" type="password" required placeholder="********"/>
+            </div>
+
+            <div class="field">
+                <label for="confirmPassword">Confirm Password <span class="req">*</span></label>
+                <input id="confirmPassword" name="confirmPassword" type="password" required placeholder="********"/>
+            </div>
+
+            <div class="actions">
+                <button type="button" id="submitBtn" class="btn primary">Create</button>
+                <button type="reset" class="btn secondary">Reset</button>
+            </div>
+
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+        </form>
+    </section>
+</main>
+
+<script th:src="@{/public/js/user-create.js}"></script>
+</body>
+</html>

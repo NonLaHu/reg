@@ -1,0 +1,206 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin • Student Detail — [[${student.name}]]</title>
+
+  <!-- external CSS -->
+  <link rel="stylesheet" th:href="@{/public/css/student_detail.css}" />
+
+</head>
+<body>
+
+  <nav class="topbar" role="navigation" aria-label="Admin top bar">
+    <div class="brand">
+      <a th:href="@{/admin}" class="brand-link">Admin Console</a>
+      <span class="sep">/</span>
+      <a th:href="@{/admin/students}" class="muted">Students</a>
+    </div>
+
+    <div class="top-actions">
+      <button id="theme-toggle" class="icon-btn" aria-pressed="false" title="Toggle theme">🌙</button>
+      <a th:href="@{'/admin/students/' + ${student.id} + '/edit'}" class="btn primary">Edit</a>
+      <button id="reset-password" class="btn danger" title="Reset student's password">Reset Password</button>
+      <a th:if="${student.preEnrollment != null && student.preEnrollment.passCertificateUrl != null}"
+         th:href="${student.preEnrollment.passCertificateUrl}" target="_blank" class="btn">Download Pass Cert</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-left">
+      <h1 th:text="${student.name}">Student Name</h1>
+      <p class="meta">
+        <strong th:text="${student.rollNo}">ROLL001</strong>
+        <span class="dot">•</span>
+        <span th:text="${student.major != null ? student.major.name : '—'}">Major</span>
+        <span class="dot">•</span>
+        <small th:text="${student.semester != null ? student.semester.yearLabel : '—'}">Semester</small>
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="status">
+        <span th:classappend="${student.enrolled} ? 'pill enrolled' : 'pill not-enrolled'"
+              th:text="${student.enrolled} ? 'Enrolled' : 'Not enrolled'">Enrolled</span>
+      </div>
+      <div class="timestamps">
+        <div><span class="label">Created</span><div class="value" th:text="${student.createdAt}">2025-01-01 12:00</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid" role="main">
+    <!-- LEFT (primary) -->
+    <section class="panel primary" aria-labelledby="personal-heading">
+      <div class="panel-header">
+        <h2 id="personal-heading">Personal & Pre-enrollment</h2>
+      </div>
+
+      <dl class="info-grid">
+        <div><dt>ID</dt><dd id="studentId" th:text="${student.id}">1</dd></div>
+        <div><dt>Full name</dt><dd th:text="${student.name}">Full Name</dd></div>
+        <div><dt>Roll No</dt><dd th:text="${student.rollNo}">ROLL001</dd></div>
+        <div><dt>Birth date</dt><dd id="birth-date" th:text="${student.birthDate}">1999-01-01</dd></div>
+        <div><dt>Age</dt><dd id="age" >0</dd></div>
+        <div><dt>Major</dt><dd th:text="${student.major != null ? student.major.name : '—'}">Major name</dd></div>
+        <div><dt>Semester</dt><dd th:text="${student.semester != null ? student.semester.yearLabel : '—'}">Year label</dd></div>
+
+        <div class="section-sep" th:if="${student.preEnrollment != null}"><h3>Pre-enrollment details</h3></div>
+
+        <div th:if="${student.preEnrollment != null}"><dt>Local full name</dt><dd th:text="${student.preEnrollment.fullNameMm}">Local</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Gender</dt><dd th:text="${student.preEnrollment.gender}">MALE</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Email</dt><dd><a th:href="'mailto:' + ${student.preEnrollment.email}" th:text="${student.preEnrollment.email}">email</a></dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>NRC</dt><dd th:text="${student.preEnrollment.nrc}">NRC123</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Phone</dt>
+          <dd>
+            <a th:href="'tel:' + ${student.preEnrollment.phoneNumber}" th:text="${student.preEnrollment.phoneNumber}">09xxxx</a>
+            <span th:if="${student.preEnrollment.viberPhoneNumber != null}"> • Viber: <a th:href="'tel:' + ${student.preEnrollment.viberPhoneNumber}" th:text="${student.preEnrollment.viberPhoneNumber}">viber</a></span>
+          </dd>
+        </div>
+        <div th:if="${student.preEnrollment != null}"><dt>Uni entrance roll</dt><dd th:text="${student.preEnrollment.uniEntranceRollno}">UE-001</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Academic year</dt><dd th:text="${student.preEnrollment.uniEntranceAcademicYear}">2024-2025</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Status</dt><dd th:text="${student.preEnrollment.status}">PENDING</dd></div>
+        <div th:if="${student.preEnrollment != null}"><dt>Informed</dt><dd th:text="${student.preEnrollment.informed}">false</dd></div>
+        <div th:if="${student.preEnrollment != null}">
+          <dt>Pre-Enrollment</dt>
+          <dd>
+            <span th:onclick="'viewEnrollmentODetail(' + ${student.preEnrollment.id} + ')'">Detail</span>
+          </dd>
+        </div>
+
+        <!-- Old Pre-enrollment -->
+        <div class="section-sep" th:if="${student.preEnrollmentOldDTO != null}">
+            <h3>Pre-enrollment details (Old)</h3>
+        </div>
+
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Local full name</dt><dd th:text="${student.preEnrollmentOldDTO.fullNameMm}">Local</dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Gender</dt><dd th:text="${student.preEnrollmentOldDTO.gender}">MALE</dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Email</dt><dd><a th:href="'mailto:' + ${student.preEnrollmentOldDTO.email}" th:text="${student.preEnrollmentOldDTO.email}">email</a></dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>NRC</dt><dd th:text="${student.preEnrollmentOldDTO.nrc}">NRC123</dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Phone</dt>
+          <dd>
+            <a th:href="'tel:' + ${student.preEnrollmentOldDTO.phoneNumber}" th:text="${student.preEnrollmentOldDTO.phoneNumber}">09xxxx</a>
+            <span th:if="${student.preEnrollmentOldDTO.viberPhoneNumber != null}"> • Viber: <a th:href="'tel:' + ${student.preEnrollmentOldDTO.viberPhoneNumber}" th:text="${student.preEnrollmentOldDTO.viberPhoneNumber}">viber</a></span>
+          </dd>
+        </div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Status</dt><dd th:text="${student.preEnrollmentOldDTO.status}">PENDING</dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}"><dt>Informed</dt><dd th:text="${student.preEnrollmentOldDTO.informed}">false</dd></div>
+        <div th:if="${student.preEnrollmentOldDTO != null}">
+          <dt>Pre-enrollment</dt>
+          <dd>
+            <span th:onclick="'viewEnrollmentODetail(' + ${student.preEnrollmentOldDTO.id} + ')'">Detail</span>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="card notes">
+        <label for="admin-notes" class="label">Internal admin notes</label>
+        <textarea id="admin-notes" placeholder="Write internal notes — not visible to student"></textarea>
+        <div class="notes-actions">
+          <button id="save-notes" class="btn">Save Note</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT (secondary) -->
+    <aside class="panel aside" aria-labelledby="history-heading">
+      <div class="panel-header">
+        <h2 id="history-heading">Enrollment History</h2>
+      </div>
+
+      <div class="history">
+        <table class="history-table" role="table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Status</th><th>Fresher</th><th>Created</th><th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="app : ${student.enrollmentApplications}">
+              <td>  <button type="button" 
+                            th:attr="data-field=${app.id}" 
+                            th:text="${app.id}" 
+                            class="link-button"
+                            onclick="viewEnrollmentDetailR(this.dataset.field)">
+                        1
+                    </button>
+            </td>
+              <td th:text="${app.status}">PENDING</td>
+              <td th:text="${app.isFresher}">true</td>
+              <td th:text="${app.createdAt}">2025-01-01</td>
+              <td th:text="${app.updatedAt}">2025-01-02</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(student.enrollmentApplications)}">
+              <td colspan="5" class="muted">No records</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card account">
+        <h3>Account / Security</h3>
+        <dl class="small-grid">
+          <div><dt>User ID</dt><dd th:text="${student.user != null ? student.user.id : '—'}">—</dd></div>
+          <div><dt>Username</dt><dd th:text="${student.user != null ? student.user.fullName : '—'}">—</dd></div>
+          <div><dt>User email</dt><dd th:text="${student.user != null ? student.user.email : '—'}">—</dd></div>
+        </dl>
+      </div>
+
+      <div class="card activity">
+        <h3>Recent activity</h3>
+        <ul>
+          <!-- placeholder activities -->
+          <li>Record created <small th:text="${student.createdAt}">2025-01-01</small></li>
+          <li th:each="app : ${student.enrollmentApplications}" th:text="'Application #' + ${app.id} + ' — ' + ${app.status}">Application</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- confirm modal -->
+  <div id="confirm" class="modal" aria-hidden="true" role="dialog" aria-labelledby="confirm-title">
+    <div class="modal-card">
+      <h4 id="confirm-title">Confirm</h4>
+      <p id="confirm-text">Are you sure?</p>
+      <div class="modal-actions">
+        <button id="confirm-yes" class="btn danger">Yes</button>
+        <button id="confirm-no" class="btn">No</button>
+      </div>
+    </div>
+  </div>
+    
+    <div id="password-overlay" class="password-overlay hidden">
+    <div class="password-container">
+        <button class="close-btn" id="close-password">&times;</button>
+        <h3>New Password</h3>
+        <div class="password-box">
+        <input type="text" id="new-password" readonly />
+        <button id="copy-password" type="button">Copy</button>
+        </div>
+    </div>
+    </div>
+
+
+
+</body>
+</html>

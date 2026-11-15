@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enrollment Detail</title>
+</head>
+<body>
+  <div id="container"></div>
+
+  <script>
+  (function() {
+    const content = sessionStorage.getItem("pageContent");
+    const container = document.getElementById("container");
+
+    if (content) {
+      // Inject the HTML content
+      container.innerHTML = content;
+
+      // Array of external script URLs needed by the injected content
+      const scriptsToLoad = [
+          "/public/js/preview_pre_enrollment_dark_theme.js", // example: your pass certificate preview logic
+        "/public/js/preview_pre_enrollment.js",
+        "/public/js/preview_pre_enrollment_accept.js"
+      ];
+
+      // Load each script sequentially
+      scriptsToLoad.forEach(src => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = false; // keep execution order
+        document.body.appendChild(script);
+      });
+
+    } else {
+      container.innerHTML = "<p>No content found</p>";
+    }
+  })();
+  </script>
+
+</body>
+</html>

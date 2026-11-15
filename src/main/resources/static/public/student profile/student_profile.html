@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="student_profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1><a href="#" class="utycc1">UTYCC</a> Portal - Student Dashboard</h1>
+    <div class="icons">
+      <span><i id="edit-btn" class="fa-solid fa-pen-to-square"></i></span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Welcome -->
+    <div class="welcome">
+      Welcome to <a href="#" class="utycc2">UTYCC</a>, <strong id="welcome-name">miu miu</strong>
+    </div>
+
+    <!-- Profile -->
+    <div class="card1">
+      <h2>Profile Overview</h2>
+      <div class="profile">
+        <div class="pic-wrap">
+          <img id="profile-pic" src="images/profile icon.png" alt="Profile Picture">
+          <div id="pic-edit-badge" class="pic-edit-badge" title="Click to upload a new photo">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+        </div>
+        <input type="file" id="upload-pic" accept="image/*" style="display:none;">
+        <div>
+          <p><strong>Name:</strong> <input type="text" value="miu miu" id="name"></p>
+          <p><strong>Major:</strong> IST</p>
+          <p><strong>Roll No:</strong> 3IST-24</p>
+          <p><strong>Year:</strong> 3rd</p>
+          <p><strong>Semester:</strong> 2nd</p>
+          <p><strong>Status:</strong> <span class="status accepted">Accepted</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Details -->
+    <div class="card1">
+      <h2>Personal Details</h2>
+      <p><strong>NRC:</strong> 12/KaMaNa(N)123456</p>
+      <p><strong>Date of Birth:</strong> 25 May 2003</p>
+      <p><strong>Phone:</strong> <input type="tel" value="+959409004168" id="phone"></p>
+      <p><strong>Email:</strong> <input type="email" value="thuralwink@email.com" id="email"></p>
+    </div>
+
+    <!-- Quick Access -->
+    <div class="card2">
+      <h2>Quick Access</h2>
+      <div class="quick-links">
+        <a href="#">Announcements</a>
+        <a href="#">Home</a>
+        <a href="#">FAQs</a>
+        <a href="#" id="password-reset-link">Password Reset</a>
+        <a href="#">My Courses</a>
+        <a href="#">Exam Schedule</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="password-modal">
+      <div class="modal-header">
+        <h2>Reset Password</h2>
+        <button class="close-btn" id="close-modal">&times;</button>
+      </div>
+      <form id="reset-form">
+
+        <!-- Old Password -->
+        <div class="input-group">
+          <label for="old-pass"><strong>Old Password:</strong></label>
+          <div class="input-wrapper">
+            <input type="password" id="old-pass" required>
+            <i class="fa-solid fa-eye toggle-pass" data-target="old-pass"></i>
+          </div>
+        </div>
+
+        <!-- New Password -->
+        <div class="input-group">
+          <label for="new-pass"><strong>New Password:</strong></label>
+          <div class="input-wrapper">
+            <input type="password" id="new-pass" required>
+            <i class="fa-solid fa-eye toggle-pass" data-target="new-pass"></i>
+          </div>
+          <p class="error-msg" id="new-error">Password must be at least 5 characters!</p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-group">
+          <label for="confirm-pass"><strong>Confirm Password:</strong></label>
+          <div class="input-wrapper">
+            <input type="password" id="confirm-pass" required>
+            <i class="fa-solid fa-eye toggle-pass" data-target="confirm-pass"></i>
+          </div>
+          <p class="error-msg" id="confirm-error">Passwords do not match!</p>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn" disabled>Update Password</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 UTYCC | Support: support@utycc.com
+  </footer>
+
+  <script>
+    /* === Edit Profile Logic === */
+    const editBtn = document.getElementById("edit-btn");
+    const profilePic = document.getElementById("profile-pic");
+    const uploadPic = document.getElementById("upload-pic");
+    const picBadge = document.getElementById("pic-edit-badge");
+
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+    const emailInput = document.getElementById("email");
+
+    let editMode = false;
+
+    editBtn.addEventListener("click", () => {
+      editMode = !editMode;
+
+      nameInput.disabled = !editMode;
+      phoneInput.disabled = !editMode;
+      emailInput.disabled = !editMode;
+
+      // Show/hide overlay icon on the profile picture
+      picBadge.classList.toggle("show", editMode);
+
+      if (editMode) {
+        profilePic.addEventListener("click", openUploader);
+        picBadge.addEventListener("click", openUploader);
+        editBtn.classList.remove("fa-pen-to-square");
+        editBtn.classList.add("fa-check");
+
+        // highlight editable fields
+        nameInput.classList.add("editable");
+        phoneInput.classList.add("editable");
+        emailInput.classList.add("editable");
+      } else {
+        profilePic.removeEventListener("click", openUploader);
+        picBadge.removeEventListener("click", openUploader);
+        editBtn.classList.remove("fa-check");
+        editBtn.classList.add("fa-pen-to-square");
+        // remove highlight
+        nameInput.classList.remove("editable");
+        phoneInput.classList.remove("editable");
+        emailInput.classList.remove("editable");
+
+        document.getElementById("welcome-name").textContent = nameInput.value;
+        // (Kept your profile save alert as-is)
+        alert("Saved!\nName: " + nameInput.value +
+          "\nPhone: " + phoneInput.value +
+          "\nEmail: " + emailInput.value);
+      }
+    });
+
+    function openUploader() { uploadPic.click(); }
+    uploadPic.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => profilePic.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Disable inputs initially
+    nameInput.disabled = true;
+    phoneInput.disabled = true;
+    emailInput.disabled = true;
+
+  </script>
+  <script>
+    const resetLink = document.getElementById("password-reset-link");
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modal = document.getElementById("password-modal");
+    const closeModal = document.getElementById("close-modal");
+    const form = document.getElementById("reset-form");
+
+    const newPass = document.getElementById("new-pass");
+    const confirmPass = document.getElementById("confirm-pass");
+    const newError = document.getElementById("new-error");
+    const confirmError = document.getElementById("confirm-error");
+    const submitBtn = document.getElementById("submit-btn");
+
+    // Open modal
+    resetLink.addEventListener("click", () => {
+      modalOverlay.style.display = "flex";
+      setTimeout(() => modal.classList.add("show"), 10);
+    });
+
+    // Close modal
+    function hideModal() {
+      modal.classList.remove("show");
+      setTimeout(() => modalOverlay.style.display = "none", 200);
+      form.reset();
+      newError.style.display = "none";
+      confirmError.style.display = "none";
+      submitBtn.disabled = true;
+    }
+    closeModal.addEventListener("click", hideModal);
+    modalOverlay.addEventListener("click", e => {
+      if (e.target === modalOverlay) hideModal();
+    });
+
+    // Toggle password visibility
+    document.querySelectorAll(".toggle-pass").forEach(icon => {
+      icon.addEventListener("click", () => {
+        const target = document.getElementById(icon.dataset.target);
+        if (target.type === "password") {
+          target.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          target.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      });
+    });
+
+    // Real-time validation
+    function validateForm() {
+      let valid = true;
+
+      // Check new password length
+      if (newPass.value.length < 5) {
+        newError.style.display = "block";
+        valid = false;
+      } else {
+        newError.style.display = "none";
+      }
+
+      // Check confirm password match
+      if (confirmPass.value !== newPass.value || confirmPass.value === "") {
+        confirmError.style.display = "block";
+        valid = false;
+      } else {
+        confirmError.style.display = "none";
+      }
+
+      submitBtn.disabled = !valid;
+    }
+
+    newPass.addEventListener("input", validateForm);
+    confirmPass.addEventListener("input", validateForm);
+
+    // Form submit
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      console.log("Password updated successfully!");
+      hideModal();
+    });
+  </script>
+
+</body>
+
+</html>

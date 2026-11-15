@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre Enrollment Form</title>
+    <link rel="stylesheet" th:href="@{/public/css/pre_enrollment_old.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- language switch button on top right-->
+    <div class="floating-button">
+        <button class="lang-toggle" role="switch" aria-checked="false" aria-label="Toggle Myanmar language">
+            <span class="track" aria-hidden="true">
+                <span class="label-right">မြန်</span>
+                <span class="label-left">EN</span>
+                <span class="handle" aria-hidden="true"></span>
+            </span>
+        </button>
+    </div>
+    <div class="page">
+        <div class="form-container" role="main" aria-labelledby="formTitle">
+
+            <div class="form-meta" aria-hidden="false">
+            <div aria-hidden="true">
+                <img class="logo" src="/public/asset/Logo_of_UTYCC.png" >
+            </div>
+            <div class="brand-title">Verifying the student</div>
+            <div class="brand-sub" data-text-mm="ကျောင်းဝင်ခွင့်ကြို မှတ်ပုံတင်လုပ်ငန်းစဉ်ကို သက်ဆိုင်ရာ ကျောင်းသား ဖြစ်ကြောင်း စစ်ဆေးခြင်းနှင့် အတည်ပြုခြင်း">The pre-enrollment process of checking and confirming that the student is indeed eligible/accepted</div>
+
+            <div style="width:100%; margin-top:8px;">
+                <small style="color:var(--muted);" data-text-mm="လိုအပ်သောအချက်အလက်များကို ပြင်ဆင်ထားပါ">Please prepare a pass certificate and your Uni entrance details.</small>
+            </div>
+            </div>
+
+            <div class="form-main">
+            <h1 id="formTitle" data-text-mm="ကျောင်းသားမှန်ကန်ကြောင်း လုပ်ငန်းစဥ်">Verifying Process</h1>
+            <p class="lead" data-text-mm="ကျောင်းဝင်ခွင့်ကြို မှတ်ပုံတင်လုပ်ငန်းစဉ်ကို သက်ဆိုင်ရာ ကျောင်းသား ဖြစ်ကြောင်း စစ်ဆေးခြင်းနှင့် အတည်ပြုခြင်း">Fill required fields. Fields marked with * must be completed before submission. only fill with Mm language.</p>
+
+            <form id="preEnrollmentForm">
+                <div >
+                    <label for="fullNameMm" data-text-mm="နာမည်အပြည့်အစုံ">*Full Name (MM):</label>
+                    <input type="text" id="fullNameMm" name="fullNameMm" required placeholder="ဥပမာ - ကျန်စစ်သား-အလှံပြစ်စား" />
+                </div>
+
+                <div >
+                    <label for="prevRollNo" data-text-mm="အရင်နှစ် ခုံနံပါတ်">*Roll-No:</label>
+                    <input type="text" id="prevRollNo" name="prevRollNo" required placeholder="ဥပမာ - 1IST-11" />
+                </div>
+
+                <div>
+                    <label for="gender" data-text-mm="လိင်">*Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="email" data-text-mm="အီးမေးလ်">Email (optional):</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" />
+                </div>
+
+                <div>
+                    <label for="major" data-text-mm="မေဂျာ">*Major:</label>
+                    <select id="major" required>
+                        <option value="" disabled selected>Select Major</option>
+                        <option th:each="m : ${majors}" th:value="${m.id}" th:text="${m.code}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="majorYear" data-text-mm="တက်ရောက်မည့်နှစ်">*Attending-Year:</label>
+                    <select id="majorYear" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option th:each="y : ${majorYears}" 
+                                th:value="${y.id}" 
+                                th:text="${y.yearLabel}"
+                                th:data-major-id="${y.major.id}"></option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="phoneNumber" data-text-mm="ဖုန်းနံပါတ်">*Phone Number:</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="09 XXX XXX XXX" />
+                </div>
+
+                <div>
+                    <label for="viberPhoneNumber" data-text-mm="viber ဖုန်းနံပါတ်">*Viber Phone Number:</label>
+                    <input type="text" id="viberPhoneNumber" name="viberPhoneNumber" required placeholder="09 XXX XXX XXX" />
+                </div>
+ 
+                <div class="field-full">
+                    <label for="studentIdCardUrl" class="label-block" data-text-mm="ကျောင်းသားကတ်">*Student Card:</label>
+                    <div class="input-file-wrap">
+                        <label class="file-label" for="studentIdCardUrl" tabindex="0">
+                            <!-- simple icon -->
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7l4-4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span id="fileLabelText">Choose file</span>
+                        </label>
+                        <input type="file" id="studentIdCardUrl" class="dbIgnore" name="studentIdCardUrl" />
+                        <div class="helper">Accepted: PDF, JPG, PNG • Max 3MB</div>
+                    </div>
+                    <div class="file-preview" id="passCertificatePreview" aria-live="polite" hidden>
+                        <div class="preview-thumb" id="passCertificateThumb" aria-hidden="true"></div>
+                        <div class="preview-info">
+                        <div class="preview-name" id="passCertificateName"></div>
+                        <div class="preview-meta" id="passCertificateMeta"></div>
+                        <div class="preview-actions">
+                            <button type="button" class="btn-clear" id="passCertificateClear">Remove</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="file-error" id="passCertificateError" role="alert" aria-atomic="true"></div>
+                </div>
+
+                <fieldset>
+                    <legend data-text-mm="မှတ်ပုံတင်">NRC</legend>
+                    <div id="errorMessage" aria-live="polite"></div>
+                    <div class="weirdRadioWrap">
+                        <label class="weirdRadio" aria-label="Advanced NRC">
+                            <input type="radio" class="dbIgnore" name="nrcType" value="advanced" checked aria-controls="advancedNrcSection" aria-expanded="true">
+                            <span>Advanced NRC</span>
+                        </label>
+
+                        <label class="weirdRadio" aria-label="NRC">
+                            <input type="radio" class="dbIgnore" name="nrcType" value="nrc" aria-controls="nrcSection" aria-expanded="false">
+                            <span>NRC</span>
+                        </label>
+
+                        <label class="weirdRadio" aria-label="Pending NRC">
+                            <input type="radio" class="dbIgnore" name="nrcType" value="pendingNRC" aria-controls="nrcSection" aria-expanded="false">
+                            <span>လျှောက်ထားဆဲ</span>
+                        </label>
+                    </div>
+
+                    <div id="nrcSection" class="section hidden" role="region" aria-labelledby="nrcLabel">
+                        <label id="nrcLabel" for="nrc">NRC (compact)</label>
+                        <input type="text" id="nrc" name="nrc" placeholder="၁၂/ကခဂ(နိုင်)၁၂၃၄၅၆" />
+                    </div>
+
+                    <div id="advancedNrcSection" class="section" role="region" aria-labelledby="advLabel">
+                        <label id="advLabel" for="region" class="label-block">Advanced NRC</label>
+                        <div class="flex_class" style="gap:8px;">
+                            <select id="region" aria-required="true">
+                                <option value="" disabled selected>၀</option>
+                                <option value="1">၁</option>
+                                <option value="2">၂</option>
+                                <option value="3">၃</option>
+                                <option value="4">၄</option>
+                                <option value="5">၅</option>
+                                <option value="6">၆</option>
+                                <option value="7">၇</option>
+                                <option value="8">၈</option>
+                                <option value="9">၉</option>
+                                <option value="10">၁၀</option>
+                                <option value="11">၁၁</option>
+                                <option value="12">၁၂</option>
+                                <option value="13">၁၃</option>
+                                <option value="14">၁၄</option>
+                            </select>
+                            <span class="nrc_visual_helpers">/</span>
+                            <select id="code" aria-required="true">
+                                <option value="" disabled selected>ကခဂ</option>
+
+                                <th:block th:each="entry : ${groupedTownships}">
+                                    <option th:each="f : ${entry.value}"
+                                            th:value="${f.shortMm}"
+                                            th:data-code="${f.stateCode}"
+                                            th:text="${f.shortMm}">
+                                    </option>
+                                </th:block>
+                            </select>
+                            <span class="nrc_visual_helpers">&#40;</span>
+                            <select id="type" aria-required="true">
+                                <option value="" disabled selected>ရွေး</option>
+                                <option th:each="f : ${nrcTypes}"
+                                        th:value="${f.nameMm}"
+                                        th:text="${f.nameMm}">
+                                </option>
+                            </select>
+                            <span class="nrc_visual_helpers">&#41;</span>
+                            <input type="text" id="nrc_number" name="nrc_number" placeholder="၁၂၃၄၅၆" />
+                        </div>
+                    </div>
+                    <div id="pendingSection" class="section hidden" role="region" aria-labelledby="nrcLabel">
+                        <label> လျှောက်ထားဆဲ </label>
+                    </div>
+                </fieldset>
+
+                <div class="field-full">
+                    <div class="actions">
+                    <button type="submit">Submit</button>
+                    <button type="button" class="secondary" id="clearBtn">Reset</button>
+                    <div style="flex:1"></div>
+                    </div>
+                    <div id="responseMessage" aria-live="polite"></div>
+                    <div id="errorGlobalMessage"></div>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+
+    <script src="/public/js/pre_enrollment_old.js"></script>
+</body>
+</html>

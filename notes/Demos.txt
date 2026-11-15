@@ -1,0 +1,82 @@
+
+Web Demos
+
+Front end page demo
+-...
+
+New Student Enrollment Demo (Detailed Walkthrough)
+-Before anything else, the admin should:
+  Update the QR scan, phone number, and enrollment status.
+-Toggle theme mode (pre-enrollment page).
+-Use the advanced NRC system (pre-enrollment page).
+-Reset the form when needed.
+-Use the disabled button feature to prevent duplicate submissions.
+-The student will receive a reference code to track their status. Demonstrate the procedure for tracking status via the pre_track page.
+
+-Show status-based filtering for pre-enrollment (admin).
+-Demonstrate:
+  Image pop-up (admin_pre).
+  File download (admin_pre).
+  Theme toggle (admin_pre).
+  Editing capabilities for correcting mistakes (admin_pre).
+  Rejection with reasons (general, specific, or no reason at all; name prepared).
+
+-Show how the student can track the rejection status and see the reason provided.
+-Demonstrate a second attempt with a slightly incorrect entry to showcase the edit feature in admin_pre.
+-Then show how the edited pre-enrollment is accepted.
+-Once credentials are ready, the admin should contact the student through the provided Viber phone number (admin_pre).
+
+After login, demonstrate:
+-Password reset functionality.
+
+-Enrollment process with text stored in IndexedDB.
+-Image removal capability.
+-Disease option that automatically disables related selections.
+-Step-prevention mechanisms, with mention of the first two steps (if asked).
+-Mandatory agreement before proceeding.
+-Ability to view information about majors without leaving the page.
+-Enlarging the QR scan.
+-Preview showcase.
+-Go-back option.
+-Submit showcase.
+-Track showcase.
+
+Admin Follow-Up
+-Admin checks:
+-Download and view uploaded images.
+-Quick access to UI, theme, and language options.
+-Activity tracking (future enhancement: role-based actions).
+-Rejection with reasons (reject the prepared case).
+-Demonstrate how rejected students can still reapply.
+-Accept the flow and show how the student page updates. Confirm that students cannot re-enroll unless the admin explicitly reopens enrollment. Even without front-end restrictions, the backend blocks unauthorized re-enrollment.
+
+Old Student Enrollment Demo
+-Old student flow is also supported.
+-Demonstrate enrollment for old students:
+-Same process as new students, but faster.
+-Skip the initial enrollment part.
+-Showcase tracking capabilities.
+
+Announcement Flow Demo
+-Admin views announcements table.
+-Admin creates new announcements.
+-Show announcement display on the student side.
+-Demonstrate pagination and explain its purpose (preventing client overload from dozens of announcements).
+-can download announcements as PDF files.
+
+Admin Page Demo
+-Brief dashboard showcase.
+-Profile settings.
+-Filtering, tables, and data view.
+-Role management:
+-Revoke and grant roles.(Future feature) Assign permissions to roles and create custom roles for flexibility.
+-Password change functionality.
+-Create a new user manually.(Future enhancement: allow user creation with admin privileges).
+-Show how a newly created student appears in the student tables.
+-Demonstrate random password reset by admin, requiring the student to reset via super admin access.
+
+-End with the sign-out button showcase.
+
+Mobile Version Demo
+-Conclude by showcasing the mobile version.
+-Hand out a phone to demonstrate usability and responsive design.

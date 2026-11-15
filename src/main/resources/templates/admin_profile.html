@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="/public/css/admin_profile.css">
+</head>
+<body class="light">
+  <a href="/admin" class="back-arrow">&#8592;</a>
+  <!-- Theme Switcher -->
+  <div class="theme-toggle">
+    <button id="toggleTheme">🌙 Dark</button>
+  </div>
+
+  <div class="container">
+    <h1>Admin Profile</h1>
+
+    <!-- Profile Section -->
+    <div id="profile" class="card">
+      <h2>Profile Details</h2>
+      <p><strong>ID:</strong> <span id="userId"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+      <p><strong>User Type:</strong> <span id="userType"></span></p>
+      <p><strong>Status:</strong> <span id="status"></span></p>
+      <p><strong>Roles:</strong> <span id="roles"></span></p>
+      <p><strong>Created At:</strong> <span id="createdAt"></span></p>
+    </div>
+
+    <!-- Password Reset -->
+    <div class="card">
+    <h2>Reset Password</h2>
+    <form id="resetForm">
+        <input type="password" id="oldPassword" placeholder="Enter old password" required>
+        <input type="password" id="newPassword" placeholder="Enter new password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+        <button type="submit">Reset</button>
+    </form>
+    <p id="resetMessage"></p>
+    </div>
+
+  </div>
+
+  <script src="/public/js/admin_profile.js"></script>
+</body>
+</html>

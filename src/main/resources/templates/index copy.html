@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Totally Serious University</title>
+    <link rel="stylesheet" th:href="@{/public/css/index.css}">
+    <script defer th:src="@{/public/js/index.js}"></script>
+</head>
+<body>
+    <header>
+        <h1 id="motto">"Shape And Bright Your Future At UTYCC"</h1>
+        <div class="controls">
+            <button id="langToggle">LANGUAGE</button>
+            <button id="themeToggle">Theme</button>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">How to Survive Finals</a></li>
+            <li><a href="#">Free WiFi That Never Works</a></li>
+            <li><a href="#">Library of Lost Pens</a></li>
+            <li><a href="#">Cafeteria Menu: Mystery Meat</a></li>
+            <li><a href="#">Professors Who Disappear Mid-Semester</a></li>
+            <li><a href="#">Debugging 101: Why Your Code Hates You</a></li>
+            <li><a href="#">Hackathon: Sleep is Optional</a></li>
+            <li><a href="#">Lost USB Drives Anonymous</a></li>
+            <li><a href="#">Coffee: The True Compiler</a></li>
+            <li><a href="#">WiFi Passwords for the Brave</a></li>
+            <li><a href="#">Servers That Go Down on Mondays</a></li>
+            <li><a href="#">AI Projects That Actually Work Sometimes</a></li>
+            <li><a href="#">Code Reviews That Break Souls</a></li>
+            <li><a href="#">Printer Jam Therapy Sessions</a></li>
+            <li><a href="#">Stack Overflow: Your Best Friend</a></li>
+            <li><a href="#">Group Projects Where you will find chaos</a></li>
+            <li><a href="#">404 Cafeteria Not Found</a></li>
+            <li><a href="#">Laptop Batteries That Lie About 100%</a></li>
+        </ul>
+    </nav>
+
+    <ul>
+        <li><a th:href="@{/login}">Login to Pretend You’re Productive</a></li>
+        <li><a th:href="@{/pre_enrollment}">Pre_enrollment_please</a></li>
+        <li><a th:href="@{/pre_enrollment_old}">Pre_enrollment_For_Old_Student</a></li>
+        <li><a href="#" id="new">go to enrollment</a></li>
+        <li><a href="#">ANNOUCEMENTS</a></li>
+    </ul>
+
+    <main>
+        <section id="intro">
+            <h2 class="lang" data-en="Welcome, Future Alumni!" data-my="ကြိုဆိုပါတယ်၊ အနာဂတ်ဘွဲ့ရသူများ။"></h2>
+            <p class="lang" data-en="Register now and maybe graduate before robots take over." 
+               data-my="ယခုမှတ်ပုံတင်ပြီး စက်ရုပ်များသင့်အလုပ်မယူခင် ဘွဲ့ရပြီးအလုပ်ရအောင်ကြိုးစားပါ။"></p>
+        </section>
+        <section>
+            <h3 class="lang" data-en="Why Join Us?" data-my="ဘာကြောင့် ကျွန်တော်တို့တက္ကသိုလ်ကို ရွေးချယ်သင့်သလဲ။"></h3>
+            <ul>
+                <li class="lang" data-en="We have chairs (most of them not broken)." data-my="ကျွန်တော်တို့ ေကျာင်းမှာ ထိုင်ခုံများရှိပါတယ် (အများစု မကျိုးသေးပါ။)"></li>
+                <li class="lang" data-en="WiFi signal strong enough to open memes." data-my="မိမိဖေ့စ်ဘုတ်မီမိများ ဖွင့်နိုင်ဖို့ လုံလောက်တဲ့ WiFi signal ရှိပါတယ်။"></li>
+                <li class="lang" data-en="Professors with Wikipedia-level knowledge." data-my="Wikipedia အဆင့် ဗဟုသုတရှိတဲ့ ဆရာများရှိပါတယ်။"></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 The Totally Serious University UTYCC(Unfunny Technology You Can`t Control). All rights reserved (maybe).</p>
+    </footer>
+</body>
+</html>

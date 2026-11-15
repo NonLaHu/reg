@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTYCC - University Of Technology YatanarPon CyberCity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #e9b949;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 8rem 0 5rem;
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(43, 108, 176, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .iso-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .iso-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .iso-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .iso-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .iso-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cert-date {
+            background: var(--primary);
+            color: white;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Map Section */
+        .map-section {
+            margin: 40px 0;
+        }
+
+        .map-section h2 {
+            color: #1a4b8c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #0a2a53 0%, #1a4b8c 100%);
+            color: white;
+            padding: 50px 0 20px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-section {
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b8ee0;
+            display: inline-block;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: #3b8ee0;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+
+        .quick-links {
+            list-style: none;
+        }
+
+        .quick-links li {
+            margin-bottom: 12px;
+            border-left: 3px solid rgba(59, 142, 224, 0.3);
+            padding-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-links li:hover {
+            border-left-color: #3b8ee0;
+            padding-left: 20px;
+        }
+
+        .quick-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .quick-links a:hover {
+            color: #3b8ee0;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-item h4 {
+            color: #3b8ee0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .news-item p {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .news-item .date {
+            display: inline-block;
+            background: rgba(59, 142, 224, 0.2);
+            color: #3b8ee0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin: 0 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #3b8ee0;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/public/asset/Logo_of_UTYCC.png" style="width: 50px;">
+                    <h1>UTYCC</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="./aboutus.html">About UTYCC</a></li>
+                        <li><a href="./history.html">History</a></li>
+                        <li><a href="./organization.html">Organization</a></li>
+                        <li><a href="./rector.html">Rector's Message</a></li>
+                        <li><a href="./faq2.html">FAQs</a></li>
+                        <li><a href="./contactus.html">Contact us</a></li>
+                        <li><a href="#learn">Learn More</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>University Of Technology YatanarPon CyberCity</h2>
+            <p>Shape and Brighten Your Future at UTYCC</p>
+        </div>
+    </section>
+
+    <section class="iso-section">
+        <div class="container">
+            <h2 class="section-title">ISO 9001:2015 Certification</h2>
+            <div class="iso-content">
+                <div class="iso-text">
+                    <p>ISO 9001:2015 is being implemented in a number of technological universities in Myanmar,
+                        including our university (UTYCC). Our University has been implementing this OMS system since
+                        2019 to improve our interactions, in accordance with the requirements of the international
+                        Standard and intended to fill the need and expectations of relevant interested parties.</p>
+
+                    <div class="cert-date">
+                        Re-Certification Achieved: June 6-7, 2022
+                    </div>
+
+                    <p>Why we implement ISO 9001:2015 in our university is to enable the accreditation system to be
+                        implemented to achieve international status. It is one of the basic step functions for us to get
+                        accreditation.</p>
+
+                    <p>Our commitment to quality management ensures that we consistently provide educational services
+                        that meet customer and regulatory requirements while enhancing student satisfaction.</p>
+                </div>
+                <div class="iso-image">
+                    <img src="https://media.licdn.com/dms/image/v2/C511BAQFRVbqqHBMs9Q/company-background_10000/company-background_10000/0/1584390115737/university_of_technology_yatanarpon_cyber_city_student_s_union_cover?e=2147483647&v=beta&t=T6i5PU1YBB-1xSy2hvMYs2cWRsAmHkv5FnZh3oy_9ZU"
+                        alt="ISO Certification">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose UTYCC</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Quality Education</h3>
+                    <p>Internationally recognized programs with ISO 9001:2015 certified quality management</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Modern Facilities</h3>
+                    <p>State-of-the-art laboratories and learning environments</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Expert Faculty</h3>
+                    <p>Highly qualified and experienced teaching staff</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Standards</h3>
+                    <p>Curriculum designed to meet international educational standards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Map Section -->
+    <div class="map-section">
+        <h2>Find Us</h2>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.530166595836!2d96.36402027517363!3d21.87565115815357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30cb7daa953374d7%3A0x9b1311ca2603a044!2sUniversity%20of%20Technology%20(Yatanarpon%20Cyber%20City)!5e0!3m2!1sen!2smm!4v1756126113390!5m2!1sen!2smm"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Mandalay-Lashio Road,Pyin Sar</strong><br>
+                                Pyin Oo Lwin, Myanmar
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                +95 94 457 67834
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div> <a href="#" style="color: white;">www.utycc.edu.mm</a></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="quick-links">
+                        <li><a href="#"><i class="fas fa-book"></i> Library Management System</a></li>
+                        <li><a href="#"><i class="fas fa-flask"></i> Research Repository</a></li>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Learning Management System</a></li>
+                        <li><a href="#"><i class="fas fa-user-plus"></i> Student Registration</a></li>
+                        <li><a href="./faq2.html"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                        <li><a href="./contactus.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Recent News</h3>
+                    <div class="news-item">
+                        <h4>Global Ranking Update (July 2025)</h4>
+                        <p>According to Webometrics’ July 2025 edition, UTYCC’s global ranking is 30,523, with a country
+                            rank of 57. The university’s openness rank is 9,001, and its excellence rank is around
+                            7,422.
+                            Webometrics
+                            For context, in January 2025, UTYCC's country rank was better at 22, indicating a recent
+                            decline in its relative performance.</p>
+                        <span class="date"></span>
+                    </div>
+
+                    <div class="news-item">
+                        <h4>Academic Collaborations & Institutional Focus</h4>
+                        <p>UTYCC remains active in research and international collaboration. It implemented work-based
+                            learning initiatives and focused efforts on e-learning adoption, notably being the first to
+                            establish an e-Learning Center in Myanmar through an ASEAN–Korea Cyber University
+                            partnership, starting July 11, 2012</p>
+                        <span class="date"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 University of Technology Yatanarpon Cyber City. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form validation
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('.contact-form');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                if (!name || !email || !message) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+
+                alert('Thank you for your message! We will get back to you soon.');
+                form.reset();
+            });
+
+            // Add animation to quick links
+            const quickLinks = document.querySelectorAll('.quick-links a');
+            quickLinks.forEach(link => {
+                link.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateX(5px)';
+                });
+
+                link.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title th:text="'Preview Enrollment - ' + (${enrollment.student != null ? enrollment.student.name : 'Unknown'})">
+        Preview Enrollment</title>
+
+    <link rel="stylesheet" th:href="@{/public/css/preview_enrollment.css}" />
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="left">
+            <h1 class="brand lang" data-en="UTYCC - Enrollment Preview" data-my="UTYCC - မှတ်ပုံတင်ကြည့်ရန်"></h1>
+            <div class="meta small">
+                <span class="lang" data-en="ID:" data-my="အမှတ်:"></span>
+                <strong th:text="${enrollment.id}">N/A</strong>
+                <span>&nbsp;•&nbsp;</span>
+                <span th:text="${enrollment.status != null ? enrollment.status : '—'}"
+                    th:classappend="${enrollment.status} == null ? ' dim' : ''">—</span>
+            </div>
+        </div>
+
+        <div class="right controls">
+            <button id="langToggle" class="btn small">LANG</button>
+            <button id="themeToggle" class="btn small">Theme</button>
+            <button id="acceptBtn" class="btn success small lang" data-en="Accept" data-my="လက်ခံမည်">Accept</button>
+            <button id="rejectBtn" class="btn danger small lang" data-en="Reject" data-my="ငြင်းဆိုမည်">Reject</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Student / Basic -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="lang" data-en="Student Personal Information" data-my="ကိုယ်ရေးအချက်အလက်"></h2>
+            </div>
+
+            <div class="card-body grid-3">
+                <div class="field">
+                    <label class="label lang" data-en="Name(MM)" data-my="အမည်(မြန်မာ)"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.fullNameMm != null ? enrollment.personal.fullNameMm : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.fullNameMm == null ? ' dim' : ''}"
+                            data-field="personal.fullNameMm" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.fullNameMm">Edit</button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label lang" data-en="Name(ENG)" data-my="အမည်(ENG)"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.fullNameEn != null ? enrollment.personal.fullNameEn : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.fullNameEn == null ? ' dim' : ''}"
+                            data-field="personal.fullNameEn" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.fullNameEn">Edit</button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label lang" data-en="Gender" data-my="လိင်"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.gender != null ? enrollment.personal.gender : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.gender == null ? ' dim' : ''}"
+                            data-field="personal.gender" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.gender">Edit</button>
+                    </div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="field">
+                    <label class="label lang" data-en="Date of Birth" data-my="မွေးသက္ကရာဇ်"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.dateOfBirth != null ? #temporals.format(enrollment.personal.dateOfBirth, 'dd-MM-yyyy') : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.dateOfBirth == null ? ' dim' : ''}"
+                            data-field="personal.dateOfBirth" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.dateOfBirth">Edit</button>
+                    </div>
+                </div>
+
+                <!-- Ethnic -->
+                <div class="field">
+                    <label class="label lang" data-en="Ethnic" data-my="လူမျိုး"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.ethnic != null ? enrollment.personal.ethnic : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.ethnic == null ? ' dim' : ''}"
+                            data-field="personal.ethnic" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.ethnic">Edit</button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label lang" data-en="NRC" data-my="မှတ်ပုံတင်"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.nrc != null && enrollment.nrc.nrc != null ? enrollment.nrc.nrc : '—'}"
+                            th:classappend="${enrollment.nrc == null || enrollment.nrc.nrc == null ? ' dim' : ''}"
+                            data-field="nrc.nrc" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="nrc.nrc">Edit</button>
+                    </div>
+                </div>
+
+                <!-- Religion -->
+                <div class="field">
+                    <label class="label lang" data-en="Religion" data-my="ဘာသာ"></label>
+                    <div class="value-row">
+                        <span
+                            th:text="${enrollment.personal != null && enrollment.personal.religion != null ? enrollment.personal.religion : '—'}"
+                            th:classappend="${enrollment.personal == null || enrollment.personal.religion == null ? ' dim' : ''}"
+                            data-field="personal.religion" class="field-value"></span>
+                        <button class="field-edit btn tiny" data-field="personal.religion">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <main class="container">
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Academic History" data-my="ပညာရေးသမိုင်း"></h2>
+                </div>
+
+                <div class="card-body grid-3" th:object="${enrollment.academics}">
+
+                    <div class="field">
+                        <label class="label lang" data-en="Academic Year" data-my="ပညာသင်နှစ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{academicYear} ?: '—'"
+                                th:classappend="*{academicYear} == null ? ' dim' : ''"
+                                data-field="academics.academicYear" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="academics.academicYear">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="University Entrance Roll No"
+                            data-my="ဆယ်တန်းစာမေးပွဲခုံအမှတ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{uniEntranceRollno} ?: '—'"
+                                th:classappend="*{uniEntranceRollno} == null ? ' dim' : ''"
+                                data-field="academics.uniEntranceRollno" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="academics.uniEntranceRollno">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="University Entrance Exam Year"
+                            data-my="ဆယ်တန်းစာမေးပွဲ အောင်မြင်ခဲ့သည့်ခုနှစ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{uniEntranceYear} ?: '—'"
+                                th:classappend="*{uniEntranceYear} == null ? ' dim' : ''"
+                                data-field="academics.uniEntranceYear" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="academics.uniEntranceYear">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Major Year" data-my="တက္ကသိုလ် နှစ်"></label>
+                        <div class="value-row">
+                            <span th:text="${student.major.name} ?: '—'" th:classappend="${student.major.name} == null ? ' dim' : ''"
+                                data-field="student.major" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="student.major">Edit</button>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label class="label lang" data-en="Academic Year" data-my="Academic Year"></label>
+                        <div class="value-row">
+                            <span th:text="${student?.semester.yearLabel} ?: '—'" th:classappend="${student?.semester.yearLabel} == null ? ' dim' : ''"
+                                data-field="student.semester" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="student.semester">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Roll No" data-my="ROll-No"></label>
+                        <div class="value-row">
+                            <span th:text="${student?.rollNo} ?: '—'" th:classappend="${student?.rollNo} == null ? ' dim' : ''"
+                                data-field="student.rollNo" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="student.rollNo">Edit</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Contact Informations" data-my="ဆက်သွယ်ရန်"></h2>
+                </div>
+                <div class="card-body grid-3" th:object="${enrollment.contact}">
+
+                    <!-- Phone Number -->
+                    <div class="field">
+                        <label class="label lang" data-en="Phone Number" data-my="ဖုန်းနံပါတ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{phoneNumber != null ? phoneNumber : '—'}"
+                                th:classappend="*{phoneNumber == null ? ' dim' : ''}" data-field="contact.phoneNumber"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="contact.phoneNumber">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Usual Phone Number -->
+                    <div class="field">
+                        <label class="label lang" data-en="Usual Phone Number"
+                            data-my="မိမိအမြဲသုံးသော ဖုန်းနံပါတ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{usualPhoneNumber != null ? usualPhoneNumber : '—'}"
+                                th:classappend="*{usualPhoneNumber == null ? ' dim' : ''}"
+                                data-field="contact.usualPhoneNumber" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="contact.usualPhoneNumber">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field">
+                        <label class="label lang" data-en="Email" data-my="အီးမေးလ်"></label>
+                        <div class="value-row">
+                            <span th:text="*{email != null ? email : '—'}"
+                                th:classappend="*{email == null ? ' dim' : ''}" data-field="contact.email"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="contact.email">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Birth Place -->
+                    <div class="field">
+                        <label class="label lang" data-en="Birth Place" data-my="မွေးဖွားရာနေရာ"></label>
+                        <div class="value-row">
+                            <span th:text="*{birthPlace != null ? birthPlace : '—'}"
+                                th:classappend="*{birthPlace == null ? ' dim' : ''}" data-field="contact.birthPlace"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="contact.birthPlace">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Full Address -->
+                    <div class="field">
+                        <label class="label lang" data-en="Full Address" data-my="နေရပ်လိပ်စာ အပြည့်အစုံ"></label>
+                        <div class="value-row">
+                            <span th:text="*{fullAddress != null ? fullAddress : '—'}"
+                                th:classappend="*{fullAddress == null ? ' dim' : ''}" data-field="contact.fullAddress"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="contact.fullAddress">Edit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Parents -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Parents" data-my="မိဘများ"></h2>
+                </div>
+
+                <div class="card-body grid-3" th:each="parent : ${enrollment.parents}" th:object="${parent}">
+
+                    <div class="field">
+                        <label class="label lang" data-en="Parent Type"></label>
+                        <div class="value-row">
+                            <span th:text="*{parentType} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.parentType">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Full Name (Myanmar)"></label>
+                        <div class="value-row">
+                            <span th:text="*{fullNameMm} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.fullNameMm">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Full Name (English)"></label>
+                        <div class="value-row">
+                            <span th:text="*{fullNameEn} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.fullNameEn">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Ethnic"></label>
+                        <div class="value-row">
+                            <span th:text="*{ethnic} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.ethnic">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Religion"></label>
+                        <div class="value-row">
+                            <span th:text="*{religion} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.religion">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Occupation"></label>
+                        <div class="value-row">
+                            <span th:text="*{occupation} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.occupation">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="field">
+                        <label class="label lang" data-en="Date of Birth"></label>
+                        <div class="value-row">
+                            <span th:text="*{dateOfBirth} ?: '—'" class="field-value"></span>
+                        </div>
+                    </div> -->
+
+                    <div class="field">
+                        <label class="label lang" data-en="Is Deceased"></label>
+                        <div class="value-row">
+                            <span th:text="*{isDeceased} == true ? 'Yes' : 'No'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.isDeceased">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field" th:if="*{isDeceased}">
+                        <label class="label lang" data-en="Date of Death"></label>
+                        <div class="value-row">
+                            <span th:text="*{dateOfDeath} ?: '—'" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.dateOfDeath">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Nested NRC -->
+                    <div class="field">
+                        <label class="label lang" data-en="NRC Status"></label>
+                        <div class="value-row">
+                            <span th:text="*{nrcs != null ? nrcs.nrcStatus : '—'}" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.nrcStatus">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="NRC"></label>
+                        <div class="value-row">
+                            <span th:text="*{nrcs != null ? nrcs.nrc : '—'}" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.nrc">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="field">
+                        <label class="label lang" data-en="National NRC"></label>
+                        <div class="value-row">
+                            <span th:text="*{nrcs != null ? nrcs.nationalNrc : '—'}" class="field-value"></span>
+                        </div>
+                    </div> -->
+
+                    <!-- Nested Contact -->
+                    <div class="field">
+                        <label class="label lang" data-en="Phone"></label>
+                        <div class="value-row">
+                            <span th:text="*{contacts != null ? contacts.phoneNumber : '—'}" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.phoneNumber">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label lang" data-en="Address"></label>
+                        <div class="value-row">
+                            <span th:text="*{contacts != null ? contacts.fullAddress : '—'}" class="field-value"></span>
+                            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="parents.fullAddress">Edit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Dorm -->
+            <section class="card" th:if="${enrollment.dorm?.otherName != null}">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Dormitory" data-my="ကျောင်းဆောင်လျှောက်ထားခြင်း"></h2>
+                    <span id="dormStatus" th:text="${enrollment.dorm.status.name().toLowerCase()}"
+                        th:class="'status ' + ${enrollment.dorm.status.name().toLowerCase()}"></span>
+
+                    <!-- Accept / Reject buttons -->
+                    <button class="btn btn-accept" id="dormAcceptBtn" th:data-dorm-id="${enrollment.dorm.id}">✔ Accept</button>
+                    <button class="btn btn-reject" id="dormRejectBtn" th:data-dorm-id="${enrollment.dorm.id}">✕ Reject</button>
+
+                </div>
+                <div class="card-body grid-3" th:object="${enrollment.dorm}">
+
+                    <!-- Other Name (if responsible is 'other') -->
+                    <div class="field">
+                        <label class="label lang" data-en="Dorm Fee Responsible"
+                            data-my="ကျောင်းဆောင်ကြေး တာဝန်ခံသူ"></label>
+                        <div class="value-row">
+                            <span th:text="*{otherName != null ? otherName : '—'}"
+                                th:classappend="*{otherName == null ? ' dim' : ''}" data-field="dorm.otherName"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.otherName">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Other Relationship -->
+                    <div class="field">
+                        <label class="label lang" data-en="Other Relationship" data-my="ဆက်နွယ်မှု"></label>
+                        <div class="value-row">
+                            <span th:text="*{otherRelationship != null ? otherRelationship : '—'}"
+                                th:classappend="*{otherRelationship == null ? ' dim' : ''}"
+                                data-field="dorm.otherRelationship" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.otherRelationship">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Other Address -->
+                    <div class="field">
+                        <label class="label lang" data-en="Other Address" data-my="အခြားလိပ်စာ"></label>
+                        <div class="value-row">
+                            <span th:text="*{otherAddress != null ? otherAddress : '—'}"
+                                th:classappend="*{otherAddress == null ? ' dim' : ''}" data-field="dorm.otherAddress"
+                                class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.otherAddress">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship Support -->
+                    <div class="field">
+                        <label class="label lang" data-en="Scholarship Support"
+                            data-my="ပညာသင်ဆုအထောက်အပံ့ ရှိ/မရှိ"></label>
+                        <div class="value-row">
+                            <span th:text="*{scholarshipSupport} != null ? (*{scholarshipSupport} ? 'Yes' : 'No') : '—'"
+                                th:classappend="*{scholarshipSupport == null ? ' dim' : ''}"
+                                data-field="dorm.scholarshipSupport" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.scholarshipSupport">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Scholarship Type -->
+                    <div class="field">
+                        <label class="label lang" data-en="Scholarship Type" data-my="ပညာသင်ဆုအမျိုးအစား"></label>
+                        <div class="value-row">
+                            <span th:text="*{scholarshipType != null ? scholarshipType : '—'}"
+                                th:classappend="*{scholarshipType == null ? ' dim' : ''}"
+                                data-field="dorm.scholarshipType" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.scholarshipType">Edit</button>
+                        </div>
+                    </div>
+
+                    <!-- Another Scholarship -->
+                    <!-- <div class="field">
+                        <label class="label lang" data-en="Another Scholarship" data-my="အခြားပညာသင်ဆု"></label>
+                        <div class="value-row">
+                            <span th:text="*{anotherScholarship != null ? anotherScholarship : '—'}"
+                                th:classappend="*{anotherScholarship == null ? ' dim' : ''}"
+                                data-field="dorm.anotherScholarship" class="field-value"></span>
+                            <button class="field-edit btn tiny" data-field="dorm.anotherScholarship">Edit</button>
+                        </div>
+                    </div> -->
+
+                </div>
+            </section>
+
+            <!-- Files - gallery -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Files & Pictures" data-my="ဖိုင်များနှင့်ဓာတ်ပုံများ"></h2>
+                </div>
+
+                <div class="card-body files-grid">
+                    <div th:each="f : ${enrollment.files}" class="file-tile">
+                        <div class="thumb">
+                            <img class="protected-img" th:attr="data-protected-src='/api'+${f.filePath}"
+                                src="/public/asset/placeholder1.png" th:alt="${f.fileName}" loading="lazy"
+                                onerror="this.classList.add('noimg')" />
+                        </div>
+                        <div class="file-meta">
+                            <div class="file_name" th:text="${f.fileName}"></div>
+                            <div class="file-actions">
+                                <a th:href="'/api'+${f.filePath}" th:download class="btn tiny">Download</a>
+                                <button class="btn tiny view-file" th:attr="data-src='/api'+${f.filePath}">View</button>
+                                <button class="btn tiny edit-file" th:attr="data-fileid=${f.id}">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${enrollment.files == null || #lists.isEmpty(enrollment.files)}" class="dim">No files
+                        uploaded</div>
+                </div>
+            </section>
+
+            <!-- Majors -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Majors & Preferences" data-my="ဘာသာရပ်များ"></h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Major ID</th>
+                                <th class="lang" data-en="Preference" data-my="ဦးစားပေး"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="m : ${enrollment.majors}">
+                                <td th:text="${majorMap[m.majorId.longValue()]} ?: '—'">—</td>
+                                <td>
+                                    <span th:each="i : ${#numbers.sequence(1,5)}" th:text="'&nbsp;'+${i}+'&nbsp;'"
+                                        th:classappend="${i == m.preferenceRank} ? ' selected' : ' dim'">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr th:if="${enrollment.majors == null or #lists.isEmpty(enrollment.majors)}">
+                                <td colspan="2" class="dim">No majors selected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </section>
+
+            <!-- Approvals -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="lang" data-en="Approvals" data-my="အတည်ပြုချက်များ"></h2>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li th:each="a : ${enrollment.approvals}">
+                            <strong th:text="${a.approverRole}">ROLE</strong> —
+                            <span th:text="${a.status}">STATUS</span>
+                            <span class="small" th:text="${a.approvedAt != null ? a.approvedAt : ''}"></span>
+                            <div th:text="${a.remarks}" th:classappend="${a.remarks == null ? ' dim' : ''}"></div>
+                        </li>
+                        <li th:if="${enrollment.approvals == null }" class="dim">No approvals</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <!-- Image preview modal -->
+        <div id="previewModal" class="modal" style="display:none;">
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="modal-content">
+                <button id="closePreview" class="btn tiny">Close</button>
+                <a id="downloadPreview" class="btn tiny" target="_blank" rel="noopener">Download</a>
+                <div class="preview-area">
+                    <img id="previewImage" src="" alt="Preview" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden file input for editing file -->
+        <input type="file" id="fileReplaceInput" style="display:none" />
+
+</body>
+
+</html>

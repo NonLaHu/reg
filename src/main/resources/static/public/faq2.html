@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of Information Technology - FAQs</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e2a47 0%, #1a3a74 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2300a8cc' fill-opacity='0.15' d='M0,160L48,144C96,128,192,96,288,96C384,96,480,128,576,138.7C672,149,768,139,864,128C960,117,1056,107,1152,112C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00a8cc 0%, #007bff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            box-shadow: 0 4px 15px rgba(0, 168, 204, 0.3);
+        }
+        
+        .logo i {
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            color: #d0d9f0;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+        
+        #faq-search {
+            width: 100%;
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #00a8cc;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #faq-search::placeholder {
+            color: #6c757d;
+        }
+        
+        #faq-search:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00a8cc;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            margin: 0 10px 10px;
+            background: white;
+            color: #495057;
+            border: 2px solid #dee2e6;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+            background: #f8f9fa;
+            color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #007bff 0%, #00a8cc 100%);
+            color: white;
+            border-color: #00a8cc;
+            box-shadow: 0 4px 15px rgba(0, 168, 204, 0.3);
+        }
+        
+        .faq-category {
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #007bff;
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-title i {
+            margin-right: 10px;
+            background: #e6f2ff;
+            padding: 10px;
+            border-radius: 50%;
+            color: #007bff;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #212529;
+            transition: background 0.3s ease;
+            background: #f8faff;
+        }
+        
+        .faq-question:hover {
+            background: #e6f0ff;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: #007bff;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #f8f9fa;
+            color: #495057;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 20px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #f8fbff 0%, #e6f0ff 100%);
+            color: #495057;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #cfe2ff;
+        }
+        
+        .contact-info h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info h2 i {
+            margin-right: 10px;
+            background: #e6f2ff;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
+        }
+        
+        .contact-item h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: #212529;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #007bff;
+            background: #e6f2ff;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        .contact-item p {
+            color: #6c757d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            background: white;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .faq-question {
+                font-size: 1rem;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .faq-category, .contact-info {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h1>University of Technology Yatanarpon Cyber City</h1>
+            </div>
+            <p class="subtitle">Find answers to commonly asked questions about our university, programs, and admissions process.</p>
+            
+            <div class="search-container">
+                <input type="text" id="faq-search" placeholder="Search FAQs...">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-category="all">All FAQs</button>
+            <button class="tab-btn" data-category="general">General</button>
+            <button class="tab-btn" data-category="admissions">Admissions</button>
+            <button class="tab-btn" data-category="programs">Programs</button>
+            <button class="tab-btn" data-category="contact">Contact</button>
+        </div>
+        
+        <div class="faq-category">
+            <h2 class="category-title"><i class="fas fa-university"></i> General Information</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <span>When was the UTYCC founded?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>University of Technology (Yatanarpon Cyber City) was established on 17 October 2010, under Myanmar's Ministry of Science and Technology</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question">
+                        <span>How many students are there in the University as of now?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>According to Edurank, UTYCC's enrollment is listed at approximately 12,000 students.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2 class="category-title"><i class="fas fa-file-alt"></i> Admissions</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="admissions">
+                    <div class="faq-question">
+                        <span>What are the requirements for the applicants?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Admission Requirements at UTYCC</p>
+                        <ul>
+                            <p>For First-Year (Undergraduate) Applicants</p>
+                            <li>A minimum score of 280 or above in four subjects: English, Mathematics, Chemistry, and Physics</li>
+                            <li>A total score of 420 or above across six subjects.</li>
+                        </ul>
+                        
+                        <ul>
+                            <p>For Transfers (Second Year to Final Year Applicants)
+                                Required documents include:
+                            </p>
+                            <li>NRC (National Registration Card)</li>
+                            <li>Passport-style photo</li>
+                            <li>Household copy</li>
+                            <li>COVID-19 vaccination certificate</li>
+                            <li>NRC copy of parents or guardians.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-category">
+            <h2 class="category-title"><i class="fas fa-graduation-cap"></i> Academic Programs</h2>
+            <div class="faq-list">
+                <div class="faq-item" data-category="programs">
+                    <div class="faq-question">
+                        <span>How long does it take to complete a Graduate Program?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Master of Engineering (M.E.) Programs:</p>
+                        <ul>
+                            <li>Duration: 2 years</li>
+                            <li>1st year → Coursework (advanced classes in the chosen specialization)</li>
+                            <li>2nd year → Research and Master's Thesis</li>
+                        </ul>
+                        <p>Doctor of Philosophy (Ph.D.) Program (for reference):</p>
+                        <ul>
+                            <li>Duration: 3 years</li>
+                            <li>1st year → Coursework</li>
+                            <li>2nd-3rd years → Research & Dissertation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="programs">
+                    <div class="faq-question">
+                        <span>What graduate programs does UTYCC offer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>UTYCC offers a wide range of graduate programs including:</p>
+                        <ul>
+                            <li>Ph.D. in Computer Engineering</li>
+                            <li>Ph.D. in Computer Science</li>
+                            <li>Ph.D. in Electronic Engineering</li>
+                            <li>Ph.D. in Information Technology</li>
+                            <li>Ph.D. in Chemical Engineering</li>
+                            <li>Ph.D. in Material Science and Engineering</li>
+                            <li>Ph.D. in Biotechnology</li>
+                        </ul>
+                        <p>Visit our academic programs page for a complete list and details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card"></i> Contact Information</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p>University of Technology Yatanarpon Cyber City<br>
+                       Mandalay-Lashio Road, Pyin Sar<br>
+                       Pyin Oo Lwin<br>
+                       The Republic of the Union of Myanmar</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p>+95 944 576 7834</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>utycc.edu.mm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 University of Technology Yatanarpon Cyber City. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Tab filtering functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    filterFAQs(category);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('faq-search');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            function filterFAQs(category) {
+                if (category === 'all') {
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                faqItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    if (itemCategory === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

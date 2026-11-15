@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1><a href="#" class="utycc1">UTYCC</a> Portal - Student Dashboard</h1>
+    <div class="icons">
+      <span><i id="edit-btn" class="fa-solid fa-pen-to-square"></i></span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- Welcome -->
+    <div class="welcome">
+      <a href="#" class="utycc1">UTYCC</a>မှကြိုဆိုပါတယ်ခင်ဗျာ <strong id="welcome-name">miu miu</strong> 
+    </div>
+
+    <!-- Profile -->
+    <div class="card1">
+      <h2>ကိုယ်ရေးအကျဉ်း</h2>
+      <div class="profile">
+        <div class="pic-wrap">
+          <img id="profile-pic" src="images/profile icon.png" alt="Profile Picture">
+          <div id="pic-edit-badge" class="pic-edit-badge" title="Click to upload a new photo">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+        </div>
+        <input type="file" id="upload-pic" accept="image/*" style="display:none;">
+        <div>
+          <p><strong>နာမည်:</strong> <input type="text" value="miu miu" id="name"></p>
+          <p><strong>မေဂျာ:</strong> IST</p>
+          <p><strong>ခုံနံပါတ်:</strong> 3IST-24</p>
+          <p><strong>ပညာသင်နှစ်:</strong> 3rd</p>
+          <p><strong>အဖြတ်:</strong> 2nd</p>
+          <p><strong>ဝင်ခွင့်:</strong> <span class="status accepted">Accepted</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Details -->
+    <div class="card1">
+      <h2>ကိုယ်ရေးကိုယ်တာအချက်အလက်များ</h2>
+      <p><strong>နိုင်ငံသားမှတ်ပုံတင်အမှတ်:</strong> 12/KaMaNa(N)123456</p>
+      <p><strong>မွေးနေ့:</strong> 25 May 2003</p>
+      <p><strong>ဖုန်းနံပါတ်:</strong> <input type="tel" value="+959409004168" id="phone"></p>
+      <p><strong>အီးမေးလ်:</strong> <input type="email" value="thuralwink@email.com" id="email"></p>
+    </div>
+
+    <!-- Quick Access -->
+    <div class="card2">
+      <h2>Quick Access</h2>
+      <div class="quick-links">
+        <a href="#">ကြေညာချက်များ</a>
+        <a href="#">Home</a>
+        <a href="#">FAQ</a>
+        <a href="#" id="password-reset-link">စကားဝှက်ပြန်ပြောင်းရန်</a>
+        <a href="#">အတန်းများ</a>
+        <a href="#">စာမေးပွဲအချိန်စာရင်း</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="password-modal">
+      <div class="modal-header">
+        <h2>Reset Password</h2>
+        <button class="close-btn" id="close-modal">&times;</button>
+      </div>
+      <form id="reset-form">
+        
+        <!-- Old Password -->
+        <div class="input-group">
+          <label for="old-pass"><strong>စကားဝှက် အဟောင်း:</strong></label>
+          <div class="input-wrapper">
+            <input type="password" id="old-pass" required>
+            <i class="fa-solid fa-eye toggle-pass" data-target="old-pass"></i>
+          </div>
+        </div>
+
+        <!-- New Password -->
+<div class="input-group">
+  <label for="new-pass"><strong>စကားဝှက် အသစ်:</strong></label>
+  <div class="input-wrapper">
+    <input type="password" id="new-pass" required>
+    <i class="fa-solid fa-eye toggle-pass" data-target="new-pass"></i>
+  </div>
+  <p class="error-msg" id="new-error">အနည်းဆုံး စာလုံးရေ ၅ခုရှိရမည်။</p>
+</div>
+
+        <!-- Confirm Password -->
+<div class="input-group">
+  <label for="confirm-pass"><strong>စကားဝှက်ကို အတည်ပြုပါ:</strong></label>
+  <div class="input-wrapper">
+    <input type="password" id="confirm-pass" required>
+    <i class="fa-solid fa-eye toggle-pass" data-target="confirm-pass"></i>
+  </div>
+  <p class="error-msg" id="confirm-error">စကားဝှက်၂ခုမကိုက်ပါ။</p>
+</div>
+
+        <button type="submit" class="submit-btn" id="submit-btn" disabled>စကားဝှက်ပြောင်းမည်</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 UTYCC | Support: support@utycc.com
+  </footer>
+
+
+
+</body>
+</html>

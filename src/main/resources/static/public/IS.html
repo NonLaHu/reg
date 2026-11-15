@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Information Science - UTYCC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link th:href="@{/public/css/department.css}" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="UTYCClogo.png" alt="UTYCC Logo">
+                    <span class="logo-text">UTYCC</span>
+                </a>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="dropdown"><a href="history.html">About UTYCC <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="history.html">History</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="academic.html">Academic <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="testacademic.htmlz">Undergraduate</a></li>
+                                <li><a href="#">Master</a></li>
+                                <li><a href="#">PhD</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#">Faculties & Departments <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="sub-dropdown"><a href="#">Faculty of ICT <span class="dropdown-arrow">▸</span></a>
+                                    <ul class="sub-dropdown-menu">
+                                        <li><a href="IS.html">Department of IS</a></li>
+                                        <li><a href="#">Department of CE</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Faculty of EcE</a></li>
+                                <li><a href="#">Faculty of PrE</a></li>
+                                <li><a href="#">Faculty of AME</a></li>
+                                <li><a href="#">Department of Myanmar</a></li>
+                                <li><a href="#">Department of English</a></li>
+                                <li><a href="#">Department of Engineering Mathematics</a></li>
+                                <li><a href="#">Department of Engineering Physics</a></li>
+                                <li><a href="#">Department of Engineering Chemistry</a></li>
+                                </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">Admission <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Admission Requirements</a></li>
+                                <li><a href="#">How to Apply</a></li>
+                            </ul>
+                        </li>
+                        <li>News & Annouancements</li>
+                    </ul>
+                </nav>
+                
+                <a href="#" class="btn-login">Register</a>
+                
+                <button class="nav-toggle" id="nav-open-btn" aria-label="Open navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="history.html">About UTYCC</a></li>
+            <li><a href="#">Academics</a></li>
+            <li><a href="#">Faculties  & Departments</a></li>
+            <li><a href="#">Admission</a></li>
+            <li><a href="">News & Annouancements</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="page-header" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1740&q=80');">
+            <div class="page-header-content">
+                <div class="container">
+                    <h1>Department of Information Science</h1>
+                    <p>Building a Better Society Through ICT</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="breadcrumbs">
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Faculty & Offices</a></li>
+                    <li><a href="#">Faculty of ICT</a></li>
+                    <li class="current-page" aria-current="page">Department of IS</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-wrapper">
+                    <h2>Introduction</h2>
+                    <p>The Department of Information Science at the University of Technology (Yatanarpon Cyber City) is a collaborative community of motivated students, competent lecturers, and enthusiastic researchers. We are dedicated to educating students to become talented specialists in their fields and to conducting innovative scientific research.</p>
+                    <p>We train our students to master 21st-century skills, including collaboration, teamwork, creativity, imagination, critical thinking, and problem-solving. Upon graduation, students possess strong work-readiness skills and an in-depth knowledge of information science. This enables them to find sophisticated solutions to the complex issues that arise within our society.</p>
+                    
+                    <div class="department-vmm">
+                        <div class="vmm-card">
+                            <h3>Our Vision</h3>
+                            <p>To become a hub for intellectual professionals, practitioners, and future leaders in the field of emerging information technologies.</p>
+                        </div>
+                        
+                        <div class="vmm-card">
+                            <h3>Our Mission</h3>
+                            <ul>
+                                <li>To train students to become innovators with the highest standard of theoretical and practical knowledge in emerging information technology.</li>
+                                <li>To empower students to solve challenging real-world problems through the effective use of the most innovative technology.</li>
+                                <li>To provide a wide-access learning environment enhanced by the application of ICT.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="motto-card">
+                        <blockquote>"To Build a Better Society Through ICT"</blockquote>
+                        <footer>— Department Motto</footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="section section-primary-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title section-title-light">Quick Resources</h2>
+                    <p class="section-subtitle section-subtitle-light">Find what you need, faster.</p>
+                </div>
+                <div class="resources-grid">
+                    <a href="#" class="resource-link">Discover Programs</a>
+                    <a href="#" class="resource-link">Admission</a>
+                    <a href="#" class="resource-link">History</a>
+                    <a href="#" class="resource-link">Student Registeration</a>
+                    <a href="#" class="resource-link">Library</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        
+        <div class="container">
+            <img src="UTYCClogo.png" alt="UTYCC Logo" class="footer-logo">
+            <p class="footer-address">
+                University of Technology, Yatanarpon Cyber City<br>
+                Pyin Oo Lwin, Mandalay Region, Myanmar
+            </p>
+            <p class="footer-copyright">
+                &copy; 2025 UTYCC. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Navigation Toggle Script
+            const navOpenBtn = document.getElementById('nav-open-btn');
+            const navCloseBtn = document.getElementById('nav-close-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const body = document.body;
+
+            if (navOpenBtn && mobileNav && navCloseBtn) {
+                navOpenBtn.addEventListener('click', () => {
+                    mobileNav.classList.add('is-open');
+                    body.classList.add('nav-open');
+                });
+                navCloseBtn.addEventListener('click', () => {
+                    mobileNav.classList.remove('is-open');
+                    body.classList.remove('nav-open');
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Student Registration Form</title>
+    <link rel="stylesheet" href="newStudentForm.css" />
+</head>
+
+<body>
+    <div class="steps" id="steps">
+        <div class="step">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+        <div class="step">4</div>
+        <div class="step">5</div>
+        <div class="step">6</div>
+        <div class="step">7</div>
+        <div class="step">8</div>
+    </div>
+    <div class="nav-buttons">
+        <button class="nav-buttons-btn" id="prev">
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            Back
+        </button>
+
+        <button class="next nav-buttons-btn">
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            Next
+        </button>
+    </div>
+
+    <div id="toast-container" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    "></div>
+    <!-- 
+    <span class="phFullName"></span><br>
+    <span class="phSchoolDate"></span><br>
+    <span class="phFullNameSir"></span><br>
+    <span class="phFullNameSirFormal"></span>
+    <span class="phSelfEthnic"></span>
+    <span class="phSelfReligion"></span>
+    <span class="phSelfNrc"></span>
+    <span class="phSelfUsualAddress"></span>
+    <span class="phSelfPhonenumber"></span>
+    <span class="phDadName"></span>
+    <span class="phMomName"></span>
+    <span class="phDadJob"></span>
+    <span class="phMomJob"></span>
+    <span class="phDadUsualAddress"></span>
+    <span class="phMomUsualAddress"></span>
+    <span class="phDadPhonenumber"></span>
+    <span class="phMomPhonenumber"></span>
+    <img class="phSelfSignature imgCon" />
+    <img class="phMomSignature imgCon" />
+    <img class="phDadSignature imgCon" />
+    <img class="phGuardianSignature imgCon" />
+    <img class="phGuardianName" /> 
+    REMINDER________
+        phSelfNrc, phSelfPhonumber, phSchoolDate, phRecommendationsRequired, phKbzNumber, phQrCode, phSchoolPrice, phDormPrice, phKBZName
+    -->
+
+    <form>
+        <!-- Personal -->
+        <div class="step-section active">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ကျောင်းသားကိုယ်ရေးအချက်အလက် (Student Personal Form)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+
+                    <div class="titleOfContainer">
+                        <h2>ကျောင်းသားကိုယ်ရေးအချက်အလက်</h2>
+                    </div>
+
+                    <div class="id-photo-section">
+                        <div class="id-photo">
+                            <span>*ကျောင်းသားဓာတ်ပုံ</span>
+                            <img id="student-passpost" src="" alt="student passpost">
+                            <input type="file" id="self-passpost" required
+                                onchange="loadFile(event,'student-passpost')">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label>*တက္ကသိုလ်၀င်တန်းဖြေဆိုခဲ့သည့် ခုံအမှတ်</label>
+                            <input type="text" id="universityEntranceRollNo" required
+                                placeholder="တက္ကသိုလ်၀င်တန်း ခုံအမှတ်">
+                        </div>
+                        <div class="form-col">
+                            <label>*တက္ကသိုလ်အောင်မြင်သည့်ခုနှစ်</label>
+                            <input type="text" id="universityEntranceExamYear" required placeholder="2024">
+                        </div>
+                    </div>
+
+
+                    <fieldset>
+                        <legend>မှတ်ပုံတင်</legend>
+                        <div class="radio-group">
+                            <label class="radio-button-wrapper">
+                                <input type="radio" id="self-nrc-available" name="self-nrc-available" checked>
+                                <span>မှတ်ပုံတင်လက်ဝယ်ရှိ</span>
+                            </label>
+                            <label class="radio-button-wrapper">
+                                <input type="radio" name="self-nrc-available">
+                                <span>မှတ်ပုံတင်လျှောက်ထားဆဲ</span>
+                            </label>
+                        </div>
+
+                        <div class="self-nrc-yes">
+                            <div class="id-photo-section">
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အရှေ့)</span>
+                                    <img id="self-nrc-front-img" src="" alt="Front ID">
+                                    <input type="file" id="self-nrc-front"
+                                        onchange="loadFile(event,'self-nrc-front-img')">
+                                </div>
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အနောက်)</span>
+                                    <img id="self-nrc-back-img" src="" alt="Back ID">
+                                    <input type="file" id="self-nrc-back"
+                                        onchange="loadFile(event,'self-nrc-back-img')">
+                                </div>
+                            </div>
+                            <span id="self-nrc">gg</span>
+                        </div>
+                        <div class="self-nrc-no hidden">လျှောက်ထားဆဲ</div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label>*အမည် (မြန်မာစာဖြင့်)</label>
+                            <div class="form-left-less">
+                                <select id="gender">
+                                    <option value="male">မောင်</option>
+                                    <option value="female">မ</option>
+                                </select>
+                                <input required type="text" id="self-name-mm" placeholder="အေးအေး">
+                            </div>
+
+                            <label>*လူမျိုး</label>
+                            <input required type="text" id="self-ethnic" placeholder="မွန်/ကရင်">
+
+                            <label>*မွေးဖွားရာဇာတိ မြို့/ပြည်နယ်/တိုင်းဒေသကြီး</label>
+                            <div class="form-row">
+
+                                <div class="form-col">
+                                    <select required id="self-birth-place-region">
+                                        <option value="1">ကချင်ပြည်နယ်</option>
+                                        <option value="2">ကယားပြည်နယ်</option>
+                                        <option value="3">ကရင်ပြည်နယ်</option>
+                                        <option value="4">ချင်းပြည်နယ်</option>
+                                        <option value="5">မွန်ပြည်နယ်</option>
+                                        <option value="6">ရခိုင်ပြည်နယ်</option>
+                                        <option value="7">ရှမ်းပြည်နယ်</option>
+                                        <option value="8">စစ်ကိုင်းတိုင်းဒေသကြီး</option>
+                                        <option value="9">မကွေးတိုင်းဒေသကြီး</option>
+                                        <option value="10">မန္တလေးတိုင်းဒေသကြီး</option>
+                                        <option value="11">ဧရာဝတီတိုင်းဒေသကြီး</option>
+                                        <option value="12">ပဲခူးတိုင်းဒေသကြီး</option>
+                                        <option value="13">ရန်ကုန်တိုင်းဒေသကြီး</option>
+                                        <option value="14">တနင်္သာရီတိုင်းဒေသကြီး</option>
+                                        <option value="15">နေပြည်တော်</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <input required type="text" id="self-birth-place" placeholder="နေရာ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-col">
+                            <label>*အမည် (အင်္ဂလိပ်စာဖြင့်)</label>
+                            <input required type="text" id="self-name-en" placeholder="Aye Aye">
+
+                            <label>*ကိုးကွယ်သည့်ဘာသာ</label>
+                            <input required type="text" id="self-religion" placeholder="ဘာသာ">
+
+                            <label>*လိပ်စာအပြည့်အစုံ</label>
+                            <textarea required id="self-full-address" placeholder="Full address"></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="titleOfContainer">
+                        <h2>အမေကိုယ်ရေးအချက်အလက်</h2>
+                    </div>
+
+                    <fieldset>
+                        <legend>မှတ်ပုံတင်</legend>
+                        <div class="radio-group">
+                            <label class="radio-button-wrapper">
+                                <input type="radio" id="mom-nrc-available" name="mom-nrc-available" checked>
+                                <span>မှတ်ပုံတင်လက်ဝယ်ရှိ</span>
+                            </label>
+                            <label class="radio-button-wrapper">
+                                <input type="radio" name="mom-nrc-available">
+                                <span>မှတ်ပုံတင်လျှောက်ထားဆဲ</span>
+                            </label>
+                        </div>
+
+                        <div class="mom-nrc-yes">
+                            <div class="id-photo-section">
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အရှေ့)</span>
+                                    <img id="mom-nrc-front-img" src="" alt="Front ID">
+                                    <input type="file" id="mom-nrc-front"
+                                        onchange="loadFile(event,'mom-nrc-front-img')">
+                                </div>
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အနောက်)</span>
+                                    <img id="mom-nrc-back-img" src="" alt="Back ID">
+                                    <input type="file" id="mom-nrc-back" onchange="loadFile(event,'mom-nrc-back-img')">
+                                </div>
+                            </div>
+
+                            <label>မှတ်ပုံတင်</label>
+                            <input type="text" id="mom-nrc" placeholder="Serial number">
+                        </div>
+                        <div class="mom-nrc-no hidden">လျှောက်ထားဆဲ</div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label>*အမည် (မြန်မာစာဖြင့်)</label>
+                            <input required type="text" id="mom-name" placeholder="အေးအေး">
+
+                            <label>*လူမျိုး</label>
+                            <input required type="text" id="mom-ethnic" placeholder="မွန်/ကရင်">
+
+                            <label>*မွေးဖွားရာဇာတိ မြို့/ပြည်နယ်/တိုင်းဒေသကြီး</label>
+                            <div class="form-row">
+
+                                <div class="form-col">
+                                    <select required id="mom-birth-place-region">
+                                        <option value="1">ကချင်ပြည်နယ်</option>
+                                        <option value="2">ကယားပြည်နယ်</option>
+                                        <option value="3">ကရင်ပြည်နယ်</option>
+                                        <option value="4">ချင်းပြည်နယ်</option>
+                                        <option value="5">မွန်ပြည်နယ်</option>
+                                        <option value="6">ရခိုင်ပြည်နယ်</option>
+                                        <option value="7">ရှမ်းပြည်နယ်</option>
+                                        <option value="8">စစ်ကိုင်းတိုင်းဒေသကြီး</option>
+                                        <option value="9">မကွေးတိုင်းဒေသကြီး</option>
+                                        <option value="10">မန္တလေးတိုင်းဒေသကြီး</option>
+                                        <option value="11">ဧရာဝတီတိုင်းဒေသကြီး</option>
+                                        <option value="12">ပဲခူးတိုင်းဒေသကြီး</option>
+                                        <option value="13">ရန်ကုန်တိုင်းဒေသကြီး</option>
+                                        <option value="14">တနင်္သာရီတိုင်းဒေသကြီး</option>
+                                        <option value="15">နေပြည်တော်</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <input required id="mom-birth-place" type="text" placeholder="နေရာ">
+                                </div>
+                            </div>
+
+                            <label>*ဖုန်းနံပါတ်</label>
+                            <input required type="text" id="mom-phonenumber" placeholder="09xxxxxxx">
+                        </div>
+
+                        <div class="form-col">
+                            <label>*အမည် (အင်္ဂလိပ်စာဖြင့်)</label>
+                            <input required type="text" id="mom-name-en" placeholder="Aye Aye">
+
+                            <label>*ကိုးကွယ်သည့်ဘာသာ</label>
+                            <input required type="text" id="mom-religion" placeholder="ဘာသာ">
+
+                            <label>*အလုပ်အကိုင်</label>
+                            <input required type="text" id="mom-job" placeholder="job">
+
+                            <label>ကွယ်လွန်ခဲ့လျှင် ခုနှစ်</label>
+                            <input type="text" id="mom-decease-date" placeholder="year">
+
+                            <label>*လိပ်စာအပြည့်အစုံ</label>
+                            <textarea required id="mom-full-address" placeholder="Full address"></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="titleOfContainer">
+                        <h2>အဖေကိုယ်ရေးအချက်အလက်</h2>
+                    </div>
+                    <fieldset>
+                        <legend>မှတ်ပုံတင်</legend>
+                        <div class="radio-group">
+                            <label class="radio-button-wrapper">
+                                <input id="dad-nrc-available" type="radio" name="dad-nrc-available" checked>
+                                <span>မှတ်ပုံတင်လက်ဝယ်ရှိ</span>
+                            </label>
+                            <label class="radio-button-wrapper">
+                                <input type="radio" name="dad-nrc-available">
+                                <span>မှတ်ပုံတင်လျှောက်ထားဆဲ</span>
+                            </label>
+                        </div>
+
+                        <div class="dad-nrc-yes">
+
+                            <div class="id-photo-section">
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အရှေ့)</span>
+                                    <img id="dad-nrc-front-img" src="" alt="Front ID">
+                                    <input type="file" id="dad-nrc-front"
+                                        onchange="loadFile(event,'dad-nrc-front-img')">
+                                </div>
+                                <div class="id-photo">
+                                    <span>မှတ်ပုံတင်(အနောက်)</span>
+                                    <img id="dad-nrc-back-img" src="" alt="Back ID">
+                                    <input type="file" id="dad-nrc-back" onchange="loadFile(event,'dad-nrc-back-img')">
+                                </div>
+                            </div>
+                            <label>မှတ်ပုံတင်</label>
+                            <input type="text" id="dad-nrc" placeholder="Serial number">
+                        </div>
+                        <div class="dad-nrc-no hidden">
+                            လျှောက်ထားဆဲ
+                        </div>
+                    </fieldset>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label>*အမည် (မြန်မာစာဖြင့်)</label>
+                            <input required type="text" id="dad-name-mm" placeholder="ဘဘ">
+
+                            <label>*လူမျိုး</label>
+                            <input required type="text" id="dad-ethnic" placeholder="မွန်/ကရင်">
+
+                            <label>*မွေးဖွားရာဇာတိ မြို့/ပြည်နယ်/တိုင်းဒေသကြီး</label>
+                            <div class="form-row">
+
+                                <div class="form-col">
+                                    <select required id="dad-birth-place-religion">
+                                        <option value="1">ကချင်ပြည်နယ်</option>
+                                        <option value="2">ကယားပြည်နယ်</option>
+                                        <option value="3">ကရင်ပြည်နယ်</option>
+                                        <option value="4">ချင်းပြည်နယ်</option>
+                                        <option value="5">မွန်ပြည်နယ်</option>
+                                        <option value="6">ရခိုင်ပြည်နယ်</option>
+                                        <option value="7">ရှမ်းပြည်နယ်</option>
+                                        <option value="8">စစ်ကိုင်းတိုင်းဒေသကြီး</option>
+                                        <option value="9">မကွေးတိုင်းဒေသကြီး</option>
+                                        <option value="10">မန္တလေးတိုင်းဒေသကြီး</option>
+                                        <option value="11">ဧရာဝတီတိုင်းဒေသကြီး</option>
+                                        <option value="12">ပဲခူးတိုင်းဒေသကြီး</option>
+                                        <option value="13">ရန်ကုန်တိုင်းဒေသကြီး</option>
+                                        <option value="14">တနင်္သာရီတိုင်းဒေသကြီး</option>
+                                        <option value="15">နေပြည်တော်</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <input required id="dad-birth-place" type="text" placeholder="နေရာ">
+                                </div>
+                            </div>
+
+                            <label>*ဖုန်းနံပါတ်</label>
+                            <input required type="text" id="dad-phonenumber" placeholder="09xxxxxxx">
+                        </div>
+
+                        <div class="form-col">
+                            <label>*အမည် (အင်္ဂလိပ်စာဖြင့်)</label>
+                            <input required type="text" id="dad-name-en" placeholder="Aye Aye">
+
+                            <label>*ကိုးကွယ်သည့်ဘာသာ</label>
+                            <input required type="text" id="dad-religion" placeholder="ဘာသာ">
+
+                            <label>*အလုပ်အကိုင်</label>
+                            <input required type="text" id="dad-job" placeholder="job">
+
+                            <label>ကွယ်လွန်ခဲ့လျှင် ခုနှစ်</label>
+                            <input type="text" id="dad-decease-date" placeholder="year">
+
+                            <label>*လိပ်စာအပြည့်အစုံ</label>
+                            <textarea required id="dad-full-address" placeholder="Full address"></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="titleOfContainer">
+                        <h2>လက်မှတ်</h2>
+                    </div>
+                    <div class="id-photo-section">
+                        <div class="id-photo">
+                            <span>*ကျောင်းသား လက်မှတ်</span>
+                            <img id="self-sign-img" src="" alt="Self Signature">
+                            <input required type="file" id="self-sign" onchange="loadFile(event,'self-sign-img')">
+                        </div>
+                        <div class="id-photo">
+                            <span>အမိ လက်မှတ်</span>
+                            <img id="mom-sign-img" src="" alt="Mother Signature">
+                            <input type="file" id="mom-sign" onchange="loadFile(event,'mom-sign-img')">
+                        </div>
+                        <div class="id-photo">
+                            <span>အဖ လက်မှတ်</span>
+                            <img id="dad-sign-img" src="" alt="Father Signature">
+                            <input type="file" id="dad-sign" onchange="loadFile(event,'dad-sign-img')">
+                        </div>
+                    </div>
+                    <div class="flexCenter">
+                        <button class="next nav-buttons-btn">
+                            <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Recommendation Letters -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ထောက်ခံချက် စာရွက်စာတမ်းများ (Recommendation Letters)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div class="titleOfContainer">
+                        <h2>ထောက်ခံချက် စာရွက်စာတမ်းများ</h2>
+                    </div>
+                    <p class="mb-3">
+                        ပထမနှစ် ကျောင်းသား/သူများ ကျောင်းအပ်ရန်အတွက် လိုအပ်သော ထောက်ခံချက် စာရွက်စာတမ်းများမှာ
+                        အောက်ပါအတိုင်း ဖြစ်ပါသည်။
+                    </p>
+
+                    <ul>
+                        <li>ရပ်ကွက်ထောက်ခံစာ</li>
+                        <li>ရဲစခန်းထောက်ခံစာ</li>
+                        <li>ဆေးဘက်ဆိုင်ရာထောက်ခံစာ</li>
+                        <li>အထက်တန်းပြီးဆုံးကြောင်းအောင်လက်မှတ်မူရင်း</li>
+                        <li>အမှတ်စာရင်း</li>
+                        <li>အိမ်ထောင်စုစာရင်း</li>
+                    </ul>
+
+                    <div class="id-photo-section">
+                        <div class="id-photo">
+                            <span>ရပ်ကွက်ထောက်ခံစာ</span>
+                            <img id="community_recommendation-img" src="" alt="">
+                            <input required type="file" id="community_recommendation"
+                                onchange="loadFile(event,'community_recommendation-img')">
+                        </div>
+
+                        <div class="id-photo">
+                            <span>ရဲစခန်းထောက်ခံစာ</span>
+                            <img id="police_recommendation-img" src="" alt="">
+                            <input required type="file" id="police_recommendation"
+                                onchange="loadFile(event,'police_recommendation-img')">
+                        </div>
+                    </div>
+
+                    <div class="id-photo-section">
+                        <div class="id-photo">
+                            <span>ဆေးဘက်ဆိုင်ရာထောက်ခံစာ</span>
+                            <img id="medical_recommendation-img" src="" alt="">
+                            <input required type="file" id="medical_recommendation"
+                                onchange="loadFile(event,'medical_recommendation-img')">
+                        </div>
+
+                        <div class="id-photo">
+                            <span>အထက်တန်းပြီးဆုံးကြောင်းအောင်လက်မှတ်မူရင်း</span>
+                            <img id="pass_certification-img" src="" alt="">
+                            <input required type="file" id="pass_certification"
+                                onchange="loadFile(event,'pass_certification-img')">
+                        </div>
+                    </div>
+
+                    <div class="id-photo-section">
+                        <div class="id-photo">
+                            <span>အမှတ်စာရင်း</span>
+                            <img id="marks_certification-img" src="" alt="">
+                            <input required type="file" id="marks_certification"
+                                onchange="loadFile(event,'marks_certification-img')">
+                        </div>
+
+                        <div class="id-photo">
+                            <span>အိမ်ထောင်စုစာရင်း</span>
+                            <img id="house_hold_registration-img" src="" alt="">
+                            <input required type="file" id="house_hold_registration"
+                                onchange="loadFile(event,'house_hold_registration-img')">
+                        </div>
+                    </div>
+
+                    <div class="note-section">
+                        <h6 style="color: red;">***သတိပြုရန်***</h6>
+                        <ul type="square">
+                            <li>အထောက်အထားမူရင်းများအား ကြည်လင်ပြတ်သားစွာ ဓာတ်ပုံရိုက်ရပါမည်။</li>
+                            <li>နေရာတကျ မှန်ကန်အောင် တင်ပြရပါမည်။</li>
+                            <li>ပုံများ ကြည်လင်ပြတ်သားမှုမရှိခြင်း၊ အလင်းရောင်များ ထင်ဟပ်နေခြင်း၊ နေရာမှား၍
+                                တင်ထားခြင်းများရှိပါက ထည့်သွင်းစဥ်းစားမည်မဟုတ်ပါ။</li>
+                        </ul>
+                    </div>
+                    <div class="flexCenter">
+
+                        <button class="next nav-buttons-btn">
+                            <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Commitment Document -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ကတိပြုချက်စာတမ်း (Commitment Document)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div>
+                        <div class="titleOfContainer">
+                            <h2>မိဘ/အုပ်ထိန်းသူ၏ ကတိပြုချက်စာတမ်း</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)တွင် ပညာသင်ယူမည့် ကျောင်းသား/သူဖြစ်သော
+                                <span class="phFullNameSirFormal"></span>
+                                သည်
+                                နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)က ချမှတ်ထားသောစည်းကမ်းများကို လိုက်နာပါမည်ဟု
+                                ကတိပြုပါသည်။
+                            </p>
+
+                            <p>
+                                တစ်ခုခု ကျူးလွန်မိပါက အုပ်ချုပ်ရေးအဖွဲ့၏ ချမှတ်ထားသောစည်းကမ်းများကို လိုက်နာပါမည်ဟု
+                                အုပ်ထိန်းသူအနေဖြင့် သဘောတူလက်မှတ်ရေးထိုးပါသည်။
+                            </p>
+
+                            <div style="color: red;">
+                                ⚠ ကျေးဇူးပြုပြီး လိုအပ်သော အချက်အလက်များကို ဖြည့်သွင်းပါ
+                            </div>
+                            <p>*တာ၀န်ယူမည့်ပုဂ္ဂုလ်</p>
+
+                            <label>
+                                <input type="radio" name="whichGuardianCommit" value="mom" />
+                                အမိ
+                            </label>
+                            <label>
+                                <input type="radio" name="whichGuardianCommit" value="dad" />
+                                အဖ
+                            </label>
+                            <label>
+                                <input type="radio" name="whichGuardianCommit" value="guardian" />
+                                အုပ်ထိန်းသူ
+                            </label>
+
+                            <p>*တာ၀န်ယူမည်</p>
+
+                            <label>
+                                <input type="radio" name="commitment-yes-no" value="yes" />
+                                လက်ခံသည်
+                            </label>
+                            <label>
+                                <input type="radio" name="commitment-yes-no" value="no" checked />
+                                လက်မခံပါ
+                            </label>
+
+                            <div class="mom-commit">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="id-photo-section">
+                                            <div class="id-phto">
+                                                <span>အမိ၏ လက်မှတ်</span>
+                                                <img src="" class="phMomSignature imgCon" alt="Mom Signature">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label>အမိ၏ အမည်</label>
+                                        <span class="phMomName"></span>
+
+                                        <label>နေရပ်လိပ်စာ အပြည့်အစုံ</label>
+                                        <span class="phMomUsualAddress"></span>
+
+                                        <label>အလုပ်အကိုင်</label>
+                                        <span class="phMomJob"></span>
+
+                                        <label>ဖုန်းနံပါတ်</label>
+                                        <span class="phMomPhonenumber"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dad-commit">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="id-photo-section">
+                                            <div class="id-phto">
+                                                <span>အဖ၏ လက်မှတ်</span>
+                                                <img src="" class="phDadSignature imgCon" alt="Dad Signature">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label>အဖ၏ အမည်</label>
+                                        <span class="phDadName"></span>
+
+                                        <label>နေရပ်လိပ်စာ အပြည့်အစုံ</label>
+                                        <span class="phDadUsualAddress"></span>
+
+                                        <label>အလုပ်အကိုင်</label>
+                                        <span class="phDadJob"></span>
+
+                                        <label>ဖုန်းနံပါတ်</label>
+                                        <span class="phDadPhonenumber"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="guardian-commit">
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="id-photo-section">
+                                            <div class="id-photo">
+                                                <span>အုပ်ထိန်းသူ၏ လက်မှတ်</span>
+                                                <img id="guardianSignature" src="" alt="Guardian Signature">
+                                                <input type="file" onchange="loadFile(event,'guardianSignature')">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <label>အုပ်ထိန်းသူ၏ အမည်</label>
+                                        <input type="text" id="guardian-name">
+
+                                        <label>နေရပ်လိပ်စာ အပြည့်အစုံ</label>
+                                        <input type="text" id="guardian-full-address">
+
+                                        <label>အလုပ်အကိုင်</label>
+                                        <input type="text" id="guardian-job">
+
+                                        <label>ဖုန်းနံပါတ်</label>
+                                        <input type="text" id="guardian-phonenumber">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <div class="titleOfContainer">
+                            <h2>ကျောင်းသား/သူ၏ ကတိပြုချက်စာတမ်း</h2>
+                        </div>
+                        <div class="card-body">
+
+                            <p>
+                                နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)တွင် ပညာသင်ယူမည့် ကျောင်းသား/သူဖြစ်သော
+                                <span class="phFullNameSirFormal"></span>
+                                သည်
+                                နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)က ချမှတ်ထားသောစည်းကမ်းများကို လိုက်နာပါမည်ဟု
+                                ကတိပြုပါသည်။
+                            </p>
+
+                            <div style="color: red;">
+                                ⚠ ကျေးဇူးပြုပြီး လိုအပ်သော အချက်အလက်များကို ဖြည့်သွင်းပါ
+                            </div>
+
+                            <label>
+                                <input type="radio" name="self-commitment-yes-no" value="yes" />
+                                လိုက်နာမည်
+                            </label>
+                            <label>
+                                <input type="radio" name="self-commitment-yes-no" value="no" checked />
+                                မလိုက်နာပါ
+                            </label>
+
+                            <div class="form-row self-commitment">
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>ကျောင်းသား/သူ၏ လက်မှတ်</span>
+                                            <img class="phSelfSignature imgCon" alt="Self Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>ကျောင်းသား/သူ၏ အမည်</label>
+                                    <span class="phFullName">
+                                </div>
+                            </div>
+                            <div class="flexCenter">
+
+                                <button class="next nav-buttons-btn">
+                                    <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Major Preference -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>တက်ရောက်လိုသော ဦးစားပေးဘာသာရပ် (Major Preference)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div>
+                        <p>ဘာသာရပ် ဆန္ဒပြုလျှောက်လွှာ</p>
+                    </div>
+
+                    <div>
+                        <h5>ပထမနှစ် ကျောင်းသား/ကျောင်းသူများ၏ အင်ဂျင်နီယာဘာသာရပ် ဆန္ဒပြုလျှောက်လွှာ</h5>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            ဤတက္ကသိုလ်တွင် တက်ရောက်ခွင့်ရသူ<span class="phFullName"></span><span
+                                class="phSchoolDate"></span>
+                            စတင်ဖွင့်လှစ်သင်ကြားမည့် ဤတက္ကသိုလ်၏ အင်ဂျင်နီယာသင်တန်းတွင် အောက်ပါ ဦးစားပေးအစီအစဉ်အရ
+                            တက်ရောက်ခွင့်ပြုပါရန် လျှောက်ထားအပ်ပါသည်။
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <label for="list" class="fs-5" style="text-decoration: underline;">
+                                ဤတက္ကသိုလ်တွင် တက်ရောက်နိုင်သော သင်တန်းများ
+                            </label>
+                            <ul>
+                                <li>၁။ သတင်းအချက်အလက်သိပ္ပံနှင့် နည်းပညာ အင်ဂျင်နီယာဘာသာရပ် (IST)</li>
+                                <li>၂။ ကွန်ပျူတာ အင်ဂျင်နီယာဘာသာရပ် (CE)</li>
+                                <li>၃။ အီလက်ထရောနစ် အင်ဂျင်နီယာဘာသာရပ် (EcE)</li>
+                                <li>၄။ တိကျပစ္စည်းထုတ်လုပ်မှု အင်ဂျင်နီယာဘာသာရပ် (Pre)</li>
+                                <li>၅။ ဒြပ်ပစ္စည်းနှင့် သတ္တုဗေဒ အင်ဂျင်နီယာဘာသာရပ် (AME)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <p>တက်ရောက်လိုသော ဦးစားပေးအစီအစဉ်</p>
+
+                            <div class="rating-row">
+                                <div class="label">IST</div>
+
+                                <div class="rating-option">
+                                    <input type="radio" id="qist-1" name="qist" value="1" />
+                                    <label for="qist-1">1</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qist-2" name="qist" value="2" />
+                                    <label for="qist-2">2</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qist-3" name="qist" value="3" />
+                                    <label for="qist-3">3</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qist-4" name="qist" value="4" />
+                                    <label for="qist-4">4</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qist-5" name="qist" value="5" />
+                                    <label for="qist-5">5</label>
+                                </div>
+                            </div>
+
+                            <div class="rating-row">
+                                <div class="label">CE</div>
+
+                                <div class="rating-option">
+                                    <input type="radio" id="qce-1" name="qce" value="1" />
+                                    <label for="qce-1">1</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qce-2" name="qce" value="2" />
+                                    <label for="qce-2">2</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qce-3" name="qce" value="3" />
+                                    <label for="qce-3">3</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qce-4" name="qce" value="4" />
+                                    <label for="qce-4">4</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qce-5" name="qce" value="5" />
+                                    <label for="qce-5">5</label>
+                                </div>
+                            </div>
+
+                            <div class="rating-row">
+                                <div class="label">EcE</div>
+
+                                <div class="rating-option">
+                                    <input type="radio" id="qece-1" name="qece" value="1" />
+                                    <label for="qece-1">1</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qece-2" name="qece" value="2" />
+                                    <label for="qece-2">2</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qece-3" name="qece" value="3" />
+                                    <label for="qece-3">3</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qece-4" name="qece" value="4" />
+                                    <label for="qece-4">4</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qece-5" name="qece" value="5" />
+                                    <label for="qece-5">5</label>
+                                </div>
+                            </div>
+
+                            <div class="rating-row">
+                                <div class="label">PRE</div>
+
+                                <div class="rating-option">
+                                    <input type="radio" id="qpre-1" name="qpre" value="1" />
+                                    <label for="qpre-1">1</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qpre-2" name="qpre" value="2" />
+                                    <label for="qpre-2">2</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qpre-3" name="qpre" value="3" />
+                                    <label for="qpre-3">3</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qpre-4" name="qpre" value="4" />
+                                    <label for="qpre-4">4</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qpre-5" name="qpre" value="5" />
+                                    <label for="qpre-5">5</label>
+                                </div>
+                            </div>
+
+                            <div class="rating-row">
+                                <div class="label">AME</div>
+
+                                <div class="rating-option">
+                                    <input type="radio" id="qame-1" name="qame" value="1" />
+                                    <label for="qame-1">1</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qame-2" name="qame" value="2" />
+                                    <label for="qame-2">2</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qame-3" name="qame" value="3" />
+                                    <label for="qame-3">3</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qame-4" name="qame" value="4" />
+                                    <label for="qame-4">4</label>
+                                </div>
+                                <div class="rating-option">
+                                    <input type="radio" id="qame-5" name="qame" value="5" />
+                                    <label for="qame-5">5</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card-body">
+                            <p>
+                                မှတ်ချက် ။ ။ သင်ကြားခွင့်ပြုမည့် ဦးစားပေးအဓိကဘာသာရပ်ကို
+                                ကျောင်းသား/သူ၏ တက္ကသိုလ်ဝင်စာမေးပွဲရမှတ်၊ ဦးစားပေးလျှောက်ထားမှုနှင့် သက်ဆိုင်ရာ
+                                အစီအစဉ်အပေါ်တွင်မူတည်၍ သတ်မှတ်ပေးမည် ဖြစ်သည်။ ပြည့်စုံစွာ ဖြည့်စွက်ခြင်းမရှိပါက
+                                သတ်မှတ်သင်တန်းကိုသာ တက်ရောက်ရမည် ဖြစ်သည်။
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Agreement -->
+                    <div>
+                        <p>
+                            အထက်ဖော်ပြပါ ကတိခံဝန်ချက်အား သေချာစွာ ဖတ်ရှုပြီးဖြစ်၍
+                            ကျွန်ုပ် မိဘအုပ်ထိန်းသူအနေဖြင့် သဘောတူ လက်ခံကြောင်း လက်မှတ်ရေးထိုးပါသည်။
+                        </p>
+                    </div>
+                    <div class="flexCenter">
+
+                        <button class="next nav-buttons-btn">
+                            <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 75% Commitment -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>၇၅% နှင့်ပတ်သက်၍ ကတိဝန်ခံချက် (75% Commitment)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div>
+                        <p>
+                            ကျောင်းသား/သူနှင့် အုပ်ထိန်းသူတို့၏ ၇၅% နှင့်ပတ်သက်၍ ကတိဝန်ခံချက်
+                        </p>
+                    </div>
+
+                    <div>
+                        ဤတက္ကသိုလ်တွင် တက်ရောက်ခွင့်ရသူ <span class="phFullNameSir"></span>
+                        နှင့် အမိ၊ အဘ (သို့) အုပ်ထိန်းသူများဖြစ်သည့် အဘ ဦး နှင့် (၂) အမိ ‌ဒေါ် တို့အား အောက်ပါ(၇၅%)နှင့်
+                        ပတ်သက်၍
+                        သိရှိရမည့်အချက်များကို လိုက်နာဆောင်ရွက်ပါမည်ဟု ဝန်ခံကတိပြု လက်မှတ်‌ရေးထိုးကြပါသည်။
+                        <ol type="a">
+                            <li>သင်တန်းတက်ရောက်ခွင့်ရလျှင် နည်းပညာတက္ကသိုလ် (ရတနာပုံဆိုက်ဘာစီးတီး) မှ
+                                ကျောင်းသား/ကျောင်းသူများအတွက် ထုတ်ပြန်သည့်(၇၅%) နှင့် ပတ်သက်သည့် အချက်များကို
+                                ထိန်းသိမ်းလိုက်နာ ဆောင်ရွက်ပါမည်ဟု ဝန်ခံကတိပြုပါသည်။</li>
+                            <li>ကျောင်းခေါ်ချိန်(၇၅%) မပြည့်သည့်စာရင်းများ၊လစဉ်ကျောင်းကြော်ငြာသင်ပုန်းတွင်
+                                ကပ်ထားမည်ကိုသိရှိပါသည်။(၇၅%)နှင့် ပတ်သက်၍ မိမိတို့ထံသို့
+                                အကြောင်းကြားစာ‌ရောက်သည်ဖြစ်စေ၊မရောက်သည်ဖြစ်စေ မိမိတို့ ကိုယ်တိုင် လစဉ်
+                                ကျောင်းကြော်ငြာသင်ပုန်း၌ လာရောက်ကြည့်ရှုခြင်း(သို့)
+                                မိသားစုဆရာ/ဆရာမ၊မော်ကွန်းထိန်းတို့အား မေးမြန်းခြင်းတို့ပြုလုပ်ပါမည်။</li>
+                            <li>နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)တွင် ကျောင်းစတင်ဖွင့်လှစ်သည့်နေ့မှစ၍
+                                ကျောင်းခေါ်ချိန် စတင်တွက်ချက်မည်ကို သိရှိကြောင်းနှင့် ကျောင်းတက်ရာခိုင်နှုန်း(၇၅%)
+                                မပြည့်မှီပါက အတန်းတင်စာမေးပွဲ ဝင်ရောက်ဖြေဆိုခွင့် မပြုကြောင်းကိုသိရှိပါသည်။</li>
+                            <li>(၇၅%) ပြည့်မှီအောင် ကျောင်းတက်ရောက်ခြင်းသည် သက်ဆိုင်ရာ ကျောင်းသား/သူနှင့်
+                                မိဘအုပ်ထိန်းသူတို့၏ အဓိကတာဝန်ဖြစ်သည့်အတွက်ကြောင့်
+                                အကြောင်းကြားစာရောက်ခြင်း/မရောက်ခြင်းအား ဤတက္ကသိုလ်မှ တာဝန်ယူဖြေရှင်းပေးမည်
+                                မဟုတ်ကြောင်းနှင့် (၃)ကြိမ်ဆက်တိုက် ကျောင်းခေါ်ချိန် ပြည့်မှီခြင်း မရှိပါက
+                                မိဘထံအပြီးပြန်အပ်မည်ကို သိရှိကြောင်း ဝန်ခံကတိပြုပါသည်။</li>
+                            <li>သို့ဖြစ်ပါ၍ မိမိတို့ ကိုယ်တိုင်လစဉ်(၇၅%)ပြည့်မှီခြင်း၊မပြည့်မှီခြင်းကို
+                                ကြည့်ရှုစုံစမ်းမေးမြန်း၍ (၇၅%)ပြည့်မှီအောင်ကျောင်းတက်ရောက်စေမည်ဖြစ်ပြီး မပြည့်မှီပါက
+                                သက်ဆိုင်ရာ ကျောင်းသား/သူနှင့် မိဘအုပ်ထိန်းသူတို့၏ တာဝန်သာဖြစ်ကြောင်းကို သိရှိပါသည်ဟု
+                                ထပ်မံဝန်ခံကတိပြုပါသည်။</li>
+                        </ol>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="radio" name="R75-self-commitment-yes-no" value="yes" />
+                            လိုက်နာမည်
+                        </label>
+                        <label>
+                            <input type="radio" name="R75-self-commitment-yes-no" value="no" checked />
+                            မလိုက်နာပါ
+                        </label>
+
+                        <div class="form-row R75-self-commitment">
+
+                            <div class="form-col">
+                                <div class="id-photo-section">
+                                    <div class="id-photo">
+                                        <span>သင်တန်းသား လက်မှတ်</span>
+                                        <img class="phSelfSignature imgCon" alt="Self Signature">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-col">
+                                <label>ကျောင်းသား/သူ၏ အမည်</label>
+                                <span class="phFullName">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <label>
+                            <input type="radio" name="whichGuardianCommit" value="parent" />
+                            မိဘ
+                        </label>
+
+                        <label>
+                            <input type="radio" name="whichGuardianCommit" value="guardian" />
+                            အုပ်ထိန်းသူ
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" name="75-guardianParent-commitment-yes-no" value="yes" />
+                            လိုက်နာမည်
+                        </label>
+                        <label>
+                            <input type="radio" name="75-guardianParent-commitment-yes-no" value="no" checked />
+                            မလိုက်နာပါ
+                        </label>
+
+                        <div class="R75-parent-commitment">
+
+                            <div class="form-row ">
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အမိ လက်မှတ်</span>
+                                            <img class="phMomSignature imgCon" alt="Mother Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>မိခင် အမည်</label>
+                                    <span class="phMomName">
+                                </div>
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အဖ လက်မှတ်</span>
+                                            <img class="phDadSignature imgCon" alt="Father Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>ဖခင် အမည်</label>
+                                    <span class="phDadName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="R75-guardian-commitment">
+
+                            <div class="form-row">
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အုပ်ထိန်းသူ လက်မှတ်</span>
+                                            <img class="phGuardianSignature imgCon" alt="Self Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>အုပ်ထိန်းသူ အမည်</label>
+                                    <span class="phGuardianName">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flexCenter">
+
+                            <button class="next nav-buttons-btn">
+                                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Rules and Regulations -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ကျောင်းသား/သူများ လိုက်နာရမည့် စည်းမျဉ်း၊စည်းကမ်းများ (Rules and Regulations)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div>
+                        <ol class="fw-bold" style="list-style-type: none; padding: 0;">
+                            <li>
+                                ၁။ ငြိမ်းချမ်းစွာ ပညာသင်ကြားရေးကိုနှောင့်ယှက်ခြင်း၊ ထိခိုက်နစ်နာစေရန်
+                                ပြုမှုပြောဆိုခြင်တို့ကို တိုက်ရိုက်သော်လည်းကောင်း၊ သွယ်ဝိုက်၍သော်လည်းကောင်း မပြုလုပ်ရ။
+                            </li>
+
+                            <li>
+                                ၂။ အကျင့်စာရိတ္တပျက်ပြားမှုဆိုင်ရာ ပြစ်မှုများ မကျူးလွန်ရ။
+                                <ul>
+                                    <li>(က) မူးယစ်ထုံထိုင်းဆေးဝါးများ သုံးစွဲ၊ ထားသို၊ ဝယ်ယူ၊ ရောင်းချ၊
+                                        ဖြန့်ဖြူးခြင်းတို့ကို လုံးဝမပြုလုပ်ရ။ ဆေးလိပ်နှင့် ကွမ်းကို စာသင်ခန်းများ၊
+                                        အလုပ်ရုံများနှင့် ကျောင်းပရဝုဏ်အတွင်း လုံးဝမသောက်စားရ။</li>
+                                    <li>(ခ) ပါချုပ်/ဒုချုပ်နှင့် ဆရာ/ဆရာမများ၊ ဝန်ထမ်းများကို ထိခိုက်နစ်နာစေမည့်
+                                        ပြောဆိုပြုမှုလုပ်ဆောင်ခြင်းများ မပြုလုပ်ရ။</li>
+                                    <li>(ဂ) ကျောင်းတွင်း၊ ကျောင်းပြင်၌ ကျောင်းသူများ၊ အမျိုးသမီးများကို
+                                        ထိခိုက်နစ်နာစေမည့် ပြောဆိုနောက်ပြောင်ခြင်းများ မပြုလုပ်ရ။</li>
+                                    <li>(ဃ) ကျောင်းတွင်း၊ ကျောင်းပြင် လောင်းကစားလုပ်ခြင်းနှင့် အရက်သောက်ခြင်း၊
+                                        မူးယစ်ခြင်း အလျဉ်းမပြုလုပ်ရ။</li>
+                                    <li>(င) ဆရာ/ဆရာမများ၏ ဆိုဆုံးမခြင်းများကို နာခံရမည်။</li>
+                                    <li>(စ) ကျောင်းတွင်း၊ ကျောင်းပြင်၌ ကျောင်းသား/ကျောင်းသူအချင်းချင်းသော်လည်းကောင်း၊
+                                        ပြင်ပမှ တစ်ဦးတစ်‌ယောက်ဖြင့်သော်လည်းကောင်း ခိုက်ရန်ဖြစ်ပွားမှု မရှိစေရ။</li>
+                                    <li>(ဆ) သက်ဆိုင်ရာ တက္ကသိုလ်/ကောလိပ်/သိပ္ပံတို့မှ ထုတ်ပြန်ထားသော စည်းကမ်းများကို
+                                        လိုက်နာရမည်။ ကျောင်းချိန်ပြင်ပတွင်လည်း သတ်မှတ်ထားသော စည်းကမ်းများနှင့်အညီ
+                                        ပြုမှုပြောဆို နေထိုင်ရမည်။</li>
+                                    <li>(ဇ) အန္တရာယ်ဖြစ်စေသော မည်သည့်လက်နက်ပစ္စည်းကိုမျှ ကျောင်းတွင်းသို့ မယူရ။</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                ၃။ ကျောင်းစည်းကမ်းဖောက်ဖျက်မှုများ လုံးဝမပြုလုပ်ရ။
+                                <ul>
+                                    <li>(က) ကျောင်းသား/ကျောင်းသူတိုင်း ကျောင်းချိန်မှန်မှန် တက်ရောက်ရမည်။</li>
+                                    <li>(ခ) ကျောင်းသား/ကျောင်းသူတစ်ဦးသည် စာမေးပွဲကြီးဖြေဆိုရန် ပညာသင်နှစ်အတွင်း
+                                        ကျောင်းခေါ်ကြိမ် အနည်းဆုံး (၇၅%) ရှိရမည်။ (၇၅%) ထက် လျော့နည်းပါက စာမေးပွဲကြီး
+                                        ဖြေဆိုခွင့်မပြု။</li>
+                                    <li>(ဂ) ကျောင်းမှ အခါအားလျော်စွာ ချမှတ်ထားသော စည်းကမ်းများကို လိုက်နာရမည်။</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                ၄။ စာမေးပွဲနှင့် ပက်သက်သော စည်းမျဉ်းများကို လိုက်နာရမည်။
+                                <ul>
+                                    <li>(က) ကျောင်းသား/ကျောင်းသူတိုင်း နှစ်ဝက်စာမေးပွဲကို မပျက်မကွက် ဖြေဆိုရမည်။
+                                        ပျက်ကွက်ခဲ့သော် နောက်ဆုံးစာမေးပွဲတွင် ဖြေဆိုခွင့် မပြု။</li>
+                                    <li>(ခ) စာမေးပွဲတွင် မသမာသောနည်းဖြင့် ဖြေဆိုပါက ထိရောက်စွာ အရေးယူဆောင်ရွက်မည်ဖြစ်၍
+                                        မည်သည့်မသမာမှုမျိုးကိုမဆို မပြုလုပ်ရ။</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                ၅။ ကျောင်းသား/ကျောင်းသူသည် သတ်မှတ်ထားသော ဝတ်စုံကိုသာ ဝတ်ဆင်ရမည့်အပြင် ကျောင်းသား၊
+                                ကျောင်းသူနှင့် လိုက်လျောညီထွေပြုမှုပြောဆို နေထိုင်ရမည်။
+                            </li>
+
+                            <li>
+                                ၆။ ဤနည်းပညာတက္ကသိုလ်၌ တက်ရောက်နေစဉ်အတွင်း အခြားမည်သည့် တက္ကသိုလ်/‌ကောလိပ်/သိပ္ပံသို့
+                                တစ်ပြိုင်နက်တည်း တက်ရောက်ခြင်းမပြုရ။ စစ်ဆေးတွေ့ရှိပါက ကျောင်းသားစာရင်းမှ
+                                ပယ်ဖျက်ခြင်းခံရမည်။
+                            </li>
+                        </ol>
+
+                        <p>
+                            အထက်ဖော်ပြပါ အချက်များကို သေချာစွာဖတ်ရှု့သိရှိပြီးဖြစ်၍ လိုက်နာရန် ပျက်ကွယ်ပါက (သို့မဟုတ်)
+                            စည်းကမ်းဖောက်ဖျက်ပါက အပြစ်ကြီးငယ်အလိုက် အရေးယူခြင်း၊
+                            ကျောင်းသား/ကျောင်းသူများကို မိဘ/အုပ်ထိန်းသူနှင့် ခံဝန်ကတိ လတ်မှတ်ရေးထိုးထားသည့်
+                            ပုဂ္ဂိုလ်များထံ ပြန်လည်အပ်နှံခြင်းစသော အပြစ်ဒဏ်များကို
+                            စည်းကမ်းဖောက်ဖျက်သော ကျောင်းသား/ကျောင်းသူများက ခံယူရမည်။<br>
+                            အထက်ဖော်ပြပါ ကတိခံဝန်ချက်အား သေချာစွာဖတ်ရှု့သိရှိပြီးဖြစ်၍ ကျွန်ုပ်
+                            သင်တန်းတက်ရောက်မည့်သူအနေဖြင့် ခံဝန်ကတိ လတ်မှတ်ရေးထိုးပါသည်။
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" name="R-self-commitment-yes-no" value="yes" />
+                            လိုက်နာမည်
+                        </label>
+                        <label>
+                            <input type="radio" name="R-self-commitment-yes-no" value="no" checked />
+                            မလိုက်နာပါ
+                        </label>
+
+                        <div class="form-row R-self-commitment">
+
+                            <div class="form-col">
+                                <div class="id-photo-section">
+                                    <div class="id-photo">
+                                        <span>သင်တန်းသား လက်မှတ်</span>
+                                        <img class="phSelfSignature imgCon" alt="Self Signature">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-col">
+                                <label>ကျောင်းသား/သူ၏ အမည်</label>
+                                <span class="phFullName">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <label>
+                            <input type="radio" name="RwhichGuardianCommit" value="parent" />
+                            မိဘ
+                        </label>
+
+                        <label>
+                            <input type="radio" name="RwhichGuardianCommit" value="guardian" />
+                            အုပ်ထိန်းသူ
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" name="R-guardianParent-commitment-yes-no" value="yes" />
+                            လိုက်နာမည်
+                        </label>
+                        <label>
+                            <input type="radio" name="R-guardianParent-commitment-yes-no" value="no" checked />
+                            မလိုက်နာပါ
+                        </label>
+
+                        <div class="R-parent-commitment">
+
+                            <div class="form-row ">
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အမိ လက်မှတ်</span>
+                                            <img class="phMomSignature imgCon" alt="Mother Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>မိခင် အမည်</label>
+                                    <span class="phMomName">
+                                </div>
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အဖ လက်မှတ်</span>
+                                            <img class="phDadSignature imgCon" alt="Father Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>ဖခင် အမည်</label>
+                                    <span class="phDadName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="R-guardian-commitment">
+
+                            <div class="form-row">
+
+                                <div class="form-col">
+                                    <div class="id-photo-section">
+                                        <div class="id-photo">
+                                            <span>အုပ်ထိန်းသူ လက်မှတ်</span>
+                                            <img class="phGuardianSignature imgCon" alt="Self Signature">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-col">
+                                    <label>အုပ်ထိန်းသူ အမည်</label>
+                                    <span class="phGuardianName">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flexCenter">
+                            <button class="next nav-buttons-btn">
+                                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dormitory Admission -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ကျောင်းဆောင် လျှောက်ထားခြင်း (Dormitory Admission)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+
+
+                    <div class="titleOfContainer">
+                        <h2>ကျောင်းဆောင်လျှောက်ထားခြင်း</h2>
+                    </div>
+
+                    <label>ကျောင်းဆောင်လျှောက်မည်/မလျှောက်ပါ</label>
+                    <label><input type="radio" name="dorm-yn" value="yes"> Yes</label>
+                    <label><input type="radio" name="dorm-yn" value="no" checked> No</label>
+
+                    <div class="toggle-dorm">
+                        <hr>
+
+                        <div class="form-row">
+                            <div class="form-col">
+
+                                <fieldset>
+                                    <legend>ကျောင်းဆောင်လျှောက်ထားသူ၏ အချက်အလက်</legend>
+                                    <label>အမည်</label><br>
+                                    <span class="phFullName"></span><br>
+                                    <label>ဖခင်အမည်</label><br>
+                                    <span class="phDadName"></span><br>
+                                    <label>မိခင်အမည်</label><br>
+                                    <span class="phMomName"></span><br>
+                                    <label>လူမျိုးအမည်\ကိုးကွယ်သည့်ဘာသာ</label><br>
+                                    <span class="phSelfEthnic"></span>&nbsp;\&nbsp;<span
+                                        class="phSelfReligion"></span><br>
+                                    <label>နိုင်ငံသားစိစ်ေရးကတ်ပြား</label><br>
+                                    <span class="phSelfNrc"></span><br>
+                                    <label>အမြဲတမ်းနေရပ်လိပ်စာ၊ဖုန်းနံပါတ်</label><br>
+                                    <span class="phSelfUsualAddress"></span>&nbsp;\&nbsp;<span
+                                        class="phSelfPhonenumber"></span><br>
+                                </fieldset>
+                            </div>
+                            <div class="form-col">
+
+                                <fieldset>
+                                    <legend>ကျောင်းဆောင်၀င်ကြေး တာ၀န်ယူမည့်ပုဂ္ဂုလ်</legend>
+                                    <label>*အမည်</label>
+                                    <input type="text" id="dorm-fee-person-name" required>
+                                    <label>*တော်စပ်ပုံ</label>
+                                    <input type="text" id="dorm-fee-person-relation" required>
+                                    <label>*အမြဲတမ်းနေရပ်လိပ်စာ၊ဖုန်းနံပါတ်</label>
+                                    <input type="text" id="dorm-fee-person-contact" required>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label>*ပညာသင်ထောက်ပံ့ကြေးရရှိခဲ့ခြင်းရှိ/မရှိ </label>
+                            </div>
+                            <label><input type="radio" name="yes" value="no" checked> မရှိ</label>
+                            <label><input type="radio" name="yes" value="yes"> ရှိ</label>
+                        </div>
+                        <br>
+                        <div class="toggleAcademic">
+                            <label>ပညာသင်ဆု၏အမျိုးအမည်၊ရရှိခဲ့သောအတန်းနှင့်ကာလအပိုင်းအခြားကိုဖော်ပြရန် :</label>
+                            <textarea id="academicPrize"></textarea>
+                        </div>
+                        <hr>
+                        <div class="page">
+                            <header>
+                                <h1>ကိုယ်တိုင်၀န်ခံချက်</h1>
+                            </header>
+
+                            <div class="content">
+                                <!-- Dummy Myanmar paragraphs (ပြင်ဆင်ဖို့) -->
+                                <p>၁။ အထက်ပါ အချက်အားလုံးမှန်ကန်ပါသည်။
+                                    တက္ကသိုလ်ရုံးကစီစစ်၍ ကျောင်းဆောင်၀င်ခွင့်ရရှိရေးအတွက်
+                                    လိမ်လည်ထည့်သွင်းဖော်ပြခြင်းတွေ့ရှိခဲ့ပါက စည်းကမ်းအတိုင်းနာခံပါမည်။</p>
+
+                                <p>၂။ ကျောင်းဆောင်၌နေခွင့်တောင်းသည်ကို မိဘ(သို့မဟုတ်)အုပ်ထိန်းသူက သဘောတူပြီးဖြစ်ပါသည်။
+                                </p>
+
+                                <p>၃။ ကျောင်းဆောင်ခများမှန်မှန်ပေးရန် မိဘ(သို့မဟုတ်)အုပ်ထိန်းသူက သဘောတူပြီးဖြစ်ပါသည်။
+                                </p>
+
+                                <p>၄။ တက္ကသိုလ်ကျောင်းသား/သူ ပီသစွာ တက္ကသိုလ်ကျောင်းသား/သူတို့ လိုက်နာရန်ချမှတ်သည့်
+                                    စည်းကမ်းများနှင့်အညီ လိုက်နာကျင့်သုံးနေထိုင်ပါမည်။</p>
+
+                                <p>၅။ တက္ကသိုလ်မှချမှတ်သော စည်းကမ်းများကိုလိုက်နာပါမည်။</p>
+
+                                <!-- Signature Section -->
+                                <label>
+                                    <input type="radio" name="R-self-dorm-commitment-yes-no" value="yes" />
+                                    လိုက်နာမည်
+                                </label>
+                                <label>
+                                    <input type="radio" name="R-self-dorm-commitment-yes-no" value="no" checked />
+                                    မလိုက်နာပါ
+                                </label>
+
+                                <div class="form-row R-self-dorm-commitment">
+                                    <div class="form-col">
+                                        <div class="id-photo-section">
+                                            <div class="id-photo">
+                                                <span>သင်တန်းသား လက်မှတ်</span>
+                                                <img class="phSelfSignature imgCon" alt="Student Dorm Signature">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-col">
+                                        <label>ကျောင်းသား/သူ၏ အမည်</label>
+                                        <span class="phFullName"></span>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <label>
+                                    <input type="radio" name="RwhichDormGuardianCommit" value="parent" />
+                                    မိဘ
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="RwhichDormGuardianCommit" value="guardian" />
+                                    အုပ်ထိန်းသူ
+                                </label>
+
+                                <br>
+
+                                <label>
+                                    <input type="radio" name="R-dormGuardianParent-commitment-yes-no" value="yes" />
+                                    လိုက်နာမည်
+                                </label>
+                                <label>
+                                    <input type="radio" name="R-dormGuardianParent-commitment-yes-no" value="no"
+                                        checked />
+                                    မလိုက်နာပါ
+                                </label>
+
+                                <div class="R-dorm-parent-commitment">
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="id-photo-section">
+                                                <div class="id-photo">
+                                                    <span>အမိ လက်မှတ်</span>
+                                                    <img class="phMomSignature imgCon" alt="Mother Dorm Signature">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-col">
+                                            <label>မိခင် အမည်</label>
+                                            <span class="phMomName"></span>
+                                        </div>
+
+                                        <div class="form-col">
+                                            <div class="id-photo-section">
+                                                <div class="id-photo">
+                                                    <span>အဖ လက်မှတ်</span>
+                                                    <img class="phDadSignature imgCon" alt="Father Dorm Signature">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-col">
+                                            <label>ဖခင် အမည်</label>
+                                            <span class="phDadName"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="R-dorm-guardian-commitment">
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <div class="id-photo-section">
+                                                <div class="id-photo">
+                                                    <span>အုပ်ထိန်းသူ လက်မှတ်</span>
+                                                    <img class="phGuardianSignature imgCon"
+                                                        alt="Dorm Guardian Signature">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-col">
+                                            <label>အုပ်ထိန်းသူ အမည်</label>
+                                            <span class="phGuardianName"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                            </div>
+                        </div>
+                        <div class="flexCenter">
+                            <button class="next nav-buttons-btn">
+                                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Payment -->
+        <div class="step-section">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="../image/Logo_of_UTYCC.png" alt="Avatar Logo">
+                        <h5>ငွေပေးချေခြင်း (Payment)</h5>
+                    </div>
+                </div>
+                <div class="form-body">
+                    <div class="card-body">
+                        <!-- Left Info -->
+                        <div>
+                            <p><strong>KPay Number:</strong> 09444223323</p>
+                            <p><strong>KPay Name:</strong> University Of Yatanarpon Cyber City</p>
+                            <p><strong>လုပ်ဆောင်ရမည့် အချက်များ---</strong></p>
+                            <ul class="small ps-3">
+                                <li>ဖုန်းနံပတ် ကို ရိုက်ထည့်ပါ <span class="text-muted">သို့</span> QR ကို
+                                    Scan လုပ်ပါ</li>
+                                <li>ငွေပမာဏနှင့် Kpayအမည်ကို စစ်ဆေးပြီး အတည်ပြုပါ</li>
+                                <li>Note တွင် အမည်နှင့် ခုံအမှတ် ထည့်ရေး‌ပေးရန်
+                                    <br><span class="text-muted">(ကျောင်းသား/သူ အသစ်များ ဖြစ်ပါက
+                                        တက္ကသိုလ်ဝင်တန်းအောင်မြင်သည့် ခုံအမှတ် ထည့်ပေးရန်)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-col">
+                                <img src="../image/kbzpay-qr-code.webp" alt="KPay QR"
+                                    style="width: 200px; margin: auto;">
+                            </div>
+
+                            <div class="id-photo-section">
+                                <div class="id-photo">
+                                    <span>ပြေစာထည့်ရန်</span>
+                                    <img id="payslip" src="" alt="Payslip">
+                                    <input type="file" onchange="loadFile(event,'payslip')">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flexCenter">
+                            <button type="button" class="btn-submit">Preview</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <script src="newStudentForm.js"></script>
+</body>
+
+</html>

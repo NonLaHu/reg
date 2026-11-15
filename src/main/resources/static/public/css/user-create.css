@@ -1,0 +1,187 @@
+/* user-create.css - clean, daylight admin form */
+
+:root {
+    --bg: #f6f9fc;
+    --card: #ffffff;
+    --text: #0f1724;
+    --muted: #6b7280;
+    --accent: #0b63d6;
+    --accent-contrast: #fff;
+    --danger: #d04545;
+    --radius: 10px;
+    --shadow: 0 8px 22px rgba(15,23,42,0.06);
+}
+
+body {
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.page {
+    max-width: 720px;
+    margin: 36px auto;
+    padding: 20px;
+}
+
+.topbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom: 18px;
+}
+.brand { font-size:20px; font-weight:700; }
+.auth-state { font-size:13px; color:var(--muted); }
+
+.card { background: var(--card); padding:20px; border-radius: var(--radius); box-shadow: var(--shadow); border:1px solid rgba(15,23,42,0.04); }
+.form-card h2 { margin-top:0; margin-bottom:12px; }
+
+.field { margin-bottom:14px; }
+.field label { display:block; font-weight:600; margin-bottom:6px; }
+.field input, .field select { width:95%; padding:10px 12px; border:1px solid rgba(15,23,42,0.08); border-radius:8px; font-size:14px; }
+.req { color: var(--danger); font-weight:700; }
+
+.actions { display:flex; gap:12px; margin-top:12px; }
+.btn { padding:10px 14px; font-weight:600; border-radius:8px; cursor:pointer; border:none; }
+.btn.primary { background: var(--accent); color: var(--accent-contrast); }
+.btn.secondary { background:transparent; border:1px solid rgba(15,23,42,0.06); color: var(--text); }
+
+.feedback { margin-top:12px; font-size:14px; min-height:22px; }
+.feedback .ok { color:#0b7a3a; }
+.feedback .error { color: var(--danger); }
+
+.back-arrow {
+    position: absolute;
+    left: 0px;
+    top:0px;
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+    font-size: 30px;
+}
+
+.back-arrow:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  text-align: right;
+}
+
+.theme-toggle button {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: white;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.theme-toggle button:hover {
+  background: #0056b3;
+}
+
+/* user-create.css — dark theme */
+
+body.dark {
+    --bg: #0f111b;
+    --card: #1a1c2a;
+    --text: #e6eef8;
+    --muted: #9aa4b2;
+    --accent: #60a5fa;
+    --accent-contrast: #fff;
+    --danger: #fb7185;
+    --radius: 10px;
+    --shadow: 0 8px 22px rgba(0,0,0,0.6);
+}
+
+body.dark {
+    background: var(--bg);
+    color: var(--text);
+}
+
+body.dark .page {
+    background: transparent;
+}
+
+body.dark .topbar {
+    color: var(--text);
+}
+
+body.dark .auth-state {
+    color: var(--muted);
+}
+
+body.dark .card,
+body.dark .form-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: var(--shadow);
+    color: var(--text);
+}
+
+body.dark .field input,
+body.dark .field select,
+body.dark .field textarea {
+    background: #1f2130;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+}
+
+body.dark .field label {
+    color: var(--text);
+}
+
+body.dark .req {
+    color: var(--danger);
+}
+
+body.dark .actions .btn.primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+}
+
+body.dark .actions .btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text);
+}
+
+body.dark .feedback .ok {
+    color: #34d399;
+}
+
+body.dark .feedback .error {
+    color: var(--danger);
+}
+
+body.dark .back-arrow {
+    color: var(--text);
+    background-color: var(--card);
+}
+
+body.dark .back-arrow:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+body.dark .theme-toggle button {
+    background: var(--accent);
+    color: var(--accent-contrast);
+}
+
+body.dark .theme-toggle button:hover {
+    background: #2563eb;
+}

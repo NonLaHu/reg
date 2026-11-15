@@ -1,0 +1,871 @@
+Web Application Endpoints Documentation
+Overview:
+Endpoints in this application serve either HTML pages (rendered views) or API data. They are categorized by access level and functionality, allowing a clear understanding of which parts of the system are publicly accessible, role-protected, or student-specific.
+Categories:
+    Public Pages: Accessible to anyone, no authentication required.
+    Student Pages: Accessible only to users with the STUDENT role (protected via JWT / Spring Security).
+    Admin / Superadmin Pages: Accessible only to users with ADMIN or SUPERADMIN roles.
+    Mixed / General Pages: Some pages are viewable by multiple roles, depending on authorization.
+Each endpoint is documented with:
+    URL – the path users navigate to.
+    Purpose – what the page or endpoint is for.
+    Input – query parameters, path variables, or request body.
+    Output – the HTML page rendered, or JSON/API response.
+    Access – roles allowed to access the endpoint.
+
+All Functional Endpoints:
+
+Base Path: /api/admin/settings
+    GET /payment
+    PUT /payment
+    POST /payment/upload
+    GET /enrollment
+    PUT /enrollment
+Base Path: /api/admin/students
+    POST /student-reset-pass/{id}
+Base Path: /api/admin/students
+    POST /student-reset-pass/{id}
+Base Path: /admin/users
+    POST /{id}/reset-password
+    POST /{id}/roles/{role}/grant
+    POST /{id}/roles/{role}/revoke
+    GET /{id}
+    PUT /{id}
+    DELETE /{id}
+    GET /me
+Base Path: /api/announcements
+    POST /create
+    GET /active
+    GET /download/{fileName}
+    DELETE /delete/{id}
+Base Path: /auth
+    POST /login
+Base Path: /private/admin
+    GET /dashboard
+    GET /recent_users
+    GET /pre_enrollments
+    GET /section_users
+    GET /section_pre_enrollments
+    GET /section_pre_enrollments_old
+    GET /section_enrollments
+    GET /section_students
+    GET /section_annoucements
+Base Path: /admin
+    GET /pre-enrollments/{id}
+    GET /pre-enrollments_old/{id}
+    GET /enrollments/{id}
+Base Path: /api
+    POST /enrollments
+    POST /pre_enrollments
+    POST /pre_enrollments_old
+    POST /admin/enrollments/{id}/accept
+    POST /admin/enrollments/{id}/reject
+Base Path: /
+    GET /files/uploads/{filepath}
+    GET /public/uploads/payment/{filepath}
+    GET /student/dashboard
+    POST /api/reset-password
+Base Path: /admin/pre-enrollments
+    POST /{id}/accept
+    POST /old/{id}/accept
+    GET /
+Base Path: /api/uploads
+    GET /{filename}
+
+All Protected Pages:
+
+Base Path: /admin
+    GET /admin/admin-users/{id}
+    GET /admin/announcements/{id}
+    GET /admin/students/{id}
+    GET /admin/announcement_admin
+Base Path: /page
+    GET /enrollment
+Base Path: /
+    GET /user_dashboard
+    GET /new_enrollment_form
+    GET /old_enrollment_form
+
+All public pages:
+|   URL                         |   Purpose / Description                  |   Input                      |   Output (View)                                                                       |
+| ----------------------------- | ---------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------- |
+| `/`                           | Landing page, shows recent announcements | —                            | `index.html` <br> `recentAnnouncements` (List of active announcements)                |
+| `/admin`                      | Admin home page                          | —                            | `admin.html`                                                                          |
+| `/signup`                     | Sign-up / registration form              | —                            | `signup.html`                                                                         |
+| `/admin_profile`              | Admin profile page                       | —                            | `admin_profile.html`                                                                  |
+| `/render`                     | Renderer demo / generic page             | —                            | `render.html`                                                                         |
+| `/dashboard`                  | Public dashboard view                    | —                            | `dashboard.html`                                                                      |
+| `/render_enrollment_new`      | Preview new enrollment form              | —                            | `render_enrollment_new.html`                                                          |
+| `/render_enrollment_old`      | Preview old enrollment form              | —                            | `render_enrollment_old.html`                                                          |
+| `/new_enrollment`             | New enrollment form page                 | —                            | `new_enrollment.html`                                                                 |
+| `/old_enrollment`             | Old enrollment form page                 | —                            | `old_enrollment.html`                                                                 |
+| `/renderOldStudent`           | Preview old student info                 | —                            | `renderOldStudent.html`                                                               |
+| `/renderAdminUser`            | Admin user management page               | —                            | `renderAdminUser.html`                                                                |
+| `/render_enrollment`          | Enrollment form render page              | —                            | `render_enrollment.html`                                                              |
+| `/render_student_detail`      | Student detail preview                   | —                            | `render_student_detail.html`                                                          |
+| `/render_preview_enrollment`  | Enrollment preview page                  | —                            | `render_preview_enrollment.html`                                                      |
+| `/render_announcement_admin`  | Admin announcement page                  | —                            | `render_announcement_admin.html`                                                      |
+| `/history`                    | History page / logs                      | —                            | `history.html`                                                                        |
+| `/department`                 | Department info page                     | —                            | `department.html`                                                                     |
+| `/announcement`               | Paginated public announcements           | `page` (optional, default 0) | `announcement.html` <br> `announcements`, `currentPage`, `totalPages`                 |
+| `/academic`                   | Academic info page                       | —                            | `academic.html`                                                                       |
+| `/user_create`                | User creation page                       | —                            | `user_create.html` <br> `roles` (all roles from `RoleService`)                        |
+| `/render_announcement_detail` | Announcement details page                | —                            | `render_announcement_detail.html`                                                     |
+| `/pre_enrollment_old`         | Old student pre-enrollment page          | —                            | `pre_enrollment_old.html` <br> `majors`, `majorYears`, `groupedTownships`, `nrcTypes` |
+| `/pre_enrollment`             | New student pre-enrollment page          | —                            | `pre_enrollment.html` <br> `groupedTownships`, `nrcTypes`                             |
+| `/login`                      | Login form                               | —                            | `login.html`                                                                          |
+
+Detail Explaination for Each end points:
+
+Admin Settings API Documentation
+Base Path: /api/admin/settings
+    GET /payment
+
+        Purpose:
+        Retrieve the current payment-related settings configured by the administrator.
+
+        Input:
+        No request body required.
+
+        Output:
+        Returns a PaymentAdminSetting object containing the current configuration (e.g., payment methods, QR path, or related details).
+
+        Use Case:
+        Used by the frontend/admin dashboard to display existing payment configurations.
+
+    PUT /payment
+    
+        Purpose:
+        Update the system’s payment settings.
+
+        Input:
+        Request Body: PaymentAdminSetting JSON object with updated configuration values.
+
+        Output:
+        Returns the updated PaymentAdminSetting object after saving changes.
+
+        Use Case:
+        Used by administrators to modify payment-related settings (e.g., bank info, QR code reference).
+
+    POST /payment/upload
+
+        Purpose:
+        Upload a new QR code image for payment (e.g., bank transfer QR).
+
+        Input:
+        Multipart Form Data:
+
+        file: the image file (e.g., .png, .jpg) to upload.
+
+        Output:
+        Returns FileUploadResponse containing the public path/URL of the uploaded file.
+
+        Use Case:
+        Allows admins to update payment QR codes displayed to students/users.
+
+    GET /enrollment
+
+        Purpose:
+        Retrieve the current enrollment-related settings configured by the administrator.
+
+        Input:
+        No request body required.
+
+        Output:
+        Returns an EnrollmentAdminSetting object containing the current configuration (e.g., enrollment dates, limits, or conditions).
+
+        Use Case:
+        Used by the frontend/admin dashboard to view enrollment-related configurations.
+
+    PUT /enrollment
+
+        Purpose:
+        Update enrollment-related settings.
+
+        Input:
+        Request Body: EnrollmentAdminSetting JSON object with new values.
+
+        Output:
+        Returns the updated EnrollmentAdminSetting object after saving changes.
+
+        Use Case:
+        Allows admins to adjust enrollment periods, requirements, or other parameters.
+
+Admin Student Management API
+Base Path: /api/admin/students
+    POST /student-reset-pass/{id}
+
+        Purpose:
+        Forcefully reset a student’s account password via administrator action.
+
+        Input:
+
+        Path Variable: id (Long) → The unique identifier of the student whose password needs resetting.
+
+        Output:
+
+        JSON message containing the new generated password.
+
+Admin User Management API
+
+Base Path: /admin/users
+
+    POST /{id}/reset-password
+
+        Purpose:
+        Reset a user’s password using a new password provided by a superadmin.
+
+        Input:
+        Path Variable: id (Long) → User ID to reset.
+        Request Body: JSON with newPassword key.
+
+        Output:
+        JSON message confirming password reset:
+            {
+            "message": "Password has been reset successfully.",
+            "userId": 123
+            }
+
+        Use Case:
+            Allows superadmins to directly reset user passwords for account recovery or administrative purposes.
+    POST /{id}/roles/{role}/grant
+
+        Purpose:
+        Grant a specific role to a user.
+
+        Input:
+        Path Variable: id (Long) → User ID.
+        Path Variable: role (String) → Role to assign.
+
+        Output:
+        JSON message confirming role assignment:
+            {
+            "message": "Role granted successfully.",
+            "userId": 123,
+            "role": "ADMIN"
+            }
+
+        Use Case:
+            Used by superadmins to assign permissions/roles to users dynamically.
+
+    POST /{id}/roles/{role}/revoke
+
+        Purpose:
+        Revoke a specific role from a user.
+
+        Input:
+        Path Variable: id (Long) → User ID.
+        Path Variable: role (String) → Role to remove.
+
+        Output:
+        JSON message confirming role revocation:
+            {
+            "message": "Role revoked successfully.",
+            "userId": 123,
+            "role": "ADMIN"
+            }
+
+        Use Case:
+            Allows superadmins to remove permissions/roles from users when needed.
+
+    GET /
+
+        Purpose:
+            Retrieve a paginated list of all users.
+
+        Input:
+            Optional pagination parameters: page, size, sort.
+
+        Output:
+            Page<UserDto> containing user summaries.
+
+        Use Case:
+            Used by admins or users with USER_READ authority to view all registered users.
+
+    GET /{id}
+
+        Purpose:
+            Retrieve detailed information of a single user by ID.
+
+        Input:
+            Path Variable: id (Long) → User ID.
+
+        Output:
+            User object if found, or 404 Not Found if the user doesn’t exist.
+
+        Use Case:
+            View specific user details for administrative purposes.
+
+    POST /create
+
+        Purpose:
+            Create a new user in the system.
+
+        Input:
+            Request Body: JSON with required user information (e.g., name, email, password).
+
+        Output:
+            JSON containing created user’s fullName and email, or error message if creation fails.
+
+        Use Case:
+            Superadmins can add new users to the system.
+
+    PUT /{id}
+
+        Purpose:
+            Update an existing user’s details.
+
+        Input:
+            Path Variable: id (Long) → User ID.
+            Request Body: User object with updated data.
+
+        Output:
+            Updated User object.
+
+        Use Case:
+            Modify user information such as name, email, or other profile details.
+
+    DELETE /{id}
+
+        Purpose:
+            Delete a user from the system.
+
+        Input:
+            Path Variable: id (Long) → User ID.
+
+        Output:
+            No content (204 No Content) on successful deletion.
+
+        Use Case:
+            Remove inactive or invalid users from the system.
+
+    GET /me
+
+        Purpose:
+            Retrieve information of the currently authenticated user.
+
+        Input:
+            No input required; uses authentication context.
+
+        Output:
+            UserDto of the currently logged-in user.
+
+        Use Case:
+            Used by users to view their own profile and roles.
+
+Announcement Management API
+
+Base Path: /api/announcements
+
+    POST /create
+
+        Purpose:
+            Create a new announcement with optional description, PDF attachment, and scheduling details.
+
+        Input:
+            Request Parameters:
+            title (String) → Announcement title.
+            description (String, optional) → Detailed description.
+            pdf (MultipartFile) → PDF file associated with the announcement.
+            publishDate (LocalDateTime, optional) → Scheduled start date.
+            expiryDate (LocalDateTime, optional) → Scheduled end date.
+
+        Output:
+            Returns the created Announcement object with all its details.
+
+        Use Case:
+            Allows admins or superadmins to create announcements for users with optional scheduling and document attachment.
+
+    GET /active
+
+        Purpose:
+            Retrieve all currently active announcements.
+
+        Input:
+            No input required.
+
+        Output:
+            List of active Announcement objects.
+
+        Use Case:
+            Display active announcements to end users on dashboards or portals.
+
+    GET /download/{fileName}
+
+        Purpose:
+            Download the PDF file associated with a specific announcement.
+
+        Input:
+            Path Variable: fileName (String) → Name of the file to download.
+
+        Output:
+            FileSystemResource containing the requested PDF.
+            Returns 404 Not Found if the file doesn’t exist.
+
+        Use Case:
+            Allows users to download announcement attachments for reference or record-keeping.
+
+    DELETE /delete/{id}
+
+        Purpose:
+            Delete an existing announcement.
+
+        Input:
+            Path Variable: id (Long) → Announcement ID to delete.
+
+        Output:
+            JSON message confirming deletion: "Deleted successfully".
+
+        Use Case:
+            Enables admins or superadmins to remove outdated or incorrect announcements.
+
+Authentication API
+
+Base Path: /auth
+
+    POST /login
+
+        Purpose:
+            Authenticate a user with email and password, and generate a JWT token for session management.
+
+        Input:
+            Request Body: LoginUserDto JSON object containing:
+            email (String) → User email for login.
+            password (String) → User password.
+
+        Output:
+            LoginResponse JSON object containing:
+            token (String) → JWT token for authenticated session.
+            expiresIn (Long) → Token expiration time in milliseconds.
+            admin (Boolean) → Whether the user is an admin.
+
+        Use Case:
+            Allows users to log in to the system securely.
+            Provides a JWT for subsequent authenticated API requests.
+            Supports identifying admin users for role-based access control.
+
+Admin Dashboard API
+
+Base Path: /private/admin
+
+    GET /dashboard
+
+        Purpose:
+            Retrieve high-level system statistics including user counts, enrollment counts, files, and CPU load.
+
+        Input:
+            No input required.
+
+        Output:
+            JSON object containing:
+            usersCount → Total registered users.
+            preEnrollments → Count of pre-enrollments.
+            enrollments → Count of enrollments.
+            filesCount → Total uploaded files.
+            load → CPU load percentage.
+
+        Use Case:
+            Provides admins with an overview of system activity and health for dashboard display.
+
+    GET /recent_users
+
+        Purpose:
+            Retrieve a list of the most recently registered users.
+
+        Input:
+            No input required.
+
+        Output:
+            List of RecentUserDTO objects.
+            Use Case:
+            Display the latest user registrations on the admin dashboard.
+
+    GET /pre_enrollments
+
+        Purpose:
+            Retrieve the most recent pre-enrollment submissions.
+
+        Input:
+            No input required.
+
+        Output:
+            List of PreEnrollmentSummaryDTO objects.
+
+        Use Case:
+            Show recent pre-enrollments to admins for monitoring and quick access.
+
+    GET /section_users
+
+        Purpose:
+            Retrieve paginated, optionally filtered, and sorted list of users.
+
+        Input:
+            Request Parameters (optional): page, size, sort, asc, filter.
+
+        Output:
+            JSON object containing content (list of RecentUserDTO), totalPages, totalElements.
+
+        Use Case:
+            Admins can browse, search, and sort users with pagination support.
+
+    GET /section_pre_enrollments
+
+        Purpose:
+            Retrieve paginated and filtered list of recent pre-enrollments.
+
+        Input:
+            Request Parameters: page, size, sort, asc, filter, status.
+
+        Output:
+            JSON object containing content (list of PreEnrollmentSummaryDTO), totalPages, totalElements.
+
+        Use Case:
+            Manage and monitor pre-enrollment applications efficiently.
+
+    GET /section_pre_enrollments_old
+
+        Purpose:
+            Retrieve paginated and filtered list of old student pre-enrollments.
+
+        Input:
+            Request Parameters: page, size, sort, asc, filter, status.
+
+        Output:
+            JSON object containing content (list of PreEnrollmentOldSummaryDTO), totalPages, totalElements.
+
+        Use Case:
+            Manage historical pre-enrollments for returning students.
+
+    GET /section_enrollments
+
+        Purpose:
+            Retrieve paginated and filtered list of enrollments.
+
+        Input:
+            Request Parameters: page, size, sort, asc, filter, status.
+
+        Output:
+            JSON object containing content (list of StudentDashboardDto), totalPages, totalElements.
+
+        Use Case:
+            Admins can monitor and manage current enrollments efficiently.
+
+    GET /section_students
+
+        Purpose:
+            Retrieve paginated and filtered list of students.
+
+        Input:
+            Request Parameters: page, size, sort, asc, filter.
+
+        Output:
+            JSON object containing content (list of StudentDashboardDto), totalPages, totalElements.
+
+        Use Case:
+            Browse student data with pagination and filtering for administrative purposes.
+
+    GET /section_annoucements
+
+        Purpose:
+            Retrieve paginated and filtered list of announcements.
+
+        Input:
+            Request Parameters: page, size, sort, asc, filter.
+
+        Output:
+            JSON object containing content (list of Announcement), totalPages, totalElements.
+
+        Use Case:
+            Admins can monitor and manage announcements efficiently on the dashboard.
+
+Enrollment Admin Preview API
+Base Path: /admin
+
+    GET /pre-enrollments/{id}
+
+        Purpose:
+            Preview a specific pre-enrollment record by ID for administrative review.
+
+        Input:
+            Path Variable: id (Long) → Pre-enrollment ID.
+
+        Output:
+            Renders the preview_pre_enrollment view with a PreEnrollmentDto object.
+
+        Use Case:
+            Allows admins to view detailed pre-enrollment information for verification or processing.
+
+    GET /pre-enrollments_old/{id}
+
+        Purpose:
+            Preview a specific old student pre-enrollment record by ID.
+
+        Input:
+            Path Variable: id (Long) → Old pre-enrollment ID.
+
+        Output:
+            Renders the preview_pre_enrollment_old view with a PreEnrollmentOldDTO object.
+
+        Use Case:
+            Enables admins to review historical pre-enrollment submissions for returning students.
+
+    GET /enrollments/{id}
+
+        Purpose:
+            Preview a specific enrollment application by ID, including student details and mapped major information.
+
+        Input:
+            Path Variable: id (Long) → Enrollment application ID.
+
+        Output:
+            Renders the preview_enrollment view with:
+            EnrollmentApplicationDto → Enrollment application details.
+            StudentDetailDto → Student information.
+            majorMap → Mapping of major IDs to names.
+
+        Use Case:
+            Admins can view detailed enrollment applications for processing, approval, or verification purposes.
+
+Enrollment API
+Base Path: /api
+
+    POST /enrollments
+
+        Purpose:
+            Submit a new enrollment application for a fresher student.
+
+        Input:
+            Request Body: EnrollmentRequestFresher JSON containing enrollment details (dto) and associated files.
+            Authenticated User: CustomUserDetails (student submitting the enrollment).
+
+        Output:
+            JSON success response: "Enrollment successful".
+
+        Use Case:
+            Allows students to submit enrollment applications for processing.
+
+    POST /pre_enrollments
+
+        Purpose:
+            Create a pre-enrollment record for a new student with a pass certificate file.
+
+        Input:
+            Request Part: dto → RequestPreEnrollmentDTO object with pre-enrollment data.
+            Request Part: passCertificate → Image file of the student’s certificate.
+
+        Output:
+            JSON success response: "Pre-enrollment successful" or error response if creation fails.
+
+        Use Case:
+            Enables students to submit initial pre-enrollment information before full enrollment.
+
+    POST /pre_enrollments_old
+
+        Purpose:
+            Create a pre-enrollment record for returning/old students with ID card upload.
+
+        Input:
+            Request Part: dto → RequestPreEnrollmentOldDTO with old student data.
+            Request Part: studentIdCardUrl → Image file of student ID card.
+
+        Output:
+            JSON success response: "Pre-enrollment (old) created successfully" or error response if creation fails.
+
+        Use Case:
+            Supports returning students in submitting pre-enrollment information.
+
+    POST /admin/enrollments/{id}/accept
+
+        Purpose:
+            Accept a student’s enrollment application by admin or superadmin.
+
+        Input:
+            Path Variable: id (Long) → Enrollment ID.
+            Authenticated User: CustomUserDetails (admin processing the enrollment).
+
+        Output:
+            JSON success response: "Enrollment accepted" or error if operation fails.
+
+        Use Case:
+            Admins use this endpoint to approve enrollment applications.
+
+    POST /admin/enrollments/{id}/reject
+
+        Purpose:
+            Reject a student’s enrollment application with optional remark by admin or superadmin.
+
+        Input:
+            Path Variable: id (Long) → Enrollment ID.
+            Request Parameter: remark (String, optional) → Reason for rejection.
+            Authenticated User: CustomUserDetails (admin processing the enrollment).
+
+        Output:
+            JSON success response: "Enrollment rejected" or error if operation fails.
+
+        Use Case:
+            Admins use this endpoint to deny enrollment applications while optionally providing a reason.
+
+File Access API
+    GET /files/uploads/{filepath}
+
+        Purpose:
+            Serve private uploaded files to authorized admins or users.
+
+        Input:
+            Path Variable: filepath (String) → Path to the file inside the uploads/ directory.
+            Access restricted to roles: ADMIN, SUPERADMIN or authority USER_READ.
+
+        Output:
+            Returns the requested file as a Resource with the appropriate content type.
+            403 Forbidden if access attempts to escape the uploads/ directory.
+            404 Not Found if the file does not exist.
+
+        Use Case:
+            Allows authorized users to download or view uploaded files while enforcing directory security.
+
+    GET /public/uploads/payment/{filepath}
+
+        Purpose:
+            Serve publicly accessible payment files.
+
+        Input:
+            Path Variable: filepath (String) → Path to the file inside the uploads/payment/ directory.
+
+        Output:
+            Returns the requested file as a Resource with the appropriate content type.
+            403 Forbidden if access attempts to escape the uploads/payment/ directory.
+            404 Not Found if the file does not exist.
+
+        Use Case:
+            Allows users to download payment-related files publicly without authentication.
+
+Pre-Enrollment Admin API
+Base Path: /admin/pre-enrollments
+
+    POST /{id}/accept
+
+        Purpose:
+            Accept a pre-enrollment application for a new student.
+
+        Input:
+            Path Variable: id (Long) → Pre-enrollment ID.
+
+        Output:
+            AcceptResponsePreEnroll object with acceptance details.
+
+        Use Case:
+            Allows admins to approve pre-enrollment applications.
+
+    POST /old/{id}/accept
+
+        Purpose:
+            Accept a pre-enrollment application for an old/returning student.
+
+        Input:
+            Path Variable: id (Long) → Pre-enrollment ID for old student.
+
+        Output:
+            AcceptResponsePreEnroll object with acceptance details.
+
+        Use Case:
+            Enables admins to approve pre-enrollments for returning students.
+
+    GET /
+
+        Purpose:
+            Retrieve all pre-enrollments.
+
+        Input:
+            None (Requires authority USER_READ).
+
+        Output:
+            List of PreEnrollment objects.
+
+        Use Case:
+            Allows admins or authorized staff to view all pre-enrollment records.
+
+Student Dashboard API
+    GET /student/dashboard
+
+        Purpose:
+            Retrieve the logged-in student’s dashboard data, including enrollment and pre-enrollment information.
+
+        Input:
+            Authenticated User: CustomUserDetails (role STUDENT).
+
+        Output:
+            StudentDashboardDto object containing relevant student dashboard details.
+
+        Use Case:
+            Allows students to view their personal dashboard with their enrollment status, pre-enrollments, and other relevant metrics.
+
+    POST /api/reset-password
+
+        Purpose:
+            Allow a student to reset their password.
+
+        Input:
+            Request Body: PasswordRequest containing:
+            oldPassword (String) → Current password.
+            newPassword (String) → New desired password.
+            Authenticated User: CustomUserDetails (role STUDENT).
+
+        Output:
+            200 OK with message "Password updated successfully." if the reset succeeds.
+            400 Bad Request with message "Invalid old password." if the old password is incorrect.
+
+        Use Case:
+            Enables students to securely change their password without admin intervention.
+
+Admin File Upload Access API
+
+Base Path: /api/uploads
+Access: ADMIN, SUPERADMIN
+
+    GET /{filename}
+
+        Purpose:
+            Serve uploaded files for admin or superadmin users, with optional forced download.
+
+        Input:
+            Path Variable: filename (String) → Name of the file inside the uploads directory.
+            Request Parameter: download (boolean, optional, default false) → true to force download, false for inline viewing.
+            Authenticated User: CustomUserDetails (role ADMIN or SUPERADMIN).
+
+        Output:
+            Returns the requested file as a Resource with appropriate content type.
+            Sets content disposition based on download parameter.
+            Cache-Control header set to 7 days.
+
+        Error Responses:
+            401 Unauthorized if not authenticated.
+            400 Bad Request for invalid file names or paths.
+            404 Not Found if file does not exist.
+            500 Internal Server Error for file access issues.
+
+        Use Case:
+            Allows admins to securely access and download files uploaded to the system, with safe handling against path traversal and forced downloads.
+
+Web Page Endpoint Documentation (JWT-Protected)
+Endpoint: /some/path
+    HTTP Method: GET (or POST if submitting forms)
+    Access / Security: Requires valid JWT; roles or authorities as specified.
+
+    Purpose:
+        Explain why this page exists. Example: “Displays the admin dashboard with user statistics.”
+
+    Input:
+        JWT token in Authorization: Bearer <token> header.
+        Optional query parameters (if any) or form data.
+
+    Output / Response:
+        Returns HTML content (rendered page).
+        Can include dynamic content based on the authenticated user.
+
+    Error responses:
+        401 Unauthorized → Invalid or missing JWT.
+        403 Forbidden → JWT valid but insufficient role/authority.
+        500 Internal Server Error → Page rendering or backend failure.
+
+    Use Case:
+        Describe why a user would access this page and what actions they can perform. Example: “Admins can view pre-enrollments and accept/reject student applications from this page.”

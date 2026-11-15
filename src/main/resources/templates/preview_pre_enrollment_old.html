@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pre-enrollment Preview</title>
+  <link rel="stylesheet" th:href="@{/public/css/preview_pre_enrollment_old.css}" />
+</head>
+<body>
+<!-- ... head remains the same ... -->
+
+<div class="pre-wrap">
+
+  <div class="header">
+    <div>
+      <div class="title">Pre-enrollment — Preview</div>
+      <div class="sub">Review the old student applicant details before action.</div>
+    </div>
+
+    <div class="header-right">
+
+      <button class="btn btn-ghost" onclick="window.history.back()">Back</button>
+
+      <button id="themeToggle" class="btn btn-ghost" aria-pressed="false"
+              aria-label="Toggle dark theme" title="Toggle theme">
+        <span id="themeToggleIcon" aria-hidden="true">🌙</span>
+        <span id="themeToggleText" style="margin-left:6px">Dark</span>
+      </button>
+
+      <div class="action-cluster" role="group" aria-label="record actions">
+        <button class="btn btn-accept" id="acceptBtn" title="Accept application">✓ Accept</button>
+        <button class="btn btn-reject" id="rejectBtn" title="Reject application">✕ Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="previewCard">
+
+    <div class="meta-list">
+      <div class="meta-row">
+        <div class="meta-label">Name</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.fullNameMm}" class="field-value">မောင်ထွန်း</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="fullNameMm">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Email</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.email}" class="field-value">user@example.com</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="email">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Previous Roll No</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.prevRollNo}" class="field-value">123456</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="prevRollNo">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Phone</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.phoneNumber}" class="field-value">09xxxxxxx</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="phoneNumber">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Viber</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.viberPhoneNumber}" class="field-value">09yyyyyyy</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="viberPhoneNumber">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Major</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.major}" class="field-value">Computer Science</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="major">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Attending Year</div>
+        <div class="meta-value">
+          <span th:text="${preEnrollment.majorYear}" class="field-value">First Year</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="majorYear">Edit</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Status</div>
+        <div class="meta-value">
+          <span th:classappend="${#strings.toLowerCase(preEnrollment.status)}"
+                class="status-badge"
+                th:text="${preEnrollment.status}">PENDING</span>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-label">Created</div>
+        <div class="meta-value">
+          <span th:text="${#temporals.format(preEnrollment.createdAt, 'yyyy-MM-dd HH:mm')}">2025-08-01 12:00</span>
+          <small class="muted thisId" style="margin-left:10px;font-weight:600;">ID: <span th:text="${preEnrollment.id}">12345</span></small>
+        </div>
+      </div>
+
+      <!-- <div class="meta-row" style="flex-direction:column; align-items:flex-start;">
+        <div class="meta-label" style="width:100%;">Admin Notes</div>
+        <textarea class="meta-value" style="width:100%; min-height:80px; padding:10px; border-radius:8px; border:1px solid #eef6ff; background:#fbfdff;" placeholder="Add short admin note..."></textarea>
+      </div> -->
+    </div>
+
+    <div class="preview-box">
+      <div class="preview-title">
+        <span>Student Id Card</span>
+        <span class="small-hint">Secure preview (JWT)</span>
+      </div>
+
+      <div id="passPreviewContainer"
+           th:attr="data-pass-url=${preEnrollment.studentIdCardUrl}, data-pass-filename=${preEnrollment.studentIdCardUrl != null ? preEnrollment.studentIdCardUrl.substring(preEnrollment.studentIdCardUrl.lastIndexOf('/') + 1) : ''}">
+        <div class="thumb-wrap" id="thumbWrap">
+          <div class="thumb-placeholder" id="thumbPlaceholder">
+            <div class="spinner" id="thumbSpinner" style="display:none;"></div>
+            <div id="thumbText">No Student Id Card uploaded</div>
+          </div>
+        </div>
+
+        <div class="file-meta" id="fileMeta" style="display:none;">
+          <div class="file-name" id="fileName"></div>
+          <div class="file-type" id="fileType"></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="openBtn" title="Open full view">Open</button>
+            <button class="btn btn-ghost" id="downloadBtn" title="Download file">Download</button>
+          </div>
+          <div class="hint">Files are fetched securely with JWT token from localStorage.</div>
+          <div id="fileError" class="error" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <div class="small-muted">Reviewer: <strong>Admin</strong></div>
+        <div style="flex:1"></div>
+      </div>
+    </div>
+
+  </div> <!-- card -->
+</div> <!-- pre-wrap -->
+
+<div id="previewModal" class="modal" role="dialog" aria-hidden="true">
+  <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  <div class="modal-content" id="modalContent" aria-live="polite"></div>
+</div>
+
+</body>
+
+</html>

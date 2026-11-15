@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Two</title>
+
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .logo-wrapper img {
+            width: 150px;
+            border-radius: 12px;
+            border: 5px solid #ddd;
+        }
+
+        h4,
+        h6,
+        p {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        /* Grid */
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            flex: 1 1 40%;
+            margin: 10px;
+        }
+
+        /* Responsive grid for small screens */
+        @media (max-width: 600px) {
+            .grid-item {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Buttons */
+        .custom-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            background: #9ad5ee;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .custom-btn:hover .icon-box{
+            background: #005477;
+            color: #ddd;
+        }
+
+        .custom-btn:hover{
+            background: #005477;
+            color: #ddd;
+        }
+
+        .custom-btn .icon-box {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background: #9ad5ee;
+            transition: all ease-in-out 0.5s;
+        }
+
+
+        /* Navigation buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .nav-buttons button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 2px solid #0d6efd;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .nav-buttons button:hover {
+            background: #005477;
+            color: white;
+        }
+
+        .nav-buttons .back-btn {
+            border: 2px solid #6c757d;
+        }
+
+        .nav-buttons .back-btn:hover {
+            background: #6c757d;
+            color: white;
+        }
+
+        /* SVG icon setup */
+        .icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            /* takes button text color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="logo-wrapper">
+            <img src="/public/asset/Logo_of_UTYCC.png" alt="photo">
+        </div>
+
+        <h4>နည်းပညာတက္ကသိုလ်(ရတနာပုံဆိုက်ဘာစီးတီး)</h4>
+        <h6>(၂၀၂၅-၂၀၂၆) ပညာသင်နှစ်</h6>
+        <p>ပထမနှစ်ကျောင်းသားအဖြစ် မှတ်ပုံတင်ခွင့်တောင်းခံခြင်း</p>
+
+        <div class="grid">
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">1.</span>
+                    <span>ကိုယ်ရေးအချက်အလက်</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">2.</span>
+                    <span>ထောက်ခံချက် စာရွက်စာတမ်းများ</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">3.</span>
+                    <span>မိဘ/အုပ်ထိန်းသူ၏ ကတိဝန်ခံချက်</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">4.</span>
+                    <span>ဘာသာရပ် ဆန္ဒပြုလျှောက်လွှာ</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">5.</span>
+                    <span>၇၅% နှင့်ပတ်သက်၍ ကတိဝန်ခံချက်</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">6.</span>
+                    <span>ကျောင်းစည်းမျဉ်း/စည်းကမ်းများ</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">7.</span>
+                    <span>အတွင်းဆောင်</span>
+                </button>
+            </div>
+
+            <div class="grid-item">
+                <button class="custom-btn">
+                    <span class="icon-box">8.</span>
+                    <span>ငွေပေးချေခြင်း</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button id="new">
+                <svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                Next
+            </button>
+
+            <!-- <button>
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/>
+        </svg>
+        Preview
+      </button> -->
+        </div>
+
+    </div>
+    <script>
+        const goToEnrollmentA = document.getElementById('new');
+        async function goToEnrollment() {
+            try {
+                const token = localStorage.getItem('jwt');
+
+                const response = await fetch(`/new_enrollment_form`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "text/html"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                // Get HTML as string
+                const html = await response.text();
+
+                // Store HTML temporarily in sessionStorage
+                sessionStorage.setItem("pageContentEnrollmentNewStudent", html);
+
+                // Redirect to render page
+                window.location.href = "render_enrollment_new";
+
+            } catch (err) {
+                console.log('Failed to fetch enrollment detail: ' + err.message, 'error');
+            }
+        }
+        goToEnrollmentA.addEventListener("click", goToEnrollment);
+    </script>
+</body>
+
+</html>

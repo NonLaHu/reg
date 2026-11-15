@@ -1,0 +1,213 @@
+/* announcement-create.css — clean daylight admin form */
+
+/* Variables */
+:root {
+    --bg: #f6f9fc;
+    --card: #ffffff;
+    --text: #0f1724;
+    --muted: #6b7280;
+    --accent: #0b63d6;
+    --accent-contrast: #ffffff;
+    --danger: #d04545;
+    --radius: 10px;
+    --gap: 14px;
+    --shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+/* Global */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.45;
+}
+
+/* Page layout */
+.page {
+    max-width: 920px;
+    margin: 34px auto;
+    padding: 20px;
+}
+
+.topbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom: 18px;
+}
+.brand { margin: 0; font-size: 20px; font-weight: 700; }
+.auth-state { color: var(--muted); font-size: 13px; }
+
+/* Card */
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    border: 1px solid rgba(15,23,42,0.04);
+}
+
+.form-card h2 { margin-top:0; margin-bottom:10px; }
+
+/* Fields */
+.field { margin-bottom: 14px; }
+.field label { display:block; font-weight:600; margin-bottom:6px; }
+.field input[type="text"],
+.field input[type="datetime-local"],
+.field textarea,
+.field input[type="file"] {
+    width:100%;
+    padding:10px 12px;
+    border:1px solid rgba(15,23,42,0.08);
+    border-radius:8px;
+    background: #fff;
+    font-size:14px;
+    color:var(--text);
+}
+.field textarea { resize: vertical; min-height:90px; }
+
+.hint { color: var(--muted); font-size:12px; margin-top:6px; display:block; }
+
+.req { color: var(--danger); margin-left:4px; font-weight:700; }
+
+/* Grid */
+.grid-row { display:flex; gap:12px; }
+.grid-row .field { flex:1; }
+
+/* Actions */
+.actions { display:flex; gap:12px; margin-top:8px; align-items:center; }
+.btn {
+    padding:10px 14px;
+    border-radius:8px;
+    border: none;
+    cursor:pointer;
+    font-weight:600;
+    font-size:14px;
+}
+.btn.primary { background:var(--accent); color:var(--accent-contrast); }
+.btn.secondary { background: transparent; border:1px solid rgba(15,23,42,0.06); color:var(--text); }
+
+/* File meta */
+.file-meta { margin-top:8px; color:var(--muted); font-size:13px; }
+
+/* Progress */
+.progress-wrap {
+    margin-top: 14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.progress-bar {
+    flex:1;
+    height:10px;
+    background: rgba(15,23,42,0.06);
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+}
+.progress-bar::after {
+    content: "";
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg, var(--accent), #2e9bf5);
+    transition: width 0.15s linear;
+}
+.progress-text { font-size:13px; color:var(--muted); min-width:44px; text-align:right; }
+
+/* Feedback */
+.feedback { margin-top:12px; min-height:24px; font-size:14px; }
+.feedback .ok { color: #0b7a3a; }
+.feedback .error { color: var(--danger); }
+
+/* Footer */
+.footnote { margin-top:18px; color:var(--muted); font-size:12px; }
+
+/* Responsive */
+@media (max-width:720px) {
+    .grid-row { flex-direction:column; }
+    .actions { flex-direction:column; align-items:stretch; }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  text-align: right;
+}
+
+.theme-toggle button {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: #007bff;
+  color: white;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.theme-toggle button:hover {
+  background: #0056b3;
+}
+
+/* dark Theme */
+/* Dark Mode Overrides */
+body.dark {
+    --bg: #0f1724;                /* page background */
+    --card: #1a2233;              /* card background */
+    --text: #f3f4f6;              /* main text */
+    --muted: #9ca3af;             /* muted/secondary text */
+    --accent: #3b82f6;            /* primary action */
+    --accent-contrast: #ffffff;   /* button text */
+    --danger: #ef4444;            /* errors */
+    --radius: 10px;
+    --gap: 14px;
+    --shadow: 0 8px 22px rgba(0,0,0,0.5);
+}
+
+/* Make inputs darker */
+body.dark .field input[type="text"],
+body.dark .field input[type="datetime-local"],
+body.dark .field textarea,
+body.dark .field input[type="file"] {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+}
+
+/* Secondary button contrast */
+body.dark .btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text);
+}
+
+/* Progress bar in dark mode */
+body.dark .progress-bar {
+    background: rgba(255,255,255,0.1);
+}
+
+.back-arrow {
+    position: absolute;
+    left: 0px;
+    top:0px;
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 30px;
+}
+
+.back-arrow:hover {
+    scale: 1.0.5;
+}

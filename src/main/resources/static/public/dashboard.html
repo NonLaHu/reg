@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; color: #111; padding: 24px; }
+    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); max-width: 500px; margin: auto; }
+    .card h2 { margin-top: 0; }
+    .field { margin-bottom: 12px; }
+    .field label { font-weight: 700; display: block; margin-bottom: 4px; }
+    .field span { color: #555; }
+  </style>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 24px; }
+    .card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); max-width: 400px; margin: auto; }
+    h2 { margin-top: 0; }
+    .field { margin-bottom: 12px; }
+    .field label { font-weight: 700; display: block; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+    button { padding: 10px 16px; background: #007bff; border: none; border-radius: 6px; color: #fff; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .message { margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Student Dashboard</h2>
+    <div class="field"><label>Name:</label> <span id="name"></span></div>
+    <div class="field"><label>Email:</label> <span id="email"></span></div>
+    <div class="field"><label>Roll No:</label> <span id="rollNo"></span></div>
+    <div class="field"><label>Major:</label> <span id="major"></span></div>
+    <div class="field"><label>Semester:</label> <span id="semester"></span></div>
+    <div class="field"><label>Enrolled:</label> <span id="enrolled"></span></div>
+    <div class="field"><label>Birth Date:</label> <span id="birthDate"></span></div>
+  </div>
+  <div class="card">
+    <h2>Reset Password</h2>
+    <div class="field">
+      <label>Old Password</label>
+      <input type="password" id="oldPassword" required>
+    </div>
+    <div class="field">
+      <label>New Password</label>
+      <input type="password" id="newPassword" required>
+    </div>
+    <button onclick="resetPassword()">Reset</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    async function resetPassword() {
+      const oldPassword = document.getElementById('oldPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const token = localStorage.getItem('jwt');
+
+      const res = await fetch('/api/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ oldPassword, newPassword })
+      });
+
+      const msg = document.getElementById('message');
+      if (res.ok) {
+        msg.textContent = "Password updated successfully.";
+        msg.style.color = "green";
+      } else {
+        const err = await res.text();
+        msg.textContent = err;
+        msg.style.color = "red";
+      }
+    }
+  </script>
+
+  <script>
+    async function fetchDashboard() {
+      const token = localStorage.getItem('jwt');
+      const res = await fetch('/student/dashboard', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) return console.error('Failed to fetch dashboard');
+
+      const data = await res.json();
+      document.getElementById('name').textContent = data.name;
+      document.getElementById('email').textContent = data.email;
+      document.getElementById('rollNo').textContent = data.rollNo;
+      document.getElementById('major').textContent = data.major;
+      document.getElementById('semester').textContent = data.semester;
+      document.getElementById('enrolled').textContent = data.enrolled ? 'Yes' : 'No';
+      document.getElementById('birthDate').textContent = data.birthDate;
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchDashboard);
+  </script>
+</body>
+</html>

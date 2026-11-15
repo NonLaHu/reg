@@ -1,0 +1,61 @@
+[at start]
+    we will start with creating annoucenemnt
+[in the annoucnement creation page] slide 1
+    1. Admin can fill header(ခေါင်းစဥ်) in Title field 
+    2. Admin can fill သတင်းအချက်အလက်နဲ့ပတ်သတ်တဲ့ ဖော်ပြချက် in description field
+    3. pulish date is the start date of annoucnements,
+        if left unfilled, it would be current date
+    4. expiry date is the date annoucnement will be expired,
+        if it is filled, students can only see the annoucnement before the expiry date
+        if it is left unfilled, the annoucncement will be avaialbe all the time
+    5. ကျောင်းက ကြေငြာလိုတဲ့ သတင်းအချက်အလက် နဲ့ ပတ်သက်ပြီးတော့ create လုပ်ထားတဲ့ PDF file ကို တင်ပြီးတာနဲ့ creation လုပ်နိုင်မှာ ဖြစ်ပါတယ်
+    6. now we click create and it is successful
+[in home page,] slide 2
+    1. we can see the annoucncement we have uploaded in home pages's recent announcement
+[in announcement page,] slide 3
+    2. we can see the same announcement we have uploaded in announcement page too
+[fill in]
+    0. now we will go through all the admin features
+[in admin page,dashboard section] slide 4
+    0. now we will go through the dashboard page
+    1. first admin can see himself detail by clicking this profile
+        [in admin profile page] slide 5
+            1. admin can see detail of himself
+            2. admin can change his own password
+    2. here on this five card, we can see total users, pre-enrollment that hasnt decided, total file uploaded, enrollment that hasnt decided, and the system load percent
+    3. here we can see recent users up to three,
+    4. here we can see recent pre-enrollment up to three,
+[in user section,] slide 6
+    1. we can create new user here
+        [in usercreatin page] slide 7
+            1. we fill name
+            2. we fill email
+            3. we select role
+            4. we fill password and confirm password
+            5. we hit create and it is successful
+    2. we can filter with name in this input box and,
+    3. we can see the user we have created here.
+        [in user detail] ss 
+            1. we can see the detail of the user
+            2. we can revoke and grant roles on users
+            3. we can change password of the user
+[in admin page, ] slide 8
+    1. pre-enrollment new , old and enrollments are all covered by Ko Mp
+[in student section, ] slide 9
+    1. we can filter with name, roll-no of students, 
+    2. we can view the student 
+        [in student view, ] slide 10
+            1. we can see the detail
+            2. we can see enrollment history
+            3. we can see detail on the history by a click
+[in announcement page, ] slide 11
+    1. we can filter with title and filename of announcement
+    2. we can view in detail of an announcement 
+        [in announcement view, ] slide 12
+            1. we can download the pdf and
+            2. we can delete the unecessary pdf
+            3. we can see detail of the announcement here
+[in admin page, ] alide 13
+    1.setting page is as already covered by KMP
+
+

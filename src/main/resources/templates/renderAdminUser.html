@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Profile Detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <script>
+  (function() {
+    const content = sessionStorage.getItem("pageContentAdminUser");
+
+    if (content) {
+      // Inject the HTML content
+      document.open();
+      document.write(content);
+      document.close();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Array of external script URLs needed by the injected content
+        const scriptsToLoad = [
+          "/public/js/user_detail.js",
+        ];
+
+        // Load each script sequentially
+        scriptsToLoad.forEach(src => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.async = false; // keep execution order
+          document.body.appendChild(script);
+        });
+      });
+
+    } else {
+      document.body.innerHTML = "<p>No content found</p>";
+    }
+  })();
+  </script>
+
+</body>
+</html>

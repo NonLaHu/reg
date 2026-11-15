@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: student-reg-app:latest
+    container_name: student-reg-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    environment:
+      SERVER_PORT: 8080
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:mariadb://mariadb:3306/student_reg?useUnicode=true&characterEncoding=UTF-8}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER:-student_reg}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-utycc2025}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
+      SPRING_JPA_SHOW_SQL: ${SPRING_JPA_SHOW_SQL:-false}
+      JWT_SECRET: ${JWT_SECRET:-11c2cddd64eefafaf5171e670ad7c804a2537f69f290c48ccc88b2b9f8d4ef8c}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-86400000}
+      FILE_UPLOAD_DIR: /app/uploads
+      ADMIN_UPLOAD_DIR: /app/uploads/payment
+      ADMIN_UPLOAD_BASE: /app/uploads
+      LOGGING_FILE_NAME: /app/logs/app.log
+      TZ: ${TZ:-Asia/Yangon}
+    volumes:
+      - app_uploads:/app/uploads
+      - app_logs:/app/logs
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - app-net
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: student-reg-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-utycc_root_2025}
+      MYSQL_DATABASE: ${DB_NAME:-student_reg}
+      MYSQL_USER: ${DB_USER:-student_reg}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-utycc2025}
+      TZ: ${TZ:-Asia/Yangon}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - app-net
+
+volumes:
+  mariadb_data:
+    name: student_reg_mariadb_data
+  app_uploads:
+    name: student_reg_uploads
+  app_logs:
+    name: student_reg_logs
+
+networks:
+  app-net:
+    name: student_reg_network
+    driver: bridge

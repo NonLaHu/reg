@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pre-enrollment Preview</title>
+  <link rel="stylesheet" th:href="@{/public/css/preview_pre_enrollment.css}" />
+</head>
+
+<body>
+
+  <div class="pre-wrap">
+
+    <div class="header">
+      <div>
+        <div class="title">Pre-enrollment — Preview</div>
+        <div class="sub">Review the applicant details before action.</div>
+      </div>
+
+      <div class="header-right">
+
+        <button class="btn btn-ghost" onclick="window.history.back()">Back</button>
+
+        <button id="themeToggle" class="btn btn-ghost" aria-pressed="false" aria-label="Toggle dark theme"
+          title="Toggle theme">
+          <span id="themeToggleIcon" aria-hidden="true">🌙</span>
+          <span id="themeToggleText" style="margin-left:6px">Dark</span>
+        </button>
+
+        <!-- new action cluster (add classes only) -->
+        <div class="action-cluster" role="group" aria-label="record actions">
+          <button class="btn btn-accept" id="acceptBtn" title="Accept application">✓ Accept</button>
+          <button class="btn btn-reject" id="rejectBtn" title="Reject application">✕ Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="previewCard">
+      <!-- LEFT: metadata (server-rendered by Thymeleaf) -->
+      <div class="meta-list">
+        <div class="meta-row">
+          <div class="meta-label">Name</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.fullNameMm}" class="field-value">မောင်ထွန်း</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="fullNameMm">Edit</button>
+
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Father Name</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.fatherName}" class="field-value">U ba</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="fatherName">Edit</button>
+
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Accepted Admission Order</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.rollEntranceOrder}" class="field-value">405</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="rollEntranceOrder">Edit</button>
+
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Date of Birth</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.birthOfDate}" class="field-value">YYYY/MM/DD</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="birthOfDate">Edit</button>
+
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Email</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.email ?: 'null'}" class="field-value">user@example.com</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="email">Edit</button>
+
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-label">NRC</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.nrc ?: 'လျှောက်ထားဆဲ'}" class="field-value">13/မပတ(နိုင်)၁၂၃၄၅၆</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="nrc">Edit</button>
+
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-label">Phone</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.phoneNumber}" class="field-value">09xxxxxxx</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="phoneNumber">Edit</button>
+
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-label">Viber</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.viberPhoneNumber}" class="field-value">09yyyyyyy</span>
+            <button class="field-edit btn tiny" th:attr="data-parent-id=*{id}" data-field="viberPhoneNumber">Edit</button>
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-label">Tracking Pin</div>
+          <div class="meta-value">
+            <span th:text="${preEnrollment.trackingPin}" class="field-value">sdfsdf</span>
+          </div>
+        </div>
+        
+        <div class="meta-row">
+          <div class="meta-label">Status</div>
+          <div class="meta-value">
+            <!-- server-side can render "pending/accepted/rejected" classes -->
+            <span th:classappend="${#strings.toLowerCase(preEnrollment.status)}" class="status-badge"
+              th:text="${preEnrollment.status}">PENDING</span>
+
+          </div>
+        </div>
+
+        <div class="meta-row">
+          <div class="meta-label">Created</div>
+          <div class="meta-value">
+            <span th:text="${#temporals.format(preEnrollment.createdAt, 'yyyy-MM-dd HH:mm')}">2025-08-01 12:00</span>
+            <small class="muted thisId" style="margin-left:10px;font-weight:600;">ID: <span
+                th:text="${preEnrollment.id}">12345</span></small>
+          </div>
+        </div>
+
+        <!-- optional admin notes area (visual only) -->
+        <!-- <div class="meta-row" style="flex-direction:column; align-items:flex-start;">
+          <div class="meta-label" style="width:100%;">Admin Notes</div>
+          <textarea class="meta-value"
+            style="width:100%; min-height:80px; padding:10px; border-radius:8px; border:1px solid #eef6ff; background:#fbfdff;"
+            placeholder="Add short admin note..."></textarea>
+        </div> -->
+      </div>
+
+      <!-- RIGHT: preview box -->
+      <div class="preview-box">
+        <div class="preview-title">
+          <span>Pass Certificate</span>
+          <span class="small-hint">Secure preview (JWT)</span>
+        </div>
+
+        <!-- container that JS uses. keep same id and data attributes -->
+        <div id="passPreviewContainer"
+          th:attr="data-pass-url=${preEnrollment.passCertificateUrl}, data-pass-filename=${preEnrollment.passCertificateUrl != null ? preEnrollment.passCertificateUrl.substring(preEnrollment.passCertificateUrl.lastIndexOf('/') + 1) : ''}">
+          <div class="thumb-wrap" id="thumbWrap">
+            <div class="thumb-placeholder" id="thumbPlaceholder">
+              <div class="spinner" id="thumbSpinner" style="display:none;"></div>
+              <div id="thumbText">No PassCertificate uploaded</div>
+            </div>
+          </div>
+
+          <div class="file-meta" id="fileMeta" style="display:none;">
+            <div class="file-name" id="fileName"></div>
+            <div class="file-type" id="fileType"></div>
+            <div class="actions">
+              <button class="btn btn-primary" id="openBtn" title="Open full view">Open</button>
+              <button class="btn btn-ghost" id="downloadBtn" title="Download file">Download</button>
+            </div>
+            <div class="hint">Files are fetched securely with JWT token from localStorage.</div>
+            <div id="fileError" class="error" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- footer actions inside preview box -->
+        <div class="footer-actions">
+          <div class="small-muted">Reviewer: <strong>Admin</strong></div>
+          <div style="flex:1"></div>
+        </div>
+      </div>
+
+    </div> <!-- card -->
+  </div> <!-- pre-wrap -->
+
+  <!-- Modal for zoom/open (keep IDs same) -->
+  <div id="previewModal" class="modal" role="dialog" aria-hidden="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-content" id="modalContent" aria-live="polite"></div>
+  </div>
+
+</body>
+
+</html>

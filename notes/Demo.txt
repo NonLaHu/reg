@@ -1,0 +1,202 @@
+All pages tour
+    Home page
+        go right left
+        recent annoucnments(recent annoucnements up to 2)
+            able to download
+    About Utycc
+        history
+        Contact us
+        Rector message
+        FAQ
+    academic
+    Department
+    Admission Requirements
+        here we can see the for registration
+    How to apply 
+        here we can see the step by step of complete 
+    New & announcement
+        WE can see all the announcements by school
+        with pageable for prevention of overloading the client device
+    go to home again, (for no reason)
+
+->two fire fox (student, admin, qr scan image, rejectable pre_enrollment acc, enrollment rejected student )
+->all enrollment files
+New enrollment flow
+    before doing this, pre-enrollment is a process of verifying or filtering the legitimate Students
+
+    go to register 
+    we can choose two from here, new and old, since we are doing new enrollment ..,
+    %<PQ> why are there two.
+        %-> new student is for those fresher while the old is for those that have been enrolled here before
+    language switch
+    file name, admission number, father name, date of birht, gender, (optional email), G12 roll no, g12 passed year, phonenumber, viber phonenumber, certificate, 
+    you can either choose three nrc option,
+        with advacned, you can choose semalessly and smoothly, which the database provided
+        normal mode, we just fill as normally, 
+        and you can choose pending if yours is still in process,
+    then we can submit
+    the form is resetted as soon as the it is successful to prevent duplications
+    we can track based on the number we got
+    
+    we go to home page, 
+    click on this tracking pin, 
+        %<this only work for new student for now, we have plan to develope to make that work also in old student>
+
+    now we login as an admin to show the feature of reasons
+        we can filter with status based filtering for pre_enrollment(admin)
+        we choose pending
+        we will choose this existing new student pre enrollment form
+        reject it with the reason data of birth is wrong
+        we check the tracking pin of that in other tab
+        we can see the rejected status and the reason
+    now we accept our student name maung maung
+        -> image pop up (admin_pre) = we have image pop for the ease of use
+        -> able to download (admin_pre) = we can download to inspect it further
+        -> toggle theme (admin_pre) = theme toggle in all admin page
+        forgiveable texts
+            we can edit by clicking this button and editing whatever is wrong
+        the credential are down now and admin should contact the student with viber phone number (admin_pre)
+
+    process of admin contacting the student
+        %<email yes advacned feature> 
+
+    then we login as student after getting the credential
+        we can change password and should change-> after user has logined, showcase the password reset, (user)
+
+    now most of our data aren't filled without the enrollment, now we can start enrollment by clicking this, BUT
+    before anything, admin should change the qr scan, phonenumber, enrollment status,
+        we set the phonenumber to the kbz phonenumber we will accept as
+        then the qr code of that kbz acc
+        enrollment fee, dorm fee
+        payment name which should be the name of the kbz
+    enrollment
+        if off it won't work
+        if it is on but the date is not within the day, it won't work
+        only if it is on and the date is within the dates it will work
+        academic year dynamic should be set based on the acceptance academic years
+
+    now we should start 
+    -> then the enrollment come,
+        we can see the requirements of first student enrollment
+            %<no they aren't dynamic for now>
+        here we click this
+        we will arrive here
+            we have made sure the text are stored so that even with accident miss restart or internet, we don't have choose the field again
+                %<no it only work for text and other, that aren't image>
+            we choose file
+            nrc is like this because we have filled nrc in the previous preenrollment, if we filled with pending, it would be pending
+            we can see here Desease feature that automactically disable the options
+            we can see some options are hardcoded because of our pre_enrollment
+            miss one field with purpose
+            decease one parent for a reason
+
+            here we fill documents
+                %<on future enchancement we plan to make admin able to decide on what is needed>
+            the first one is on two step validation, show case the steps prevention and mention about the first two steps (if asked)
+        decease one is off
+            automactically signs are appeared
+            if no parent we have guardian
+            we must fill guardian if we choose guardian
+            -> only able to continue only if agree.
+        -> can go check out information about the majors without replacing the page 
+            if the student need to know abut major, they can find out there
+            then we choose major order preference
+        75 % this is as before, we can only continue if agree
+        Rule and regulations
+        for dorm we can either choose yes or no, we choose yes
+            now we fill tehe necessary field 
+            and academic prize or not
+            the below is as before
+        payment> here we can see the phonenumber and kpay name we submitted before and dorm fee and enrollment fee
+            if we did not choose dorm (go back and ...)
+            we can make it bigger inorder to scan
+            now we add the payslip
+        now we can preview
+            we can go back if something caught our eye to fix(go back)
+            we can see here, it is submitted
+        (admin)we click profile and go to admin
+            pending status
+            here we can see all the data
+            we can edit like this if we want
+            we can download file, view it, we can switch language
+                %<yes we plan to make the ui better>
+            here also we can either reject with reason or accept
+        now we will see the student who got rejected
+            here we can see the remark by click the button
+            he got rejected for like...
+            he can still enrollshow case the rejected student how they can still enroll
+        now continue with our student maung maung
+            we accept
+        now we see the student profile of maung, he got submittted cleanly but we still has not accept the dorm
+            %<yes we plan to separate the concern>
+            so we accept the dorm, here it got updated
+            here, we can't enrollment anymore
+            
+    it is not all about new student, we should have old student to be accepted too
+    for example, in the next december, when we start accepting enrollment via online, 2 year , 3 year etc, all kind of student would enoll.
+    so we also have old student enrollment
+    -then show case old_student's enrollment demo flow
+    we go to register, as usual because we will filter valid student
+    we fill this and that.
+    we fill student card,
+    we accept that via admin (here too, we can edit, reject etc)
+    we accept, now the credential are down
+    we login, we enroll
+    here there are only three
+    we do this that..
+    and then it is all done
+
+
+    -> all the same (do them fast)(track, )
+    -> skip the enrollment part
+
+Announcement Flow Demo
+        we make announcement feature where we can annouce thing by uploading pdf files
+    -Admin views announcements table.
+        Here we can see all the annoucement we have uploaded so far
+        Here too we can work with pageable to avoid client web overloading
+        we click page next back
+        status finding?
+        view
+        we can give title to annoucment,
+        date time and description
+        we choose pdf. and we hut submit
+    -Admin creates new announcements.
+    -Show announcement display on the student side.
+        Now we can see it is updated on the home page and on the annoucement page
+        here too we make announcement with pageable
+    -Demonstrate pagination and explain its purpose (preventing client overload from dozens of announcements).
+    -can download announcements as PDF files.
+        client can download announcement pdf
+
+Admin Page Demo
+    -Brief dashboard showcase.
+        we can see that and that....
+    -Profile settings.
+        if we click here, we will see info of current admin
+    -Filtering, tables, and data view.
+        We can go to search all section from here
+        user section
+        here use pageable too, we can fikter with, we can create new user
+        it is handy because admin can create new admin which we can grabt role on then later
+    -Role management:
+        now we view the user we just created. 
+    -Revoke and grant roles.(Future feature) Assign permissions to roles and create custom roles for flexibility.
+        and we can grant roles, revoke it back.
+    -Password change functionality.
+        we can change password.
+        %<only super admin can>
+    -Create a new user manually.(Future enhancement: allow user creation with admin privileges).
+        onto preenrollment and enrollment are all explained during enrollment demo .as it happended.
+    -Demonstrate random password reset by admin, requiring the student to reset via super admin access.
+        here we have student section, here too, pageable, we can view the student.
+        you can see enrollmebt history, go into thwre directly,
+        then annoucnement and setting are already explained
+    -End with the sign-out button showcase.
+
+    now we will show mobile version a bit.
+    Mobile Version Demo
+    -Conclude by showcasing the mobile version.
+    -Hand out a phone to demonstrate usability and responsive design.(ask)
+
+    -Begin by emphasizing the importance of security. Explain how the system uses JWT (JSON Web Tokens) to ensure secure authentication and data integrity.

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Announcement — Admin</title>
+
+    <link rel="stylesheet" th:href="@{/public/css/announcement_admin.css}" />
+</head>
+<body>
+  <a href="/admin" class="back-arrow">&#8592;</a>
+
+  <div class="theme-toggle">
+    <button id="toggleTheme">🌙 Dark</button>
+  </div>
+<main class="page">
+    <header class="topbar">
+        <h1 class="brand">Admin • Create Announcement</h1>
+        <div class="auth-state" id="authState" aria-live="polite"></div>
+    </header>
+
+    <section class="card form-card" aria-labelledby="formTitle">
+        <h2 id="formTitle">New Announcement</h2>
+
+        <form id="announcementForm" novalidate>
+            <div class="field">
+                <label for="title">Title <span class="req">*</span></label>
+                <input id="title" name="title" type="text" required maxlength="200" placeholder="Exam schedule, Notice, etc." />
+                <small class="hint">Short, descriptive title</small>
+            </div>
+
+            <div class="field">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" maxlength="1000" placeholder="Optional details or summary"></textarea>
+                <small class="hint">Optional; brief summary shown on school page</small>
+            </div>
+
+            <div class="grid-row">
+                <div class="field">
+                    <label for="publishDate">Publish date</label>
+                    <input id="publishDate" name="publishDate" type="datetime-local" />
+                </div>
+
+                <div class="field">
+                    <label for="expiryDate">Expiry date</label>
+                    <input id="expiryDate" name="expiryDate" type="datetime-local" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="pdfFile">PDF file <span class="req">*</span></label>
+                <input id="pdfFile" name="pdf" type="file" accept="application/pdf" required />
+                <div class="file-meta" id="fileMeta">No file selected.</div>
+                <small class="hint">PDF only. Max 5 MB. Filename will be stored on server.</small>
+            </div>
+
+            <div class="actions">
+                <button id="submitBtn" class="btn primary" type="button">Create</button>
+                <button id="resetBtn" class="btn secondary" type="reset">Reset</button>
+            </div>
+
+            <div class="progress-wrap" id="progressWrap" hidden>
+                <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-text" id="progressText">0%</div>
+            </div>
+
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+        </form>
+    </section>
+
+    <footer class="footnote">
+        <small>Changes are applied only after the server returns success. JWT authentication required.</small>
+    </footer>
+</main>
+
+</body>
+</html>

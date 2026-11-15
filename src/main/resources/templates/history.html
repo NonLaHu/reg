@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our History - UTYCC</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <link th:href="@{/public/css/history.css}" rel="stylesheet">
+    <link th:href="@{/public/css/profileSetup.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Overlay + Popup -->
+    <div class="overlay" id="popupOverlay">
+        <div class="popup">
+            <h3>Enter Tracking Pin</h3>
+            <input type="text" id="pinInput" placeholder="Tracking Pin">
+            <div>
+                <button class="submit-btn" id="submitPin">Submit</button>
+                <button class="close-btn" id="closePopup">Close</button>
+            </div>
+            <div class="status" id="statusMsg"></div>
+        </div>
+    </div>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="/public/asset/UTYCClogo.png" alt="UTYCC Logo">
+                    <span class="logo-text">UTYCC</span>
+                </a>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li class="dropdown"><a href="/public/aboutus.html">About UTYCC <span
+                                    class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/public/history.html">History</a></li>
+                                <li><a href="/public/contactus.html">Contact Us</a></li>
+                                <li><a href="/public/rector.html">Rector Message</a></li>
+                                <li><a href="/public/faq2.html">FAQ</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="academic">Academic <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="academic">Undergraduate</a></li>
+                                <li><a href="academic">Master</a></li>
+                                <li><a href="academic">PhD</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="/department">Faculties & Departments <span
+                                    class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="sub-dropdown"><a href="/department#ICT">Faculty of ICT <span
+                                            class="dropdown-arrow">▸</span></a>
+                                    <ul class="sub-dropdown-menu">
+                                        <li><a href="/department#IST">Department of IS</a></li>
+                                        <li><a href="/department#CE">Department of CE</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/department#">Faculty of EcE</a></li>
+                                <li><a href="/department#">Faculty of PrE</a></li>
+                                <li><a href="/department#">Faculty of AME</a></li>
+                                <li><a href="/department#">Department of Myanmar</a></li>
+                                <li><a href="/department#">Department of English</a></li>
+                                <li><a href="/department#">Department of Engineering Mathematics</a></li>
+                                <li><a href="/department#">Department of Engineering Physics</a></li>
+                                <li><a href="/department#">Department of Engineering Chemistry</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/public/requirementAdmission.html">Admission <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/public/requirementAdmission.html">Admission Requirements</a></li>
+                                <li><a href="/howToApply">How to Apply</a></li>
+                                <li id="trackingPin"><a href="#">Tracking Pin</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/announcement"> News & Announcements </a></li>
+                    </ul>
+                </nav>
+
+                <a href="/login" class="btn-login" id="login-btn">Login</a>
+                <a href="/signup" class="btn-login" id="register-btn">Register</a>
+
+                <div id="user-section" style="display:none;">
+                    <img id="profile-user" src="/public/asset/placeholder.png" alt="Profile" class="profile-img" />
+                    <div class="user-info">
+                        <span id="user-fullname"></span>
+                        <span id="user-roles"></span>
+                    </div>
+                    <button id="signout-btn" class="btn-login">Sign out</button>
+                </div>
+
+
+                <button class="nav-toggle" id="nav-open-btn" aria-label="Open navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About UTYCC</a></li>
+            <li><a href="/academic">Academics</a></li>
+            <li><a href="/department">Faculties & Departments</a></li>
+            <li><a href="#">Admission</a></li>
+            <li><a href="announcement">News & Annouancements</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Our History & Commitment to Quality</h1>
+                <p>Learn about our journey and dedication to excellence.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="content-wrapper">
+                    <h2>About UTYCC</h2>
+                    <p>The University of Technology (Yatanarpon Cyber City), also known as UT-YCC, is one of Myanmar's
+                        premier universities. Established in October 2010 under the Ministry of Science and Technology,
+                        the university is conveniently located near Pyin Oo Lwin, alongside the Mandalay-Lashio Road.
+                    </p>
+
+                    <h2>Academic Programs</h2>
+                    <p>UT-YCC offers five specialized Bachelor of Engineering (B.E.) programs, each requiring five years
+                        of dedicated study:</p>
+                    <ul>
+                        <li>Information Science and Technology</li>
+                        <li>Computer Engineering</li>
+                        <li>Electronics Engineering</li>
+                        <li>Mechanical Precision</li>
+                        <li>Advanced Materials Engineering</li>
+                    </ul>
+                    <p>In addition to our undergraduate degrees, we also provide comprehensive Master's and Doctoral
+                        programs to further advanced learning and research.</p>
+
+                    <h2>Pioneering E-Learning</h2>
+                    <p>A pioneer in digital education, UT-YCC established the first E-Learning Center in Myanmar. On
+                        July 11, 2012, this center became part of the ASEAN-KOREA Cyber University (ACU) project,
+                        developing and sharing online content with other universities. UT-YCC is a proud member
+                        institute of the ACU project.</p>
+
+                    <h2>International Collaboration</h2>
+                    <p>To achieve international standards and provide global opportunities, the university actively
+                        collaborates with international partners. This includes a double-degree program with Miyazaki
+                        University in Japan and an ongoing e-Learning project with the Korea International Cooperation
+                        Agency (KOICA).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="iso-section">
+            <div class="container">
+                <div class="content-wrapper iso-content">
+                    <div>
+                        <h2>Our Commitment to Quality</h2>
+                        <p>As part of our commitment to excellence, UT-YCC has implemented the ISO 9001:2015 Quality
+                            Management System (QMS). Since 2019, this system has helped us standardize our processes and
+                            improve our educational services to meet the needs and expectations of our students,
+                            faculty, and stakeholders.</p>
+                        <p>Implementing the ISO 9001:2015 standard is a foundational step in our journey toward
+                            international accreditation, ensuring our operations align with global best practices. The
+                            university successfully completed its ISO 9001:2015 Re-Certification audit on June 7, 2022,
+                            reaffirming our dedication to continuous improvement.</p>
+                    </div>
+                    <div class="iso-certificate-container">
+                        <a href="/public/asset/iso_utycc.jpg" target="_blank" title="View Full Certificate">
+                            <img src="/public/asset/iso_utycc.jpg"
+                                alt="UTYCC ISO 9001:2015 Certificate from Bureau Veritas">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="section section-primary-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title section-title-light">Quick Resources</h2>
+                    <p class="section-subtitle section-subtitle-light">Find what you need, faster.</p>
+                </div>
+                <div class="resources-grid">
+                    <a href="#" class="resource-link">Discover Programs</a>
+                    <a href="#" class="resource-link">Admission</a>
+                    <a href="/public/history.html" class="resource-link">History</a>
+                    <a href="#" class="resource-link">Student Registeration</a>
+                    <a href="#" class="resource-link">Library</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+
+        <div class="container">
+            <img src="/public/asset/UTYCClogo.png" alt="UTYCC Logo" class="footer-logo">
+            <p class="footer-address">
+                University of Technology, Yatanarpon Cyber City<br>
+                Pyin Oo Lwin, Mandalay Region, Myanmar
+            </p>
+            <p class="footer-copyright">
+                &copy; 2025 UTYCC. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Navigation Toggle Script
+            const navOpenBtn = document.getElementById('nav-open-btn');
+            const navCloseBtn = document.getElementById('nav-close-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const body = document.body;
+
+            if (navOpenBtn && mobileNav && navCloseBtn) {
+                navOpenBtn.addEventListener('click', () => {
+                    mobileNav.classList.add('is-open');
+                    body.classList.add('nav-open');
+                });
+                navCloseBtn.addEventListener('click', () => {
+                    mobileNav.classList.remove('is-open');
+                    body.classList.remove('nav-open');
+                });
+            }
+        });
+
+        const trackingPinBtn = document.getElementById('trackingPin');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const closePopupBtn = document.getElementById('closePopup');
+        const submitPinBtn = document.getElementById('submitPin');
+        const statusMsg = document.getElementById('statusMsg');
+        const pinInput = document.getElementById('pinInput');
+
+        // Show popup
+        trackingPinBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            popupOverlay.style.display = 'flex';
+            statusMsg.textContent = '';
+            statusMsg.className = 'status';
+            pinInput.value = '';
+        });
+
+        // Close popup
+        closePopupBtn.addEventListener('click', () => {
+            popupOverlay.style.display = 'none';
+        });
+
+        // Submit pin
+        submitPinBtn.addEventListener('click', async () => {
+            const pin = pinInput.value.trim();
+            if (!pin) {
+                statusMsg.textContent = 'Please enter a pin.';
+                statusMsg.className = 'status rejected';
+                return;
+            }
+
+            try {
+                // Example request to backend
+                const response = await fetch('/check-tracking-pin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ pin })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network error');
+                }
+
+                const result = await response.json();
+                const status = result.status;
+                const remark = result.reason;
+
+                statusMsg.textContent = status.charAt(0).toUpperCase() + status.slice(1) +
+                    (remark ? `: ${remark}` : "");
+                statusMsg.className = 'status ' + status;
+            } catch (err) {
+                statusMsg.textContent = 'Error checking pin.';
+                statusMsg.className = 'status rejected';
+            }
+        });
+    </script>
+    <script th:src="@{/public/js/profileSetup.js}"></script>
+</body>
+
+</html>

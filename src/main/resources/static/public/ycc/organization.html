@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    img{
+        width: 1000px;
+        height: auto;
+       margin-left: 200px;
+    }
+       
+        /* Map Section */
+        .map-section {
+            margin: 40px 0;
+        }
+        
+        .map-section h2 {
+            color: #1a4b8c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #0a2a53 0%, #1a4b8c 100%);
+            color: white;
+            padding: 50px 0 20px;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        
+        .footer-section {
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b8ee0;
+            display: inline-block;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            color: #3b8ee0;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+        
+        .quick-links {
+            list-style: none;
+        }
+        
+        .quick-links li {
+            margin-bottom: 12px;
+            border-left: 3px solid rgba(59, 142, 224, 0.3);
+            padding-left: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-links li:hover {
+            border-left-color: #3b8ee0;
+            padding-left: 20px;
+        }
+        
+        .quick-links a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .quick-links a:hover {
+            color: #3b8ee0;
+        }
+        
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .news-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .news-item h4 {
+            color: #3b8ee0;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .news-item p {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        
+        .news-item .date {
+            display: inline-block;
+            background: rgba(59, 142, 224, 0.2);
+            color: #3b8ee0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin: 0 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #3b8ee0;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+</style>
+</head>
+<body>
+    <img src="./utycc.png" alt="utycc">
+   <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Mandalay-Lashio Road,Pyin Sar</strong><br>
+                                Pyin Oo Lwin, Myanmar
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                               +95 94 457 67834
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div> <a href="#" style="color: white;">www.utycc.edu.mm</a></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="quick-links">
+                        <li><a href="#"><i class="fas fa-book"></i> Library Management System</a></li>
+                        <li><a href="#"><i class="fas fa-flask"></i> Research Repository</a></li>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Learning Management System</a></li>
+                        <li><a href="#"><i class="fas fa-user-plus"></i> Student Registration</a></li>
+                        <li><a href="./faq2.html"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                        <li><a href="./contactus.html"><i class="fas fa-phone"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Recent News</h3>
+                    <div class="news-item">
+                        <h4>Global Ranking Update (July 2025)</h4>
+                        <p>According to Webometrics’ July 2025 edition, UTYCC’s global ranking is 30,523, with a country rank of 57. The university’s openness rank is 9,001, and its excellence rank is around 7,422.
+Webometrics
+ For context, in January 2025, UTYCC's country rank was better at 22, indicating a recent decline in its relative performance.</p>
+                        <span class="date"></span>
+                    </div>
+                    
+                    <div class="news-item">
+                        <h4>Academic Collaborations & Institutional Focus</h4>
+                        <p>UTYCC remains active in research and international collaboration. It implemented work-based learning initiatives and focused efforts on e-learning adoption, notably being the first to establish an e-Learning Center in Myanmar through an ASEAN–Korea Cyber University partnership, starting July 11, 2012</p>
+                        <span class="date"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 University of Technology Yatanarpon Cyber City. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !message) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                alert('Thank you for your message! We will get back to you soon.');
+                form.reset();
+            });
+            
+            // Add animation to quick links
+            const quickLinks = document.querySelectorAll('.quick-links a');
+            quickLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

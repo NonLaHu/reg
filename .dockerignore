@@ -1,0 +1,27 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE & Editor files
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+.settings
+.project
+.classpath
+
+# Build logs and temp files
+logs/
+raw.txt
+notes/
+HELP.md
+
+# File uploads (should be mounted via Docker volumes, not baked into image)
+uploads/
+
+# OS generated files
+.DS_Store
+Thumbs.db

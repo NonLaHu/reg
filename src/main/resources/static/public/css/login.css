@@ -1,0 +1,269 @@
+/* --- Theme variables (light by default) --- */
+:root{
+  --bg: #0f1d4a;
+  --surface: rgba(255,255,255,0.7);
+  --card-bg: linear-gradient(180deg, rgb(255, 255, 255), rgba(250,250,252,1));
+  --accent: #5b8cff;
+  --accent-2: #6ee7b7;
+  --muted: #8c95a6;
+  --text: #0f1724;
+  --radius: 14px;
+  --glass-blur: 8px;
+  --shadow: 0 10px 30px rgba(16,24,40,0.12);
+  --control-border: rgba(15,23,36,0.08);
+  --success: #16a34a;
+  --danger: #ef4444;
+  --btn-padding: 10px 16px;
+  --transition: 180ms cubic-bezier(.2,.9,.2,1);
+  --fillIcon:black;
+}
+
+/* Dark theme overrides */
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --surface: rgba(14,20,28,0.5);
+  --card-bg: linear-gradient(180deg, rgba(10,14,20,0.6), rgba(8,12,18,0.5));
+  --accent: #6ea8ff;
+  --accent-2: #3dd9a6;
+  --muted: #9aa6b2;
+  --text: #edf2f8;
+  --control-border: rgba(255,255,255,0.06);
+  --shadow: 0 8px 28px rgba(2,6,23,0.6);
+  --fillIcon: white;
+}
+
+body{
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(91,140,255,0.06), transparent 8%),
+            radial-gradient(1000px 400px at 90% 90%, rgba(110,231,183,0.04), transparent 8%),
+            var(--bg);
+}
+/* Page container */
+.container{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(91,140,255,0.06), transparent 8%),
+              radial-gradient(1000px 400px at 90% 90%, rgba(110,231,183,0.04), transparent 8%),
+              var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.imgLogo{
+  width: 100%;
+  text-align: center;
+}
+
+.back-arrow {
+    position: absolute;
+    left: 50px;
+    top:20px;
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.3s;
+    font-size: 30px;
+}
+
+.back-arrow:hover {
+    scale: 1.0.5;
+}
+
+
+/* Card / aside */
+.card{
+  width: min(460px, 96%);
+  padding: 26px;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--control-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(115%);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Elevation on pointer */
+.card:hover{
+  box-shadow: 0 18px 44px rgba(2,6,23,0.12);
+}
+
+/* Heading and lead */
+#regTitle{
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.lead{
+  margin: 0 0 18px 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+/* Form layout */
+form#registrationForm { width:100%; }
+
+/* Field wrapper for floating label pattern */
+.field{
+  position: relative;
+  margin: 12px 0;
+}
+
+/* Inputs */
+.field input{
+  width: 95%;
+  padding: 16px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--control-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  color: var(--text);
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  appearance: none;
+}
+
+/* Accessible focus */
+.field input:focus{
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: 0 6px 20px rgba(91,140,255,0.12);
+  transform: translateY(-1px);
+}
+
+/* Floating label (input + label order in DOM) */
+.field label.floating{
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: transform var(--transition), font-size var(--transition), color var(--transition);
+  padding: 0 6px;
+  background: transparent;
+}
+
+/* When input has text or focus - float label up */
+.field input:focus + label.floating,
+.field input:not(:placeholder-shown) + label.floating{
+  transform: translateY(-155%) scale(0.86);
+  font-size: 0.78rem;
+  color: var(--accent);
+  background: transparent;
+}
+
+/* Subtle invalid state support */
+.field input:invalid:not(:focus) {
+  border-color: var(--danger);
+  box-shadow: 0 4px 12px rgba(239,68,68,0.08);
+}
+
+/* Buttons container — user has inline style; these styles provide defaults */
+.btn-primary,
+.btn-ghost{
+  border: 0;
+  font-weight: 600;
+  padding: var(--btn-padding);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+/* Primary button */
+.btn-primary{
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(91,140,255,0.18), inset 0 -2px 6px rgba(0,0,0,0.08);
+}
+
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(91,140,255,0.14); }
+.btn-primary:active{ transform: translateY(0); }
+
+/* Ghost button */
+.btn-ghost{
+  background: transparent;
+  color: var(--text);
+  border: 1px solid transparent;
+  padding: 9px 12px;
+  border-radius: 10px;
+}
+
+.btn-ghost[aria-pressed="true"]{
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 6px 18px rgba(91,140,255,0.06);
+}
+
+/* Small helper text */
+.helper{
+  margin-top: 14px;
+  font-size: 0.87rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+/* Inline link emphasis */
+.helper a{
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* Form message (success/error) */
+#formMsg{
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+#formMsg.success{ background: rgba(22,163,74,0.08); color: var(--success); border: 1px solid color-mix(in srgb, var(--success) 22%, transparent); display:block; }
+#formMsg.error{ background: rgba(239,68,68,0.06); color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 18%, transparent); display:block; }
+
+/* Accessibility: focus-visible outlines */
+:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  outline-offset: 3px;
+}
+
+/* Position toggle button inside input field */
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-color, #333);
+  z-index: 999;
+}
+
+.eyeIcon {
+  fill:var(--fillIcon);
+}
+.eyeIcon path{
+  fill:var(--fillIcon);
+}
+
+/* Responsive */
+@media (max-width:420px){
+  .card{ padding: 20px; border-radius: 12px; }
+  .btn-primary, .btn-ghost{ padding: 10px 12px; font-size:0.92rem; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; animation: none !important; }
+}

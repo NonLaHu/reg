@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to UTYCC</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link th:href="@{/public/css/index.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Overlay + Popup -->
+    <div class="overlay" id="popupOverlay">
+        <div class="popup">
+            <h3>Enter Tracking Pin</h3>
+            <input type="text" id="pinInput" placeholder="Tracking Pin">
+            <div>
+                <button class="submit-btn" id="submitPin">Submit</button>
+                <button class="close-btn" id="closePopup">Close</button>
+            </div>
+            <div class="status" id="statusMsg"></div>
+        </div>
+    </div>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img th:src="@{/public/asset/UTYCClogo.png}" alt="UTYCC Logo">
+                    <span class="logo-text">UTYCC</span>
+                </a>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li class="dropdown"><a href="/public/aboutus.html">About UTYCC <span
+                                    class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/history">History</a></li>
+                                <li><a href="/public/contactus.html">Contact Us</a></li>
+                                <li><a href="/public/rector.html">Rector Message</a></li>
+                                <li><a href="/public/faq2.html">FAQ</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="academic">Academic <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="academic">Undergraduate</a></li>
+                                <li><a href="academic">Master</a></li>
+                                <li><a href="academic">PhD</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="/department">Faculties & Departments <span
+                                    class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="sub-dropdown"><a href="/department#ICT">Faculty of ICT <span
+                                            class="dropdown-arrow">▸</span></a>
+                                    <ul class="sub-dropdown-menu">
+                                        <li><a href="/department#IST">Department of IS</a></li>
+                                        <li><a href="/department#CE">Department of CE</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/department#">Faculty of EcE</a></li>
+                                <li><a href="/department#">Faculty of PrE</a></li>
+                                <li><a href="/department#">Faculty of AME</a></li>
+                                <li><a href="/department#">Department of Myanmar</a></li>
+                                <li><a href="/department#">Department of English</a></li>
+                                <li><a href="/department#">Department of Engineering Mathematics</a></li>
+                                <li><a href="/department#">Department of Engineering Physics</a></li>
+                                <li><a href="/department#">Department of Engineering Chemistry</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="/public/requirementAdmission.html">Admission <span class="dropdown-arrow">▾</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/public/requirementAdmission.html">Admission Requirements</a></li>
+                                <li><a href="/howToApply">How to Apply</a></li>
+                                <li id="trackingPin"><a href="#">Tracking Pin</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/announcement"> News & Announcements </a></li>
+                    </ul>
+                </nav>
+
+                <a href="/login" class="btn-login" id="login-btn">Login</a>
+                <a href="/signup" class="btn-login" id="register-btn">Register</a>
+
+                <div id="user-section"  style="display:none;">
+                    <img id="profile-user" src="/public/asset/placeholder.png" alt="Profile" class="profile-img" />
+                    <div class="user-info">
+                        <span id="user-fullname"></span>
+                        <span id="user-roles"></span>
+                    </div>
+                    <button id="signout-btn" class="btn-login">Sign out</button>
+                </div>
+
+
+                <button class="nav-toggle" id="nav-open-btn" aria-label="Open navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="/history">About UTYCC</a></li>
+            <li><a href="/academic">Academics</a></li>
+            <li><a href="/department">Faculties & Departments</a></li>
+            <li><a href="/public/requirementAdmission.html">Admission</a></li>
+            <li><a href="/announcement">News & Annouancements</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="hero-carousel" id="hero-carousel-container">
+            <div class="carousel-slides">
+                <div class="carousel-slide" style="background-image: url('/public/asset/yccG.jpg');">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">
+                            University of Technology
+                            <span class="highlight">Yatanarpon Cyber City</span>
+                        </h1>
+                        <a href="/public/requirementAdmission.html" class="carousel-cta-button">Apply for Admission</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('/public/asset/yccmajors.jpg');">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">Pioneering in <span class="highlight">Technology</span></h1>
+                        <a href="#" class="carousel-cta-button">Discover Our Programs</a>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: url('/public/asset/yccY.jpg');">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">Vibrant <span class="highlight">Campus Life</span></h1>
+                        <a href="#" class="carousel-cta-button">See Upcoming Events</a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-btn prev">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button class="carousel-btn next">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+
+            <div class="carousel-dots"></div>
+        </section>
+
+        <section id="vision-mission" class="section">
+            <div class="container">
+                <div class="vmo-grid">
+                    <article class="vmo-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.432 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <h3 style="color:black;">Our Vision</h3>
+                        <p>To become an estate of standard engineering education that nurtures students with high
+                            intelligence, social consciousness, and good personalities to ensure the sustainable
+                            development of society.</p>
+                    </article>
+                    <article class="vmo-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 style="color:black;">Our Mission</h3>
+                        <ul>
+                            <li>To nurture the graduates with good personalities and professional standards.</li>
+                            <li>To set quality teaching, learning and research environment to cope with social and
+                                educational transformation.</li>
+                            <li>To make a socially responsible contribution to the sustainable development of society.
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="vmo-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 3v1.5M3 21v-1.5M21 3v1.5M21 21v-1.5M3 12h18M12 3v18" />
+                        </svg>
+                        <h3 style="color:black;">Our Objective</h3>
+                        <p>To create broad access of engineering education opportunities with smart learning.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="events" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">News, Events &amp; Announcements</h2>
+                    <p class="section-subtitle">Join us for workshops, seminars, and community gatherings.</p>
+                </div>
+
+                <div class="events-list">
+                    <ul>
+                        <!-- When there are announcements -->
+                        <li th:each="ann : ${recentAnnouncements}" class="event-item">
+                            <div class="event-info">
+                                <div class="event-date">
+                                    <p class="month"
+                                        th:text="${#temporals.format(ann.publishDate,'MMM').toUpperCase()}">AUG</p>
+                                    <p class="day" th:text="${#temporals.format(ann.publishDate,'dd')}">25</p>
+                                </div>
+
+                                <div>
+                                    <p class="event-title" th:text="${ann.title}">Announcement title</p>
+                                    <p class="event-subtitle" th:if="${ann.description != null}"
+                                        th:text="${ann.description.length() > 140 ? ann.description.substring(0,140) + '...' : ann.description}">
+                                        Short description
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <dl class="event-details">
+                                <!-- Example placeholders — edit as needed -->
+                                <div class="event-detail-item">
+                                    <dt class="sr-only">Time</dt>
+                                    <!-- If you have a time field, replace with real data -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <!-- svg content -->
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <dd
+                                        th:text="${ann.publishDate != null ? #temporals.format(ann.publishDate,'h:mm a') : 'TBA'}">
+                                        2:00 PM</dd>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <dt class="sr-only">Location</dt>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <!-- svg content -->
+                                        <path ... />
+                                    </svg>
+                                    <dd>Campus / Online</dd>
+                                </div>
+                            </dl>
+                            <div class="event-actions">
+                                <a th:if="${ann.pdfFileName != null}"
+                                    th:href="@{|/api/announcements/download/${ann.pdfFileName}|}" target="_blank"
+                                    class="btn">
+                                    Download PDF
+                                </a>
+                            </div>
+                        </li>
+
+                        <!-- Fallback when list is empty -->
+                        <li th:if="${#lists.isEmpty(recentAnnouncements)}" class="event-item">
+                            <div class="event-info">
+                                <div>
+                                    <p class="event-title">No announcements</p>
+                                    <p class="event-subtitle">There are no active announcements at this time. Please
+                                        check back later.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="stats" class="section stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <svg fill="var(--c-primary)" height="200px" width="200px" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 377.64 377.64" xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M369.64,347.132H8c-4.418,0-8-3.582-8-8s3.582-8,8-8h361.64c4.418,0,8,3.582,8,8S374.058,347.132,369.64,347.132z M354.968,310.669c-4.418,0-8-3.582-8-8V125.884h-53.882c-4.418,0-8-3.582-8-8s3.582-8,8-8h61.884c4.418,0,8,3.582,8,8 c0,0.059,0,0.118-0.002,0.176v184.609C362.968,307.087,359.387,310.669,354.968,310.669z M285.566,310.669c-4.418,0-8-3.582-8-8 v-90.367c0-4.418,3.582-8,8-8s8,3.582,8,8v90.367C293.566,307.087,289.984,310.669,285.566,310.669z M221.069,310.669 c-4.418,0-8-3.582-8-8v-90.367c0-4.418,3.582-8,8-8s8,3.582,8,8v90.367C229.069,307.087,225.487,310.669,221.069,310.669z M156.572,310.669c-4.418,0-8-3.582-8-8v-90.367c0-4.418,3.582-8,8-8s8,3.582,8,8v90.367 C164.572,307.087,160.99,310.669,156.572,310.669z M92.075,310.669c-4.418,0-8-3.582-8-8v-90.367c0-4.418,3.582-8,8-8s8,3.582,8,8 v90.367C100.075,307.087,96.493,310.669,92.075,310.669z M22.673,310.669c-4.418,0-8-3.582-8-8V118.118 c-0.002-0.078-0.003-0.156-0.003-0.234c0-4.418,3.582-8,8-8h61.886c4.418,0,8,3.582,8,8s-3.582,8-8,8H30.673v176.785 C30.673,307.087,27.091,310.669,22.673,310.669z M321.05,235.857c-4.418,0-8-3.582-8-8v-15.555c0-4.418,3.582-8,8-8s8,3.582,8,8 v15.555C329.05,232.276,325.468,235.857,321.05,235.857z M56.604,235.857c-4.418,0-8-3.582-8-8v-15.555c0-4.418,3.582-8,8-8 s8,3.582,8,8v15.555C64.604,232.276,61.023,235.857,56.604,235.857z M321.05,187.071c-4.418,0-8-3.582-8-8v-15.555 c0-4.418,3.582-8,8-8s8,3.582,8,8v15.555C329.05,183.489,325.468,187.071,321.05,187.071z M56.604,187.071c-4.418,0-8-3.582-8-8 v-15.555c0-4.418,3.582-8,8-8s8,3.582,8,8v15.555C64.604,183.489,61.023,187.071,56.604,187.071z M285.566,187.069H92.075 c-4.418,0-8-3.582-8-8s3.582-8,8-8h193.492c4.418,0,8,3.582,8,8S289.985,187.069,285.566,187.069z M285.562,159.805 c-1.193,0-2.404-0.268-3.546-0.833l-94.058-46.601l-92.28,46.575c-3.945,1.989-8.755,0.407-10.747-3.538 c-1.991-3.944-0.407-8.756,3.538-10.747l92.351-46.61V38.507c0-4.418,3.582-8,8-8h57.83c4.418,0,8,3.582,8,8v30.224 c0,4.418-3.582,8-8,8h-49.83v22.174l92.299,45.729c3.959,1.961,5.578,6.761,3.617,10.72 C291.34,158.172,288.506,159.805,285.562,159.805z M196.82,60.731h41.83V46.507h-41.83V60.731z">
+                                </path>
+                            </g>
+                        </svg>
+                        <div class="stat-number" data-goal="2010">0</div>
+                        <p class="stat-label">Year Founded</p>
+                    </div>
+                    <div class="stat-item">
+                        <svg fill="var(--c-primary)" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 97.056 97.056" xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <g>
+                                        <path
+                                            d="M86.021,43.476L49.929,57.239L13.838,43.675l-2.056,18.832c-0.096,0.774,0.175,1.549,0.732,2.095 c0.558,0.545,1.337,0.799,2.109,0.688c1.976-0.288,3.997-0.434,6.005-0.434c11.994,0,22.726,5.081,26.705,12.643 c0.432,0.822,1.284,1.336,2.212,1.336h0.766c0.928,0,1.78-0.514,2.212-1.335c3.98-7.562,14.711-12.643,26.703-12.643 c2.013,0,4.034,0.146,6.007,0.434c0.121,0.019,0.374,0.025,0.381,0.026c1.381,0,2.602-1.039,2.5-2.5 C88.1,62.602,86.021,43.476,86.021,43.476z">
+                                        </path>
+                                        <path
+                                            d="M95.436,29.301L50.809,12.505c-0.568-0.214-1.193-0.214-1.762,0L4.306,29.345c-0.974,0.367-1.619,1.299-1.619,2.34V62.09 h5.609V35.441l40.752,15.337c0.568,0.214,1.192,0.214,1.762,0l44.627-16.797c0.974-0.367,1.619-1.299,1.619-2.34 S96.409,29.668,95.436,29.301z">
+                                        </path>
+                                        <path
+                                            d="M0.014,81.949c-0.074,0.705,0.154,1.408,0.628,1.935C1.116,84.41,1.791,84.71,2.5,84.71h5.982 c0.708,0,1.384-0.301,1.858-0.827s0.703-1.229,0.628-1.935L9.335,66.445h-7.69L0.014,81.949z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <div class="stat-number" data-goal="12">0</div>
+                        <p class="stat-label">Degree Offer</p>
+                    </div>
+                    <div class="stat-item">
+                        <svg fill="var(--c-primary)" height="200px" width="200px" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 325.262 325.262" xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M276.397,325.262c-3.161,0-6.154-1.885-7.416-4.994l-22.086-54.433c-12.342-30.408-26.366-47.908-44.821-54.943 l-31.442,43.087v40.753c0,4.418-3.582,8-8,8s-8-3.582-8-8v-40.756l-31.441-43.084c-18.458,7.033-32.48,24.532-44.823,54.944 l-22.085,54.432c-1.661,4.093-6.323,6.065-10.421,4.405c-4.094-1.661-6.066-6.326-4.405-10.421L63.54,259.82 c8.52-20.99,17.513-35.853,28.301-46.774c14.288-14.464,31.952-21.798,52.502-21.798h36.575c20.55,0,38.214,7.334,52.502,21.798 c10.788,10.922,19.781,25.784,28.301,46.773l22.086,54.434c1.661,4.094-0.312,8.76-4.405,10.421 C278.416,325.073,277.398,325.262,276.397,325.262z M140.415,207.354l22.217,30.443l22.217-30.443 c-1.29-0.071-2.601-0.106-3.93-0.106h-36.575C143.015,207.248,141.705,207.283,140.415,207.354z M162.63,168.944 c-29.225,0-53-23.776-53-53.002c0-7.418,1.495-14.566,4.448-21.279l-1.436-41.021L72.921,41.777 c-3.389-1.012-5.711-4.129-5.711-7.665s2.322-6.653,5.711-7.665l87.422-26.111c1.492-0.447,3.086-0.447,4.578,0l87.233,26.055 c0.826,0.225,1.599,0.578,2.296,1.037c1.045,0.688,1.909,1.608,2.528,2.679c0.28,0.483,0.511,0.998,0.686,1.539 c0.254,0.781,0.39,1.612,0.39,2.467c0,0.059-0.001,0.117-0.002,0.176V67.61c0,4.418-3.582,8-8,8s-8-3.582-8-8V44.851l-29.413,8.785 l-1.314,41.351c2.859,6.625,4.308,13.665,4.308,20.955C215.632,145.167,191.856,168.944,162.63,168.944z M127.156,105.374 c-1.014,3.4-1.525,6.938-1.525,10.568c0,20.403,16.598,37.002,37,37.002c20.403,0,37.002-16.599,37.002-37.002 c0-3.522-0.482-6.959-1.439-10.271c-11.318,1.898-22.556,2.76-35.561,2.76C150.426,108.43,139.24,107.477,127.156,105.374z M129.911,89.612c11.159,1.938,21.479,2.818,32.721,2.818c12.053,0,22.435-0.79,32.847-2.529l0.998-31.438l-31.556,9.425 c-1.492,0.447-3.086,0.447-4.578,0l-31.521-9.414L129.911,89.612z M122.89,40.003l39.742,11.87l39.761-11.875 c0.094-0.03,0.188-0.059,0.283-0.085l19.425-5.802L162.632,16.35l-59.469,17.762l19.402,5.795 C122.674,39.937,122.782,39.969,122.89,40.003z">
+                                </path>
+                            </g>
+                        </svg>
+                        <div class="stat-number" data-goal="2248">0</div>
+                        <p class="stat-label">Graduates</p>
+                    </div>
+                    <div class="stat-item">
+                        <svg fill="var(--c-primary)" height="200px" width="200px" version="1.1" id="Capa_1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 355.438 355.438" xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M7.999,339.806c-1.001,0-2.02-0.189-3.005-0.589c-4.094-1.661-6.066-6.327-4.405-10.421l22.068-54.39 c9.5-23.403,26.342-54.327,63.335-55.823c0.313-0.038,0.63-0.057,0.949-0.057h33.005c0.319,0,0.636,0.019,0.949,0.057 c36.996,1.496,53.838,32.42,63.337,55.822l2.846,7.015l59.311-54.812c3.245-2.999,8.308-2.799,11.305,0.445 c2.999,3.245,2.8,8.306-0.445,11.305l-67.805,62.663c-1.929,1.783-4.612,2.506-7.173,1.932c-2.563-0.572-4.683-2.366-5.67-4.8 l-7.194-17.731c-11.43-28.16-24.617-42.187-43.098-45.247l-4.704,22.456l6.293,56.622c0.302,2.72-0.807,5.406-2.94,7.12 l-14.015,11.26c-1.421,1.142-3.188,1.764-5.011,1.764h-4.974c-1.822,0-3.59-0.622-5.01-1.763l-14.016-11.26 c-2.134-1.714-3.243-4.4-2.941-7.121l6.295-56.622l-4.705-22.455c-18.48,3.061-31.667,17.088-43.098,45.247l-22.068,54.389 C14.154,337.921,11.16,339.806,7.999,339.806z M95.379,311.653l8.066,6.48l8.065-6.48l-5.158-46.409h-5.815L95.379,311.653z M99.876,249.244h7.139l3.083-14.717H96.792L99.876,249.244z M347.438,314.278H225.832c-4.418,0-8-3.582-8-8s3.582-8,8-8h113.605 V67.943H22.341v168.339c0,4.418-3.582,8-8,8s-8-3.582-8-8V59.943c0-4.418,3.582-8,8-8h333.097c4.418,0,8,3.582,8,8v246.335 C355.438,310.696,351.856,314.278,347.438,314.278z M143.05,276.41c-4.418,0-8-3.582-8-8v-1.089c0-4.418,3.582-8,8-8s8,3.582,8,8 v1.089C151.05,272.828,147.468,276.41,143.05,276.41z M103.445,203.87c-24.271,0-44.018-19.747-44.018-44.018 s19.746-44.018,44.018-44.018c2.914,0,5.764,0.285,8.521,0.828c0.161,0.027,0.321,0.06,0.48,0.098 c19.969,4.166,35.016,21.905,35.016,43.092C147.462,184.124,127.716,203.87,103.445,203.87z M89.161,135.756 c-8.217,4.89-13.734,13.861-13.734,24.096c0,15.449,12.569,28.018,28.018,28.018s28.018-12.569,28.018-28.018 c0-11.692-7.199-21.735-17.398-25.927c-3.65,4.823-8.263,8.855-13.586,11.843c-3.854,2.163-8.73,0.792-10.892-3.061 C88.343,140.492,88.267,137.938,89.161,135.756z M304.059,150.392h-41.058c-4.418,0-8-3.582-8-8s3.582-8,8-8h41.058 c4.418,0,8,3.582,8,8S308.477,150.392,304.059,150.392z M225.831,150.392h-15.25c-4.418,0-8-3.582-8-8s3.582-8,8-8h15.25 c4.418,0,8,3.582,8,8S230.249,150.392,225.831,150.392z M304.059,117.016h-82.116c-4.418,0-8-3.582-8-8s3.582-8,8-8h82.116 c4.418,0,8,3.582,8,8S308.477,117.016,304.059,117.016z M221.949,31.631h-82.12c-4.418,0-8-3.582-8-8s3.582-8,8-8h82.12 c4.418,0,8,3.582,8,8S226.367,31.631,221.949,31.631z">
+                                </path>
+                            </g>
+                        </svg>
+                        <div class="stat-number" data-goal="80">0</div>
+                        <p class="stat-label">Lecturers</p>
+                    </div>
+                    <div class="stat-item">
+                        <svg fill="var(--c-primary)" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                            class="icon">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M904 512h-56c-4.4 0-8 3.6-8 8v320H184V184h320c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V520c0-4.4-3.6-8-8-8z">
+                                </path>
+                                <path
+                                    d="M355.9 534.9L354 653.8c-.1 8.9 7.1 16.2 16 16.2h.4l118-2.9c2-.1 4-.9 5.4-2.3l415.9-415c3.1-3.1 3.1-8.2 0-11.3L785.4 114.3c-1.6-1.6-3.6-2.3-5.7-2.3s-4.1.8-5.7 2.3l-415.8 415a8.3 8.3 0 0 0-2.3 5.6zm63.5 23.6L779.7 199l45.2 45.1-360.5 359.7-45.7 1.1.7-46.4z">
+                                </path>
+                            </g>
+                        </svg>
+                        <div class="stat-number" data-goal="350">0</div>
+                        <p class="stat-label">Enrollment</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="section section-primary-bg">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title section-title-light">Quick Resources</h2>
+                    <p class="section-subtitle section-subtitle-light">Find what you need, faster.</p>
+                </div>
+                <div class="resources-grid">
+                    <a href="#" class="resource-link">Discover Programs</a>
+                    <a href="/public/requirementAdmission.html" class="resource-link">Admission</a>
+                    <a href="/public/aboutus.html" class="resource-link">History</a>
+                    <a href="#" class="resource-link">Student Registeration</a>
+                    <a href="#" class="resource-link">Library</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+
+        <div class="container">
+            <img th:src="@{/public/asset/UTYCClogo.png}" alt="UTYCC Logo" class="footer-logo">
+            <p class="footer-address">
+                University of Technology, Yatanarpon Cyber City<br>
+                Pyin Oo Lwin, Mandalay Region, Myanmar
+            </p>
+            <p class="footer-copyright">
+                &copy; 2025 UTYCC. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    <script th:src="@{/public/js/index.js}"></script>
+</body>
+
+</html>

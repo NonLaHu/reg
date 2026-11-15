@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>University History - UT-YCC</title>
+  <style>
+    /* Reset some default browser styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #f4f6f8;
+      color: #333;
+      padding: 20px;
+    }
+
+    header {
+      background: #2b6cb0;
+      color: white;
+      padding: 20px 15px;
+      text-align: center;
+      border-radius: 5px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 6px rgba(43, 108, 176, 0.3);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
+
+    main {
+      max-width: 900px;
+      background: white;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #2b6cb0;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 5px;
+    }
+
+    p {
+      margin-bottom: 18px;
+      font-size: 1.1em;
+    }
+
+    .more-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .more-content.open {
+      max-height: 1000px; /* large enough to show content */
+      transition: max-height 1s ease;
+    }
+
+    button.toggle-btn {
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 15px auto 0;
+      width: 200px;
+      transition: background-color 0.3s ease;
+    }
+
+    button.toggle-btn:hover {
+      background-color: #1a4d7f;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      margin-top: 30px;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      main {
+        padding: 15px;
+      }
+
+      button.toggle-btn {
+        width: 100%;
+      }
+    }
+      :root{
+    /* Updated color palette with #2b6cb0 as primary */
+    --primary-900: #0f2a4a;
+    --primary-800: #13315c;
+    --primary-700: #16396e;
+    --primary-600: #1a4280;
+    --primary-500: #1e4b92;
+    --primary-400: #2154a4;
+    --primary-300: #2b6cb0;
+    --primary-200: #5c8ec9;
+    --primary-100: #e6f0fa;
+
+    --ink: #0b1b23;
+    --muted: #50626b;
+    --card: #ffffff;
+    --ring: var(--primary-300);
+    --shadow: 0 10px 25px rgba(15, 42, 74, 0.15);
+    --radius: 16px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 600px at 10% -50%, var(--primary-300) 0%, transparent 70%),
+      radial-gradient(900px 500px at 110% -60%, var(--primary-500) 0%, transparent 70%),
+      linear-gradient(180deg, var(--primary-100), #ffffff 38%);
+  }
+
+  /* Header */
+  .wrap{
+    max-width:1100px;
+    margin-inline:auto;
+    padding: clamp(20px, 4vw, 40px);
+  }
+  header.site{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:16px;
+    align-items:end;
+    margin-bottom:18px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .logo{
+    width:44px;height:44px;border-radius:12px;
+    background: conic-gradient(from 210deg, var(--primary-300), var(--primary-600), var(--primary-400));
+    box-shadow: inset 0 0 0 3px #fff8, 0 6px 18px rgba(26, 66, 128, 0.25);
+    position:relative;
+  }
+  .logo::after{
+    content:"";
+    position:absolute; inset:7px;
+    border-radius:9px;
+    background: radial-gradient(60% 60% at 65% 35%, #fff8, transparent 60%),
+                linear-gradient(145deg,#fff6,transparent 60%);
+    mix-blend-mode:screen;
+  }
+  h1{
+    margin:0;
+    font-size: clamp(22px, 2.2vw, 28px);
+    letter-spacing:.3px;
+  }
+  .tag{
+    font-size:14px;color:white;
+  }
+
+  /* Wavy divider */
+  .waves{
+    height:56px; width:100%;
+    display:block; margin: 8px 0 22px;
+  }
+  .waves path:nth-child(1){ fill: var(--primary-200); opacity:.6 }
+  .waves path:nth-child(2){ fill: var(--primary-300); opacity:.45 }
+  .waves path:nth-child(3){ fill: var(--primary-400); opacity:.35 }
+  .waves path:nth-child(4){ fill: var(--primary-500); opacity:.25 }
+
+  /* Grid of cards */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap: clamp(16px, 2.5vw, 26px);
+  }
+  @media (max-width: 950px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid #00000010;
+    padding: clamp(18px, 2.4vw, 26px);
+    position:relative;
+    overflow:hidden;
+    transform: translateY(12px);
+    opacity:0;
+    transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s;
+  }
+  .card.reveal{
+    transform: translateY(0);
+    opacity:1;
+  }
+
+  /* Corner surf motif */
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-60px; right:-60px;
+    width:160px; height:160px;
+    background: radial-gradient(80px 80px at 60% 60%, var(--primary-200), transparent 70%),
+                conic-gradient(from 210deg, #ffffff00 0 35%, #ffffff40 35% 55%, #ffffff00 55% 100%);
+    border-radius:50%;
+    filter: blur(1px);
+    transform: rotate(-8deg);
+  }
+
+  .eyebrow{
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:12px;
+    color: var(--primary-600);
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:10px;
+  }
+
+  /* Inline SVG icons */
+  .icon{
+    width:22px;height:22px; flex:0 0 22px;
+    color: var(--primary-600);
+  }
+  .card h2{
+    font-size: clamp(18px, 2vw, 22px);
+    margin:0 0 8px;
+    color: var(--primary-800);
+  }
+  .lead{
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+
+  /* Bullet list */
+  .list{
+    padding:0; margin:10px 0 0; list-style:none;
+  }
+  .list li{
+    display:grid; grid-template-columns:auto 1fr; gap:10px;
+    align-items:start;
+    padding:10px 0;
+    border-top:1px dashed #00000014;
+  }
+  .list li:first-child{ border-top:none; }
+  .dot{
+    margin-top:6px;
+    width:8px; height:8px; border-radius:50%;
+    background: var(--primary-400);
+    box-shadow:0 0 0 4px rgba(33, 107, 176, 0.15);
+  }
+
+  /* Focus and hover states */
+  .card:focus-within, .card:hover{
+    outline: 2px solid var(--ring);
+    outline-offset: 0;
+  }
+  a.more{
+    margin-top:12px; display:inline-flex; align-items:center; gap:8px;
+    text-decoration:none; font-weight:600;
+    color: var(--primary-700);
+  }
+  a.more svg{ width:16px;height:16px }
+  a.more:focus-visible{ outline:2px solid var(--ring); outline-offset:4px }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>University of Technology (Yatanarpon Cyber City)</h1>
+  </header>
+
+  <main>
+    <h2>History</h2>
+    <p>
+      The University of Technology (Yatanarpon Cyber City), also known as UT-YCC, is recognized as one of Myanmar's premier higher education institutions. It is located near Pyin Oo Lwin, alongside the Mandalay-Lashio Road within Yatanarpon Cyber City. The university was established in October 2010 under the Ministry of Science and Technology and has rapidly become a center of technology education.
+    </p>
+
+    <p>
+      UT-YCC offers five specialized Bachelor of Engineering degrees: Information Science and Technology, Computer Engineering, Electronics, Mechanical Precision and Automation, and Materials and Metallurgy. Each program generally spans six years. In addition to its undergraduate offerings, the university provides Master's and Doctoral degree programs.
+    </p>
+
+    <div id="more-content" class="more-content">
+      <p>
+        The university's mission focuses on fostering a collaborative learning environment that brings together faculty, students, and stakeholders to utilize technology-enhanced learning for personal and regional development.
+      </p>
+
+      <p>
+        UT-YCC pioneered e-learning in Myanmar, establishing the country's first E-Learning Center on July 11, 2012. This was part of the ASEAN-KOREA Cyber University (ACU) initiative, aiming to develop and share digital educational content among ASEAN universities. UT-YCC remains an active member of this project.
+      </p>
+
+      <p>
+        Committed to quality, UT-YCC has implemented a Quality Management System to pursue international accreditation. The university collaborates internationally through a double degree program with Miyazaki University in Japan and works with the Korea International Cooperation Agency to enhance e-learning solutions.
+      </p>
+
+      <p>
+        Prospective students are encouraged to join UT-YCC to benefit from excellent academic programs, prepare for rewarding careers, and contribute to technological advancement locally and globally.
+      </p>
+    </div>
+    <button class="toggle-btn" id="toggle-btn">Read More</button>
+  </main>
+<div class="wrap">
+  <header class="site" aria-label="Header">
+    <div class="brand" aria-label="Brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Visionary & Global</h1>
+        <div class="tag">Next-Gen Technology Vision
+From knowledge to global impact</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- decorative waves -->
+  <svg class="waves" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,32 C150,80 350,0 600,32 C850,64 1050,16 1200,40 L1200,120 L0,120 Z"></path>
+    <path d="M0,50 C180,90 420,20 600,40 C780,60 1020,20 1200,60 L1200,120 L0,120 Z"></path>
+    <path d="M0,70 C220,110 440,40 600,60 C760,80 980,40 1200,80 L1200,120 L0,120 Z"></path>
+    <path d="M0,90 C240,120 460,60 600,80 C740,100 960,60 1200,100 L1200,120 L0,120 Z"></path>
+  </svg>
+
+  <main class="grid">
+    <!-- Card 1 -->
+    <section class="card" tabindex="0" aria-labelledby="c1-title">
+      <div class="eyebrow">
+        <!-- Lighthouse icon -->
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3l2 3H10l2-3z"></path>
+          <path d="M10 6h4v4h-4zM7 22h10M9 10l-2 12m10-12l-2 12"></path>
+          <path d="M2 8l5-2m15 2l-5-2"></path>
+        </svg>
+        Our Purpose
+      </div>
+      <h2 id="c1-title">Chart a sustainable digital future</h2>
+      <p class="lead">We empower the next generation of technologists with the skills and vision to build a secure, innovative, and connected future for our nation.</p>
+      <ul class="list">
+        <li><span class="dot"></span><span>Deliver practical, cutting-edge education in cybersecurity, AI, and sustainable technology.</span></li>
+        <li><span class="dot"></span><span>Open up advanced research facilities so students, researchers, and industry partners can innovate faster.</span></li>
+        <li><span class="dot"></span><span>Upskill national talent to maintain and evolve digital solutions for long-term prosperity.</span></li>
+      </ul>
+      <a class="more" href="#" aria-label="Learn more about our purpose">
+        Learn more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Card 2 -->
+    <section class="card" tabindex="0" aria-labelledby="c2-title">
+      <div class="eyebrow">
+        <!-- Compass icon -->
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M16 8l-4 8-4-4 8-4z"></path>
+        </svg>
+        Our Strategy
+      </div>
+      <h2 id="c2-title">Partner, prototype, then scale</h2>
+      <p class="lead">We co-design with industry leaders, iterate in real-world environments, and scale proven technologies for maximum impact.</p>
+      <ul class="list">
+        <li><span class="dot"></span><span>University + industry labs to rapidly prototype next-generation digital solutions.</span></li>
+        <li><span class="dot"></span><span>Pilot programs with transparent metrics and public dashboards to track success.</span></li>
+        <li><span class="dot"></span><span>Open standards and frameworks so our innovations interoperate across the public and private sectors.</span></li>
+      </ul>
+      <a class="more" href="#" aria-label="Explore our strategy">
+        Explore strategy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Card 3 -->
+    <section class="card" tabindex="0" aria-labelledby="c3-title">
+      <div class="eyebrow">
+        <!-- Hands/heart icon -->
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s-6-4.35-6-8a3.5 3.5 0 017-1 3.5 3.5 0 017 1c0 3.65-6 8-6 8z"></path>
+        </svg>
+        Our Principles
+      </div>
+      <h2 id="c3-title">Guided by the sea</h2>
+      <p class="lead">These values keep our compass steady as we navigate the complex challenges of the digital age</p>
+      <ul class="list">
+        <li><span class="dot"></span><span><strong>Integrity:</strong> act with academic honesty, transparency, and honor our commitments.</span></li>
+        <li><span class="dot"></span><span><strong>Leadership</strong> cultivate the vision and skills to guide our society into the future.</span></li>
+        <li><span class="dot"></span><span><strong>Excellence:</strong>pursue mastery, evidence-based results, and measurable outcomes in all endeavors.
+
+</span></li>
+        <li><span class="dot"></span><span><strong>Innovation:</strong> prototype boldly, learn fast, and share knowledge openly.</span></li>
+        <li><span class="dot"></span><span><strong>Collaboration:</strong>  build bridges across academic disciplines, industries, and borders.</span></li>
+      </ul>
+      <a class="more" href="#" aria-label="Read our principles">
+        Read principles
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 12h14M13 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </section>
+  </main>
+</div>
+  <footer>
+    &copy; 2025 University of Technology (Yatanarpon Cyber City)
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-btn');
+    const moreContent = document.getElementById('more-content');
+
+    toggleBtn.addEventListener('click', () => {
+      if (moreContent.classList.contains('open')) {
+        moreContent.classList.remove('open');
+        toggleBtn.textContent = 'Read More';
+      } else {
+        moreContent.classList.add('open');
+        toggleBtn.textContent = 'Read Less';
+      }
+    });
+     // Simple intersection-reveal; respects prefers-reduced-motion.
+  (function(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = document.querySelectorAll('.card');
+    if(prefersReduced){
+      cards.forEach(c => c.classList.add('reveal'));
+      return;
+    }
+    const ob = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          e.target.classList.add('reveal');
+          obs.unobserve(e.target);
+        }
+      })
+    }, {threshold: .12});
+    cards.forEach(c => ob.observe(c));
+  })();
+  </script>
+</body>
+</html>

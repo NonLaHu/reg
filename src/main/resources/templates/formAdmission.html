@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTYCC Admission Form for first year Student</title>
+    <link rel="stylesheet" th:href="@{/public/css/form.css}">
+</head>
+<body>
+    <header>
+        <h1 id="motto">"Shape And Bright Your Future At UTYCC"</h1>
+        <div class="controls">
+            <button id="langToggle">LANGUAGE</button>
+            <button id="themeToggle">Theme</button>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2 class="lang" data-en="Admission Form" data-my="တက္ကသိုလ် မှတ်ပုံတင်ရန်ဖောင်"></h2>
+            <form id="admissionForm" enctype="multipart/form-data">
+                
+                <!-- SELF SECTION -->
+                <fieldset>
+                    <legend class="lang" data-en="Applicant Information" data-my="ကိုယ်ပိုင်အချက်အလက်"></legend>
+
+                    <label class="lang" data-en="Gender" data-my="ကျား/မ"></label>
+                    <select name="self_gender" required>
+                        <option value="" disabled selected class="lang" data-en="Select Gender" data-my="ကျား/မ ရွေးပါ"></option>
+                        <option value="male" class="lang" data-en="Male" data-my="ကျား"></option>
+                        <option value="female" class="lang" data-en="Female" data-my="မ"></option>
+                    </select>
+
+                    <label class="lang" data-en="University Entrance Year" data-my="တက္ကသိုလ် ဝင်ခွင့်နှစ်"></label>
+                    <input type="text" name="self_entrance_year" required>
+
+                    <label class="lang" data-en="Roll Number" data-my="မှတ်ပုံတင်နံပါတ်"></label>
+                    <input type="text" name="self_roll_no" required>
+
+                    <label class="lang" data-en="Entrance Date" data-my="ဝင်ခွင့်ရက်စွဲ"></label>
+                    <input type="date" name="self_entrance_date" required>
+
+                    <label class="lang" data-en="University Entrance Registration No. (optional)" data-my="မှတ်ပုံတင်နံပါတ် (optional)"></label>
+                    <input type="text" name="self_registration_no">
+
+                    <label class="lang" data-en="Full Name (MM)" data-my="အမည် (မြန်မာ)"></label>
+                    <input type="text" name="self_name_mm" required>
+
+                    <label class="lang" data-en="Full Name (ENG)" data-my="အမည် (အင်္ဂလိပ်)"></label>
+                    <input type="text" name="self_name_eng" required>
+
+                    <label class="lang" data-en="Ethnic Group" data-my="ဇာတိဘာသာ"></label>
+                    <input type="text" name="self_ethnic" required>
+
+                    <label class="lang" data-en="Religion" data-my="ဘာသာရေး"></label>
+                    <input type="text" name="self_religion" required>
+
+                    <label class="lang" data-en="NRC (Old/ETC)" data-my="NRC (အဟောင်း/အခြား)"></label>
+                    <input type="text" name="self_nrc" required>
+
+                    <label class="lang" data-en="Date of Birth" data-my="မွေးနေ့"></label>
+                    <input type="date" name="self_dob" required>
+
+                    <label class="lang" data-en="Phone Number" data-my="ဖုန်းနံပါတ်"></label>
+                    <input type="tel" name="self_phone" required>
+
+                    <label class="lang" data-en="Birthplace" data-my="မွေးရာနေရာ"></label>
+                    <input type="text" name="self_birthplace" required>
+
+                    <label class="lang" data-en="Usual Phone Number" data-my="ပုံမှန်ဖုန်းနံပါတ်"></label>
+                    <input type="tel" name="self_usual_phone" required>
+
+                    <label class="lang" data-en="Usual Address" data-my="ပုံမှန်လိပ်စာ"></label>
+                    <textarea name="self_usual_address" rows="2" required></textarea>
+
+                    <label class="lang" data-en="Another NRC (optional)" data-my="အခြား NRC (optional)"></label>
+                    <input type="text" name="self_another_nrc">
+
+                    <label>
+                        <input type="checkbox" name="self_agree" required>
+                        <span class="lang" data-en="I agree to the terms" data-my="စည်းမျဉ်းစည်းကမ်းများကို သဘောတူပါသည်"></span>
+                    </label>
+                </fieldset>
+
+                <!-- PARENTS SECTION -->
+                <fieldset>
+                    <legend class="lang" data-en="Parent Information" data-my="မိဘအချက်အလက်"></legend>
+                    <!-- Repeat for Mom & Dad -->
+                    <div class="parent">
+                        <h3 class="lang" data-en="Mother" data-my="မိခင်"></h3>
+
+                        <label class="lang" data-en="Full Name (MM)" data-my="အမည် (မြန်မာ)"></label>
+                        <input type="text" name="mom_name_mm" required>
+
+                        <label class="lang" data-en="Full Name (ENG)" data-my="အမည် (အင်္ဂလိပ်)"></label>
+                        <input type="text" name="mom_name_eng" required>
+
+                        <label class="lang" data-en="Ethnic Group" data-my="ဇာတိဘာသာ"></label>
+                        <input type="text" name="mom_ethnic" required>
+
+                        <label class="lang" data-en="Religion" data-my="ဘာသာရေး"></label>
+                        <input type="text" name="mom_religion" required>
+
+                        <label class="lang" data-en="NRC (Old/ETC)" data-my="NRC (အဟောင်း/အခြား)"></label>
+                        <input type="text" name="mom_nrc" required>
+
+                        <label class="lang" data-en="Job" data-my="အလုပ်အကိုင်"></label>
+                        <input type="text" name="mom_job" required>
+
+                        <label class="lang" data-en="Address" data-my="လိပ်စာ"></label>
+                        <textarea name="mom_address" rows="2" required></textarea>
+
+                        <label class="lang" data-en="Phone Number" data-my="ဖုန်းနံပါတ်"></label>
+                        <input type="tel" name="mom_phone" required>
+
+                        <label class="lang" data-en="Date of Death (optional)" data-my="ရက်စွဲ (မရှိရင်စွန့်တင်)"></label>
+                        <input type="date" name="mom_death_date">
+                    </div>
+
+                    <div class="parent">
+                        <h3 class="lang" data-en="Father" data-my="အဖေ"></h3>
+                        <!-- Same fields as Mother -->
+                        <label class="lang" data-en="Full Name (MM)" data-my="အမည် (မြန်မာ)"></label>
+                        <input type="text" name="dad_name_mm" required>
+
+                        <label class="lang" data-en="Full Name (ENG)" data-my="အမည် (အင်္ဂလိပ်)"></label>
+                        <input type="text" name="dad_name_eng" required>
+
+                        <label class="lang" data-en="Ethnic Group" data-my="ဇာတိဘာသာ"></label>
+                        <input type="text" name="dad_ethnic" required>
+
+                        <label class="lang" data-en="Religion" data-my="ဘာသာရေး"></label>
+                        <input type="text" name="dad_religion" required>
+
+                        <label class="lang" data-en="NRC (Old/ETC)" data-my="NRC (အဟောင်း/အခြား)"></label>
+                        <input type="text" name="dad_nrc" required>
+
+                        <label class="lang" data-en="Job" data-my="အလုပ်အကိုင်"></label>
+                        <input type="text" name="dad_job" required>
+
+                        <label class="lang" data-en="Address" data-my="လိပ်စာ"></label>
+                        <textarea name="dad_address" rows="2" required></textarea>
+
+                        <label class="lang" data-en="Phone Number" data-my="ဖုန်းနံပါတ်"></label>
+                        <input type="tel" name="dad_phone" required>
+
+                        <label class="lang" data-en="Date of Death (optional)" data-my="ရက်စွဲ (မရှိရင်စွန့်တင်)"></label>
+                        <input type="date" name="dad_death_date">
+                    </div>
+                </fieldset>
+
+                <!-- PICTURE & DOCUMENTS -->
+                <fieldset>
+                    <legend class="lang" data-en="Pictures & Documents" data-my="ဓာတ်ပုံများနှင့်စာရွက်စာတမ်းများ"></legend>
+                    <label class="lang" data-en="Your Picture" data-my="ကိုယ်ပိုင်ဓာတ်ပုံ"></label>
+                    <input type="file" name="self_picture" accept="image/*" required>
+
+                    <label class="lang" data-en="NRC Photos (Self, Mom, Dad)" data-my="NRC ဓာတ်ပုံ (ကိုယ်, မိခင်, အဖေ)"></label>
+                    <input type="file" name="nrc_photos" accept="image/*" multiple required>
+
+                    <label class="lang" data-en="Signatures (Self, Mom, Dad)" data-my="လက်မှတ်များ (ကိုယ်, မိခင်, အဖေ)"></label>
+                    <input type="file" name="signatures" accept="image/*" multiple required>
+
+                    <label class="lang" data-en="Recommendations & Documents" data-my="အကြံပြုချက်နှင့်စာရွက်စာတမ်းများ"></label>
+                    <input type="file" name="recommendations_docs" accept="image/*" multiple required>
+
+                    <label class="lang" data-en="Payment Slip" data-my="ငွေပေးချေမှုဆိုင်ရာ ဓာတ်ပုံ"></label>
+                    <input type="file" name="payment_slip" accept="image/*" required>
+                </fieldset>
+
+                <!-- MAJOR SELECTION -->
+                <fieldset>
+                    <legend class="lang" data-en="Major Selection" data-my="ဘာသာရပ်ရွေးချယ်ခြင်း"></legend>
+                    <p class="lang" data-en="Assign preference (1-5)" data-my="ဦးစားပေးမှု (1-5)"></p>
+
+                    <label>IST</label>
+                    <input type="number" name="major_ist" min="1" max="5" required>
+
+                    <label>CE</label>
+                    <input type="number" name="major_ce" min="1" max="5" required>
+
+                    <label>ECE</label>
+                    <input type="number" name="major_ece" min="1" max="5" required>
+
+                    <label>PRE</label>
+                    <input type="number" name="major_pre" min="1" max="5" required>
+
+                    <label>AME</label>
+                    <input type="number" name="major_ame" min="1" max="5" required>
+                </fieldset>
+
+                <!-- DORMITORY SECTION -->
+                <fieldset>
+                    <legend class="lang" data-en="Dormitory Admission (Optional)" data-my="နေအိမ် ဝင်ခွင့် (optional)"></legend>
+
+                    <label class="lang" data-en="Who will pay dormitory fee?" data-my="နေအိမ်ကြေး ပေးမည့်သူ"></label>
+                    <select name="dorm_fee_responsible" required>
+                        <option value="mom" class="lang" data-en="Mother" data-my="မိခင်"></option>
+                        <option value="dad" class="lang" data-en="Father" data-my="အဖေ"></option>
+                        <option value="other" class="lang" data-en="Other" data-my="အခြား"></option>
+                    </select>
+
+                    <div id="otherResponsibility" style="display:none;">
+                        <label class="lang" data-en="Name" data-my="အမည်"></label>
+                        <input type="text" name="other_name">
+
+                        <label class="lang" data-en="Relationship" data-my="ဆက်နွယ်မှု"></label>
+                        <input type="text" name="other_relationship">
+
+                        <label class="lang" data-en="Address" data-my="လိပ်စာ"></label>
+                        <textarea name="other_address" rows="2"></textarea>
+                    </div>
+
+                    <label class="lang" data-en="Scholarship Supporting Fee?" data-my="ပညာသင်ကြေးအထောက်အပံ့ ရှိ/မရှိ"></label>
+                    <select name="scholarship_support">
+                        <option value="yes" class="lang" data-en="Yes" data-my="ရှိ"></option>
+                        <option value="no" class="lang" data-en="No" data-my="မရှိ"></option>
+                    </select>
+
+                    <label class="lang" data-en="Type of Scholarship (if yes)" data-my="ပညာသင်ကြေး အမျိုးအစား"></label>
+                    <input type="text" name="scholarship_type">
+
+                    <label class="lang" data-en="Another Scholarship (optional)" data-my="အခြားပညာသင်ကြေး (optional)"></label>
+                    <input type="text" name="another_scholarship">
+                </fieldset>
+
+                <!-- SUBMIT -->
+                <button type="submit" class="lang" data-en="Submit Application" data-my="ဖောင်တင်သွင်းမည်"></button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,503 @@
+REMAINDER
+    acc -> block, lock, (admin)
+    print (admin)
+    pre edit what are needed and what aren't for admission (admin)
+    auto accept feature with csv (admin)
+    edit the submission form (admin)
+    acceptance date and hour (admin)
+    ----
+    NRC-> code, region (front end)
+    ----
+    enrollment flow (backend)
+    ----
+    dorm tables (database)
+
+ONE NIGHT
+    student_reg
+        preEnrollment
+            infos
+                gender
+                email
+                full_name_mm
+                uni_entrance_rollno
+                uni_entrance_academic_year
+                nrc ()
+                pass_certificate varchar()
+                status (pending, accepted, rejected)
+                phone_number, viber_phone_number
+        admin
+         check that 
+         and approve which create student acc
+         then contact via viber or email(auto)
+        student_profile
+            serial,
+            email,
+            fullName,
+            gender,
+            password,
+            >pass certificate_path in pre_enrollment should be filled
+        enrollment start
+            >should check which student did that and etc
+        admin look at enrollment, 
+            check,
+            Instant approve
+        >student_profile changed and accepted
+
+    steps
+        pre_enrollment_table (db)(jdbl)(repo)-
+        post pre_enrollment (backend)-
+        post pre_enrollment (ui front end)-
+        
+        user dashboard detail (tell)-
+        pre_enrollment (fix ui)-
+        detail flow of all page in general (only about 15 minute)-
+        sort thing out (raw)-
+
+        admin view (backend)(ui)-
+        Suadmin instant approve (backend) -> student_acc created (ui)-
+        admin contact ()-
+        login(ui fix)(backend)-
+        enrollments (get set) (repo)-
+        enrollment upload (backend) (ui)(OOO)-
+        admin view enrollment (backend)(ui)-
+        Suadmin instant approve (backend) (ui)->studnet_profile_update-
+        student view himself (backend)(ui)(OOO)-
+        -------
+        admin view students(ui)(backend) history -
+        admin reset students pass -
+        admin remove instant approve -
+        admin view userIndetail -
+        dashboard enrollment card (pending fix)-
+        ----
+        enrollment once decided -
+        ----
+        admin profile page -
+        -----
+        pre_enrollment for old student-
+        (make new table to check if the student is from new or old for pre_enrollment_studentIDCARD accessment) -
+        ----
+        annoucement_table (db)(jdbl)(repo)-
+        annoucement_annouce (backend) (ui)-
+        status Track pin 
+        -------
+        -------
+        user add -
+        user delete (not)
+        -------
+        prepare qr code
+        reject for pre-enrollment
+        setting config
+        QUERY FEATURE (FEEDBACK)
+        -----
+        dark theme match
+        split the admin js 
+        not_authorized
+        DOM fixes js
+        admin jwt countdown (admin)
+        delete button for enrollment (including imgs)
+        dashboard new rectangel
+        edit feature (for a few)
+        -----
+        ------
+        test all and smooth all out
+        ------
+        enrollment for old student(000) 
+        integrate
+        ------
+        page next and etc all test
+        ------
+        ADVANCED FILTER(maybe)
+        ability to download or convert in csv , excel etc...
+        edit for pre-enrollment and enrollment. (Nah)
+        major assign, role assign (nah)
+        user quick access (or not) //////
+        ----
+        ----
+        ----
+        ----fe
+        try student nrc next
+        then integrate server setting
+        academicYear: get('self_entrance_year') || null,//academic year
+        then old student come
+        reject and reason
+        user Friendly jwt for form
+        section ist,ce,...
+        ---
+        bug fix 
+            not allowed store_db
+limit download end points to mb wise
+
+POWERPOINT
+    JWT EXPLANATION (do it self)--
+    ALL are fetched by JWT (html,js)++
+    all end points are secure++
+    use thymleaf and encoding to prevent xss++
+    we use pageable to avoid overheat++
+    theme switch for ...
+    open new link in form was for new tab instead of replacing current tab ==presentor
+    we have validated our file at either client side and servser side
+
+ADMIN
+    server side rendering filter
+
+
+demo flow then, the demo side by side
+
+
+STEP
+    fill form and send data {current}
+    error exception in front ends
+
+flow student
+    first student
+        fill form and send data
+
+flow admin
+    login
+
+FORM FLOW
+    #`*` are optional
+    Self,
+        Gender (Male, Female)
+        Year, UniversityEntraceRoll-No,UniversityEntranceDate,
+        *univesityEntranceRegistrationNo.
+        ----
+        Name(mm), Name(eng)
+        ethnic, religion
+        NRC(OLD,ETC)
+        DOB
+        PhoneNumber, birthplace
+        usual phonenumber, usual address
+        *ANOTHER NRC
+        {}agree to ...
+    
+    Mom,DAD(for each)
+        Name(mm),Name(eng)
+        ethnic, religion
+        NRC(OLD,ETC) 
+        Job, address, phoneNumber
+        *if Death, then date
+    
+    PICTURE
+        Your Picture[1]
+        NRC,
+            you,mom,dad[6]
+        Signature,
+            mom, dad, self[3]
+        Recommendation and document(all are pictures),
+            Police, Village, Medicine, Grade ten Pass, Hierchy, Grade ten Result[6]
+        Payslip(picture),
+            PaymentSlip[1]
+
+    Major To choose from with order or preference,
+        IST (range 1 to 5)
+        CE (range 1 to 5)
+        ECE (range 1 to 5)
+        PRE (range 1 to 5)
+        AME (range 1 to 5)
+
+    DORMITORY ADMISSION FLOW(optional)
+        self's data
+        ******
+        *Passed Engineer Role and year
+        ******
+        Who will have responsibility for Dorm fee
+        [mom,dad,other]
+            If Other,
+                name, relationship, address
+        *******
+        schoolership_supporting_fee (yes or no, if yes, enter the type)
+        *another schoolership
+    
+//enrollment 
+//SELF
+CREATE TABLE enrollment_applications (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    status ENUM('pending','rejected','accepted') DEFAULT 'pending',
+    is_fresher BOOLEAN,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE applicant_personal (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    full_name_mm VARCHAR(100) NOT NULL,
+    full_name_en VARCHAR(100) NOT NULL,
+    gender ENUM('male','female') NOT NULL,
+    date_of_birth DATE NOT NULL,
+    ethnic VARCHAR(50),
+    religion VARCHAR(50),
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id)
+);
+
+CREATE TABLE applicant_nrc (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    nrc_status ENUM('pending','available') DEFAULT 'available',
+    nrc_type SMALLINT,
+    nrc_region SMALLINT,
+    nrc_township SMALLINT,
+    nrc_number VARCHAR(30),
+    national_nrc VARCHAR(50),
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id),
+    FOREIGN KEY (nrc_region) REFERENCES nrc_states(id),
+    FOREIGN KEY (nrc_township) REFERENCES nrc_townships(id),
+    FOREIGN KEY (nrc_type) REFERENCES nrc_types(id)
+);
+
+CREATE TABLE applicant_contact (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    phone_number VARCHAR(20),
+    usual_phone_number VARCHAR(20),
+    email VARCHAR(100),
+    birth_place VARCHAR(100),
+    usual_address_region SMALLINT,
+    usual_address_township SMALLINT,
+    full_address TEXT,
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id),
+    FOREIGN KEY (usual_address_region) REFERENCES nrc_states(id),
+    FOREIGN KEY (usual_address_township) REFERENCES nrc_townships(id)
+);
+
+CREATE TABLE applicant_academic (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    academic_year VARCHAR(15),
+    uni_entrance_rollno VARCHAR(30) NOT NULL,
+    uni_entrance_year VARCHAR(30),
+    major_year_id SMALLINT UNSIGNED,
+    roll_no VARCHAR(10),
+    FOREIGN KEY (major_year_id) REFERENCES major(id) ON DELETE CASCADE,
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id)
+);
+
+//PARENT
+CREATE TABLE applicant_parents (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    parent_type ENUM('mother','father') NOT NULL,
+    full_name_mm VARCHAR(100) NOT NULL,
+    full_name_en VARCHAR(100) NOT NULL,
+    ethnic VARCHAR(50),
+    religion VARCHAR(50),
+    occupation VARCHAR(100),
+    date_of_birth DATE,
+    is_deceased BOOLEAN DEFAULT FALSE,
+    date_of_death DATE,
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id) ON DELETE CASCADE
+);
+
+CREATE TABLE applicant_parents_nrc (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    applicant_parent_id BIGINT NOT NULL,
+    nrc_status ENUM('pending','available') DEFAULT 'available',
+    nrc_type SMALLINT,
+    nrc_region SMALLINT,
+    nrc_township SMALLINT,
+    nrc_number VARCHAR(30),
+    national_nrc VARCHAR(50),
+    FOREIGN KEY (applicant_parent_id) REFERENCES applicant_parents(id),
+    FOREIGN KEY (nrc_region) REFERENCES nrc_states(id),
+    FOREIGN KEY (nrc_township) REFERENCES nrc_townships(id),
+    FOREIGN KEY (nrc_type) REFERENCES nrc_types(id)
+);
+
+CREATE TABLE applicant_parents_contact (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    applicant_parent_id BIGINT NOT NULL,
+    phone_number VARCHAR(20),
+    usual_address_region SMALLINT,
+    usual_address_township SMALLINT,
+    full_address TEXT,
+    FOREIGN KEY (applicant_parent_id) REFERENCES applicant_parents(id),
+    FOREIGN KEY (usual_address_region) REFERENCES nrc_states(id),
+    FOREIGN KEY (usual_address_township) REFERENCES nrc_townships(id),
+);
+
+//document
+CREATE TABLE file_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+INSERT INTO file_types (type_name) VALUES
+('self_picture'), 
+('nrc_front_self'),
+('nrc_back_self'),
+('nrc_front_mother'),
+('nrc_back_mother'),
+('nrc_front_father'),
+('nrc_back_father'),
+('self_signature'),
+('mother_signature'),
+('father_signature'),
+('community_recommendation'),
+('police_recommendation'),
+('medical_recommendation'),
+('pass_certification'),
+('marks_certification'),
+('house_hold_registration'),
+('payment_slip');
+
+
+CREATE TABLE enrollment_files (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    file_type_id INT NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id) ON DELETE CASCADE,
+    FOREIGN KEY (file_type_id) REFERENCES file_types(id)
+);
+
+//Major preference
+CREATE TABLE enrollment_majors (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    major_id SMALLINT UNSIGNED NOT NULL,
+    preference_rank TINYINT NOT NULL CHECK (preference_rank BETWEEN 1 AND 5),
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id) ON DELETE CASCADE,
+    FOREIGN KEY (major_id) REFERENCES major(id) ON DELETE CASCADE,
+    UNIQUE(application_id, major_id)
+);
+
+
+//Dorm 
+CREATE TABLE enrollment_dorm (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    dorm_fee_responsible ENUM('mother','father','other'),
+    other_name VARCHAR(100),
+    other_relationship VARCHAR(50),
+    other_address TEXT,
+    scholarship_support BOOLEAN DEFAULT FALSE,
+    scholarship_type VARCHAR(100),
+    another_scholarship VARCHAR(100),
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id) ON DELETE CASCADE
+);
+
+//APPROVAL
+CREATE TABLE application_approvals (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    application_id BIGINT NOT NULL,
+    approver_role ENUM('student_affair', 'hod', 'dorm_warden', 'finance') NOT NULL,
+    status ENUM('pending', 'rejected', 'approved') DEFAULT 'pending',
+    approved_at TIMESTAMP NULL,
+    remarks TEXT,
+    FOREIGN KEY (application_id) REFERENCES enrollment_applications(id)
+);
+
+//GENERALLY
+CREATE TABLE major (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(20) NOT NULL UNIQUE,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO major (code,name) VALUES
+('IST','Information Science and Technology'),
+('CE','Computer Engineering'),
+('EcE','Electronics Engineering'),
+('Pre','Precision'),
+('AME','Advanced Material Engineering');
+
+
+CREATE TABLE major_year (
+    id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    major_id SMALLINT UNSIGNED NOT NULL,
+    year_label VARCHAR(50) NOT NULL,
+    year_order TINYINT UNSIGNED NOT NULL,
+    FOREIGN KEY (major_id) REFERENCES major(id),
+    UNIQUE(major_id, year_label)
+);
+
+INSERT INTO major_year (major_id, year_label, year_order) VALUES
+(1, 'First Year', 1),
+(1, 'Second Year', 2),
+(1, 'Third Year', 3),
+(1, 'Fourth Year', 4),
+(1, 'Fifth Year', 5),
+(1, 'Sixth Year', 6);
+
+-- CE
+INSERT INTO major_year (major_id, year_label, year_order) VALUES
+(2, 'First Year', 1),
+(2, 'Second Year', 2),
+(2, 'Third Year', 3),
+(2, 'Fourth Year', 4),
+(2, 'Fifth Year', 5),
+(2, 'Sixth Year', 6);
+
+-- ECE
+INSERT INTO major_year (major_id, year_label, year_order) VALUES
+(3, 'First Year', 1),
+(3, 'Second Year', 2),
+(3, 'Third Year', 3),
+(3, 'Fourth Year', 4),
+(3, 'Fifth Year', 5),
+(3, 'Sixth Year', 6);
+
+-- PRE
+INSERT INTO major_year (major_id, year_label, year_order) VALUES
+(4, 'First Year', 1),
+(4, 'Second Year', 2),
+(4, 'Third Year', 3),
+(4, 'Fourth Year', 4),
+(4, 'Fifth Year', 5),
+(4, 'Sixth Year', 6);
+
+-- AME
+INSERT INTO major_year (major_id, year_label, year_order) VALUES
+(5, 'First Year', 1),
+(5, 'Second Year', 2),
+(5, 'Third Year', 3),
+(5, 'Fourth Year', 4),
+(5, 'Fifth Year', 5),
+(5, 'Sixth Year', 6);
+
+
+//NRC
+CREATE TABLE `nrc_states` (
+  `code` varchar(50) NOT NULL,
+  `number_en` varchar(10) NOT NULL,
+  `number_mm` varchar(10) NOT NULL,
+  `name_en` varchar(50) NOT NULL,
+  `name_mm` varchar(50) NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
+) 
+
+CREATE TABLE `nrc_townships` (
+  `code` varchar(50) NOT NULL,
+  `short_en` varchar(50) DEFAULT NULL,
+  `short_mm` varchar(50) DEFAULT NULL,
+  `name_en` varchar(50) NOT NULL,
+  `name_mm` varchar(50) NOT NULL,
+  `state_code` varchar(10) DEFAULT NULL,
+  `state_id` smallint(5) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
+)
+
+CREATE TABLE `nrc_types` (
+  `name_en` varchar(50) NOT NULL,
+  `name_mm` varchar(50) NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL
+)
+
+//pre_enrollment
+CREATE TABLE pre_enrollment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    gender ENUM('male', 'female', 'other') NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    full_name_mm VARCHAR(255) NOT NULL,
+    uni_entrance_rollno VARCHAR(50) NOT NULL,
+    uni_entrance_academic_year YEAR NOT NULL,
+    nrc VARCHAR(50) NOT NULL UNIQUE,
+    pass_certificate VARCHAR(255), -- you can store filename or path
+    status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
+    informed BOOLEAN, --if the user have been informed about the news
+    phone_number VARCHAR(20) NOT NULL,
+    viber_phone_number VARCHAR(20)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

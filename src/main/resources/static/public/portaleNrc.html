@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Myanmar NRC — Portable</title>
+  <meta name="description" content="Portable Myanmar NRC helper — works offline." />
+
+  <style>
+    :root{
+      --bg:#f3f6f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --danger:#c53030;
+      --glass: rgba(16,24,40,0.04);
+      --radius:12px;
+      --maxw:720px;
+      color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0f1724;
+        --card:#0b1220;
+        --muted:#cbd5e1;
+        --accent:#3b82f6;
+        --glass: rgba(255,255,255,0.03);
+      }
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg), #e9eef6);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--maxw);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 8px 28px rgba(2,6,23,0.12);
+      padding:26px;
+      box-sizing:border-box;
+      border:1px solid var(--glass);
+    }
+
+    header{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+    }
+
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .logo {
+      width:56px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent), #0ea5e9);
+      color:white;
+      flex:0 0 56px;
+      box-shadow:0 4px 14px rgba(37,99,235,0.18);
+    }
+
+    h1{
+      font-size:1.05rem;
+      margin:0;
+      color: #0f1724;
+      font-weight:600;
+    }
+
+    .subtitle {
+      font-size:0.84rem;
+      margin:0;
+      color:var(--muted);
+      opacity:0.9;
+    }
+
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .icon-btn{
+      background:transparent;
+      border:1px solid var(--glass);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:var(--muted);
+      font-weight:600;
+      transition:all .15s ease;
+    }
+
+    .icon-btn:hover{ transform:translateY(-1px); }
+
+    form{ display:grid; gap:14px; }
+
+    label{
+      display:block;
+      font-size:0.85rem;
+      margin-bottom:6px;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    select, input[type="text"]{
+      width:100%;
+      box-sizing:border-box;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid var(--glass);
+      background:transparent;
+      color:var(--muted);
+      font-size:0.95rem;
+      outline:none;
+    }
+
+    select:invalid { color: #9ca3af; }
+
+    .row { display:grid; gap:12px; grid-template-columns:1fr; }
+
+    @media(min-width:720px){
+      .row-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:2px;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      border:none;
+      color:white;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      box-shadow:0 6px 18px rgba(37,99,235,0.18);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      border:1px solid var(--glass);
+      padding:9px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .result{
+      margin-top:8px;
+      padding:12px;
+      border-radius:10px;
+      background:linear-gradient(180deg, rgba(37,99,235,0.04), transparent);
+      color:#0b1220;
+      font-weight:600;
+    }
+
+    footer{
+      margin-top:18px;
+      border-top:1px solid var(--glass);
+      padding-top:12px;
+      text-align:center;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+
+    /* small helper */
+    .muted { color:var(--muted); font-weight:500; }
+    .hidden { display:none !important; }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="pageTitle">
+    <header>
+      <div class="brand">
+        <!-- Inline SVG logo - replace path contents with your logo if available -->
+        <div class="logo" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="4" fill="white" opacity="0.08"></rect>
+            <path d="M6 12h12M6 8h12M6 16h8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div>
+          <h1 id="pageTitle">Myanmar NRC Helper</h1>
+          <p class="subtitle">Portable — works offline. Replace data or enable remote update if needed.</p>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <button id="toggleMode" class="icon-btn" type="button" aria-pressed="false" title="Toggle dark mode">
+          <span id="modeIcon" aria-hidden="true">
+            <!-- Sun (default) -->
+            <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:inline-block">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"></circle>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l-1.5-1.5M20 20l1.5 1.5M5 19l-1.5 1.5M20 4l1.5-1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <!-- Moon (hidden by default) -->
+            <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
+              <path d="M21 12.8A8.999 8.999 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" stroke="currentColor" stroke-width="1.4" fill="none"/>
+            </svg>
+          </span>
+          <span id="modeText">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <form id="nrcForm" onsubmit="handleSubmit(event)" novalidate>
+      <div class="row row-2">
+        <div>
+          <label for="region">ပြည်နယ်/တိုင်း</label>
+          <select id="region" required aria-required="true" onchange="onRegionChange()" >
+            <option value="" disabled selected>ရွေးပါ</option>
+            <!-- numeric region codes -->
+            <option value="1">၁</option>
+            <option value="2">၂</option>
+            <option value="3">၃</option>
+            <option value="4">၄</option>
+            <option value="5">၅</option>
+            <option value="6">၆</option>
+            <option value="7">၇</option>
+            <option value="8">၈</option>
+            <option value="9">၉</option>
+            <option value="10">၁၀</option>
+            <option value="11">၁၁</option>
+            <option value="12">၁၂</option>
+            <option value="13">၁၃</option>
+            <option value="14">၁၄</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="code">မြို့နယ်</label>
+          <select id="code" required aria-required="true">
+            <option value="" disabled selected>ရွေးပါ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row row-2">
+        <div>
+          <label for="number_type">အမျိုးအစား</label>
+          <select id="number_type">
+            <option value="(နိုင်)">(နိုင်)</option>
+            <option value="(ဧည့်)">(ဧည့်)</option>
+            <option value="(ပြု)">(ပြု)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="number">နံပါတ် (6 digits)</label>
+          <input id="number" name="number" type="text" inputmode="numeric" pattern="\d{1,6}" maxlength="6" placeholder="e.g. 123456" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary">Generate</button>
+        <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
+        <!-- Optional: allow user to enable remote fetch if desired -->
+        <button type="button" class="btn-secondary" onclick="tryFetchRemote()" title="Fetch latest NRC dataset">Update data</button>
+      </div>
+
+      <div id="result" class="result hidden" aria-live="polite"></div>
+    </form>
+
+    <footer>
+      <div class="muted">&copy; <span id="year"></span> Myanmar NRC — Portable • Developed by Htet Oo Zin</div>
+    </footer>
+  </div>
+
+  <script>
+    // -- Configuration --
+    // By default the page uses the embedded sample data to remain portable / offline-ready.
+    // If you want to use the full remote dataset, call tryFetchRemote() which will fetch the GitHub JSON and replace local data.
+    const REMOTE_JSON = "https://raw.githubusercontent.com/htetoozin/Myanmar-NRC/master/nrc.json";
+    const USE_REMOTE_BY_DEFAULT = false; // set true if you want to fetch on load when online
+
+    // -- Minimal sample dataset for portability --
+    // The real dataset is large. Replace or extend this array if you have a local full copy.
+    const NRC_DATA = [
+      // Example format: { nrc_code: "1", name_en: "Yangon", name_mm: "ရန်ကုန် (ဥပ)" , code: "YGN" }
+      { nrc_region: "1", nrc_code: "1", name_en: "Yangon", name_mm: "ရန်ကုန်" , code: "YC" },
+      { nrc_region: "1", nrc_code: "1", name_en: "Ahlone", name_mm: "အလုံ" , code: "AHL" },
+      { nrc_region: "2", nrc_code: "2", name_en: "Mandalay", name_mm: "မန္တလေး" , code: "MD" },
+      { nrc_region: "3", nrc_code: "3", name_en: "Naypyidaw", name_mm: "နေပြည်တော်" , code: "NP" }
+      // Add more entries or replace with the full dataset file
+    ];
+
+    // helper: set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Populate code dropdown based on selected region
+    function onRegionChange(){
+      const region = document.getElementById('region').value;
+      populateCodes(region);
+    }
+
+    function populateCodes(region){
+      const codeSelect = document.getElementById('code');
+      codeSelect.innerHTML = '<option value="" disabled selected>ရွေးပါ</option>';
+
+      const matches = NRC_DATA.filter(item => String(item.nrc_region) === String(region));
+      if(matches.length === 0){
+        // useful fallback: if dataset uses nrc_code field
+        const altMatches = NRC_DATA.filter(item => String(item.nrc_code) === String(region));
+        renderOptions(codeSelect, altMatches);
+      } else {
+        renderOptions(codeSelect, matches);
+      }
+    }
+
+    function renderOptions(selectElement, items){
+      items.forEach(it => {
+        const opt = document.createElement('option');
+        // store the full object in dataset for later retrieval
+        opt.value = JSON.stringify({ name_mm: it.name_mm || it.name_en || it.code, code: it.code || "" });
+        opt.text = it.name_mm || it.name_en || it.code || "—";
+        selectElement.add(opt);
+      });
+
+      if(items.length === 0){
+        const opt = document.createElement('option');
+        opt.value = "";
+        opt.text = "No entries found";
+        opt.disabled = true;
+        selectElement.add(opt);
+      }
+    }
+
+    // Convert english numeral region to Myanmar numerals
+    function enToMM(value){
+      const mmNumbers = ["၀","၁","၂","၃","၄","၅","၆","၇","၈","၉","၁၀","၁၁","၁၂","၁၃","၁၄"];
+      const idx = Number(value);
+      return (Number.isFinite(idx) && mmNumbers[idx] !== undefined) ? mmNumbers[idx] : value;
+    }
+
+    function tryFetchRemote(){
+      // attempt to fetch remote json and replace NRC_DATA (user-initiated)
+      if(!navigator.onLine){
+        alert("Online connection required to fetch remote dataset.");
+        return;
+      }
+
+      const btn = event?.target;
+      if(btn) { btn.disabled = true; btn.textContent = "Updating..."; }
+
+      fetch(REMOTE_JSON, {cache: "no-store"})
+        .then(r => {
+          if(!r.ok) throw new Error("Network response not OK: " + r.status);
+          return r.json();
+        })
+        .then(json => {
+          // The original remote file uses { data: [...] } format
+          const data = json.data || json;
+          if(!Array.isArray(data)) throw new Error("Invalid data format");
+          // Replace items in the global array (shallow replace)
+          NRC_DATA.length = 0;
+          data.forEach(it => NRC_DATA.push(it));
+          alert("Dataset updated. Now populate region to see entries.");
+          // Optionally refresh codes if a region is selected
+          const region = document.getElementById('region').value;
+          if(region) populateCodes(region);
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Failed to fetch remote data: " + err.message);
+        })
+        .finally(()=> { if(btn){ btn.disabled = false; btn.textContent = "Update data"; } });
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const region = document.getElementById('region').value;
+      const codeVal = document.getElementById('code').value;
+      const numberType = document.getElementById('number_type').value;
+      const number = document.getElementById('number').value.trim();
+
+      if(!region){
+        alert("ပြည်နယ်/တိုင်း ရွေးပေးပါ။");
+        return;
+      }
+      if(!codeVal){
+        alert("မြို့နယ် ရွေးပေးပါ။");
+        return;
+      }
+      if(!number || !/^\d{1,6}$/.test(number)){
+        alert("နံပါတ်ကို 1–6 လုံး အကျဉ်းဖြင့် ထည့်ပေးပါ။");
+        return;
+      }
+
+      // codeVal was stored as JSON string containing name_mm and code (see renderOptions)
+      let selectedCodeName = "";
+      let selectedCodeShort = "";
+      try {
+        const parsed = JSON.parse(codeVal);
+        selectedCodeName = parsed.name_mm || "";
+        selectedCodeShort = parsed.code || "";
+      } catch (err) {
+        selectedCodeName = codeVal;
+      }
+
+      const mmRegion = enToMM(region);
+      const codeFragment = (selectedCodeShort || selectedCodeName).toString();
+      const formatted = `${mmRegion}/${codeFragment}${numberType}${number}`;
+
+      const resultEl = document.getElementById('result');
+      resultEl.classList.remove('hidden');
+      resultEl.textContent = `မှတ်ပုံတင် နံပါတ် - ${formatted}`;
+    }
+
+    function resetForm(){
+      document.getElementById('nrcForm').reset();
+      document.getElementById('result').classList.add('hidden');
+    }
+
+    // Dark / Light toggle (persist in localStorage)
+    const body = document.documentElement;
+    const modeBtn = document.getElementById('toggleMode');
+    const modeText = document.getElementById('modeText');
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+
+    function setMode(isDark){
+      if(isDark){
+        body.style.background = "linear-gradient(180deg, #071026, #071028)";
+        document.documentElement.setAttribute('data-theme', 'dark');
+        modeText.textContent = "Light";
+        sun.style.display = 'none';
+        moon.style.display = 'inline-block';
+        modeBtn.setAttribute('aria-pressed','true');
+      } else {
+        body.style.background = "";
+        document.documentElement.removeAttribute('data-theme');
+        modeText.textContent = "Dark";
+        sun.style.display = 'inline-block';
+        moon.style.display = 'none';
+        modeBtn.setAttribute('aria-pressed','false');
+      }
+      try { localStorage.setItem('nrc:darkmode', isDark ? "1" : "0"); } catch(e){}
+    }
+
+    modeBtn.addEventListener('click', () => {
+      const current = localStorage.getItem('nrc:darkmode') === "1";
+      setMode(!current);
+    });
+
+    // initialize mode
+    (function initMode(){
+      try {
+        const stored = localStorage.getItem('nrc:darkmode');
+        if(stored !== null){
+          setMode(stored === "1");
+          return;
+        }
+      } catch (e){}
+      // fallback to system preference
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setMode(prefersDark);
+    })();
+
+    // optional: fetch remote on load if allowed
+    if(USE_REMOTE_BY_DEFAULT && navigator.onLine){
+      tryFetchRemote();
+    }
+
+    // Initialize codes if region already selected (rare)
+    document.addEventListener('DOMContentLoaded', () => {
+      const sel = document.getElementById('region').value;
+      if(sel) populateCodes(sel);
+    });
+  </script>
+</body>
+</html>

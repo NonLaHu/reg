@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/public/css/dashboard.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- Remark Popup -->
+    <div class="overlay" id="remarkPopup">
+        <div class="popup">
+            <h3>Remark</h3>
+            <p id="remarkContent"></p>
+            <button id="closeRemark" class="close-btn">Close</button>
+        </div>
+    </div>
+    <!-- Header -->
+    <header>
+        <h1><a th:href="@{/}" class="utycc1">UTYCC</a> / Student Dashboard</h1>
+        <div class="icons">
+            <span><i id="edit-btn" class="fa-solid fa-pen-to-square"></i></span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Welcome -->
+        <div class="welcome">
+            Welcome back,
+            <strong id="welcome-name" th:text="${student != null ? student.name : 'Student'}">Student Name</strong>
+        </div>
+
+        <!-- Profile -->
+        <div class="card1">
+            <h2>Profile Overview</h2>
+            <div class="profile">
+                <div class="pic-wrap">
+                    <!-- profile image: if student.user.avatarUrl exists use it, otherwise use a default -->
+                    <img id="profile-pic" src="/public/asset/profileIcon.png" alt="Profile Picture">
+                    <div id="pic-edit-badge" class="pic-edit-badge" title="Click to upload a new photo">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                </div>
+
+                <input type="file" id="upload-pic" accept="image/*" style="display:none;">
+
+                <div>
+                    <p><strong>Name:</strong> <span th:text="${student != null ? student.name : '—'}">Name</span></p>
+                    <p><strong>Serial:</strong>
+                        <span
+                            th:text="${student != null && student.user != null && student.user.email != null ? student.user.email : '—'}">Email</span>
+                    </p>
+                    <p><strong>Major:</strong>
+                        <span
+                            th:text="${student != null && student.major != null ? student.major.name : '—'}">Major</span>
+                    </p>
+                    <p><strong>Roll No:</strong> <span th:text="${student != null ? student.rollNo : '—'}">RollNo</span>
+                    </p>
+                    <p><strong>Academic Year:</strong>
+                        <span
+                            th:text="${student != null && student.semester != null ? student.semester.yearLabel : '—'}">Semester</span>
+                    </p>
+                    <p><strong>Status:</strong>
+                        <span
+                            th:classappend="${student != null && student.enrolled} ? ' status accepted' : ' status pending'"
+                            th:text="${student != null && student.enrolled ? 'Enrolled' : 'Not enrolled'}">Status</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="card1">
+            <h2>Personal Details</h2>
+
+            <p><strong>Date of Birth:</strong>
+                <span
+                    th:text="${student != null && student.birthDate != null ? #temporals.format(student.birthDate,'dd MMM yyyy') : '—'}">25
+                    May 2003</span>
+            </p>
+
+            <p><strong>Age:</strong>
+                <span th:text="${student != null && student.age != null ? student.age : '—'}">22</span>
+            </p>
+
+            <p><strong>Account created:</strong>
+                <span
+                    th:text="${student != null && student.createdAt != null ? #temporals.format(student.createdAt,'dd MMM yyyy HH:mm') : '—'}">Created
+                    At</span>
+            </p>
+        </div>
+
+        <!-- Pre-enrollment (choose whichever exists) -->
+        <div class="card1">
+            <h2>Pre-Enrollment</h2>
+
+            <!-- New pre-enrollment DTO -->
+            <div th:if="${student != null && student.preEnrollment != null}">
+                <p><strong>Full Name (MM):</strong> <span th:text="${student.preEnrollment.fullNameMm}">Full name
+                        mm</span></p>
+                <p><strong>Gender:</strong> <span th:text="${student.preEnrollment.gender}">Gender</span></p>
+                <p><strong>Email:</strong> <span th:text="${student.preEnrollment.email}">Email</span></p>
+                <p><strong>Entrance Roll No:</strong> <span
+                        th:text="${student.preEnrollment.uniEntranceRollno}">Roll</span></p>
+                <p><strong>Entrance Year:</strong> <span
+                        th:text="${student.preEnrollment.uniEntranceAcademicYear}">Year</span></p>
+                <p><strong>NRC:</strong> <span th:text="${student.preEnrollment.nrc}">NRC</span></p>
+                <p><strong>Phone:</strong> <span th:text="${student.preEnrollment.phoneNumber}">Phone</span></p>
+            </div>
+
+            <!-- Old pre-enrollment DTO -->
+            <div th:if="${student != null && student.preEnrollmentOldDTO != null}">
+                <p><strong>Full Name (MM):</strong> <span th:text="${student.preEnrollmentOldDTO.fullNameMm}">Full name
+                        mm</span></p>
+                <p><strong>Gender:</strong> <span th:text="${student.preEnrollmentOldDTO.gender}">Gender</span></p>
+                <p><strong>Prev Roll No:</strong> <span th:text="${student.preEnrollmentOldDTO.prevRollNo}">Prev
+                        Roll</span></p>
+                <p><strong>Email:</strong> <span th:text="${student.preEnrollmentOldDTO.email}">Email</span></p>
+                <p><strong>NRC:</strong> <span th:text="${student.preEnrollmentOldDTO.nrc}">NRC</span></p>
+                <p><strong>Phone:</strong> <span th:text="${student.preEnrollmentOldDTO.phoneNumber}">Phone</span></p>
+                <p><strong>Selected Major:</strong> <span
+                        th:text="${student.preEnrollmentOldDTO.major != null ? student.preEnrollmentOldDTO.major : '—'}">Major</span>
+                </p>
+                <p><strong>Selected Year:</strong> <span
+                        th:text="${student.preEnrollmentOldDTO.majorYear != null ? student.preEnrollmentOldDTO.majorYear : '—'}">Year</span>
+                </p>
+            </div>
+
+            <div th:if="${student != null && student.preEnrollment == null && student.preEnrollmentOldDTO == null}">
+                <p>No pre-enrollment record available.</p>
+            </div>
+        </div>
+
+        <!-- Enrollment History -->
+        <div class="card1">
+            <h2>Enrollment History</h2>
+
+            <div class="enrollment-list">
+                <div
+                    th:if="${student != null && student.enrollmentApplications != null and !student.enrollmentApplications.isEmpty()}">
+                    <div th:each="app : ${student.enrollmentApplications}" class="enrollment-card">
+
+                        <!-- Header -->
+                        <div class="enrollment-header">
+                            <p>
+                                <strong>ID:</strong> <span th:text="${app.id}">#id</span> |
+                                <strong>Status:</strong> <span
+                                    th:text="${app.status != null ? app.status : '—'}">Status</span>
+                            </p>
+                            <small
+                                th:text="${app.createdAt != null ? #temporals.format(app.createdAt,'dd MMM yyyy HH:mm') : ''}">date</small>
+                        </div>
+
+                        <!-- Basic Info -->
+                        <p><strong>Fresher:</strong> <span th:text="${app.isFresher ? 'Yes' : 'No'}">No</span></p>
+
+                        <!-- Dorm Status -->
+                        <div th:if="${app.dormStatus != null}">
+                            <p>
+                                <strong>Dorm Status:</strong>
+                                <span th:text="${app.dormStatus}" th:classappend="${app.dormStatus == 'pending' ? 'status-pending' 
+                             : app.dormStatus == 'accepted' ? 'status-accepted' 
+                             : app.dormStatus == 'rejected' ? 'status-rejected' 
+                             : ''}">
+                                    Status
+                                </span>
+                            </p>
+                        </div>
+
+                        <!-- Approvals -->
+                        <div class="scrollable-section" th:if="${app.approvals != null and !app.approvals.isEmpty()}">
+                            <h4>Approvals</h4>
+                            <ul>
+                                <li th:each="ap : ${app.approvals}">
+                                    <span th:text="${ap.approverName}">Approver</span> -
+                                    <span th:text="${ap.status}">Status</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Remark Button -->
+                        <button class="remark-btn"
+                            th:data-remark="${app.remark != null ? app.remark : 'No remark available'}">
+                            View Remark
+                        </button>
+                    </div>
+                </div>
+
+                <p
+                    th:if="${student == null || student.enrollmentApplications == null || student.enrollmentApplications.isEmpty()}">
+                    No enrollment history available.
+                </p>
+            </div>
+        </div>
+
+        <!-- Quick Access -->
+        <div class="card2">
+            <h2>Quick Access</h2>
+            <div class="quick-links">
+                <a href="/announcement">Announcements</a>
+                <a href="/">Home</a>
+                <a href="#">FAQs</a>
+                <a href="#" id="password-reset-link">Password Reset</a>
+                <a href="/new_enrollment"
+                    th:if="${student != null and !student.enrolled and student.preEnrollment != null}">
+                    New Enrollment
+                </a>
+                <a href="/old_enrollment"
+                    th:if="${student != null and !student.enrolled and student.preEnrollmentOldDTO != null}">
+                    Old Enrollment
+                </a>
+                <a href="/history">History</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="password-modal">
+            <div class="modal-header">
+                <h2>Reset Password</h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <form id="reset-form">
+
+                <!-- Old Password -->
+                <div class="input-group">
+                    <label for="old-pass"><strong>Old Password:</strong></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="old-pass" required>
+                        <i class="fa-solid fa-eye toggle-pass" data-target="old-pass"></i>
+                    </div>
+                </div>
+
+                <!-- New Password -->
+                <div class="input-group">
+                    <label for="new-pass"><strong>New Password:</strong></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="new-pass" required>
+                        <i class="fa-solid fa-eye toggle-pass" data-target="new-pass"></i>
+                    </div>
+                    <p class="error-msg" id="new-error">Password must be at least 5 characters!</p>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="input-group">
+                    <label for="confirm-pass"><strong>Confirm Password:</strong></label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm-pass" required>
+                        <i class="fa-solid fa-eye toggle-pass" data-target="confirm-pass"></i>
+                    </div>
+                    <p class="error-msg" id="confirm-error">Passwords do not match!</p>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn" disabled>Update Password</button>
+            </form>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        © <span th:text="${#temporals.format(T(java.time.LocalDateTime).now(),'yyyy')}">2025</span> UTYCC | Support: <a
+            href="mailto:support@utycc.com">support@utycc.com</a>
+    </footer>
+    <div id="toast-container" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    "></div>
+</body>
+
+</html>

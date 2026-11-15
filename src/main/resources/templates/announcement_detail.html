@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title th:text="${announcement.title} + ' — Announcement'">Announcement Detail</title>
+    <link rel="stylesheet" th:href="@{/public/css/announcement_detail.css}" />
+
+</head>
+<body>
+    <a href="/admin" class="back-arrow">&#8592;</a>
+
+    <div class="theme-toggle">
+        <button id="toggleTheme">🌙 Dark</button>
+    </div>
+    <main class="container">
+
+        <nav class="breadcrumb">
+            <a href="/admin" class="crumb">Announcements</a>
+            <span class="sep">/</span>
+            <span class="current" th:text="${announcement.title}">Title</span>
+        </nav>
+
+        <article class="card">
+            <header class="card-header">
+                <div>
+                    <h1 class="title" th:text="${announcement.title}">Announcement Title</h1>
+                    <p class="subtitle" th:text="${announcement.description ?: 'No description provided.'}">Short description</p>
+                </div>
+
+                <div class="meta">
+                    <p><strong>Published:</strong>
+                        <span th:text="${announcement.publishDate}">2025-01-01 10:00</span>
+                    </p>
+
+                    <p>
+                        <strong>Expiry:</strong>
+                        <span th:text="${announcement.expiryDate != null ? announcement.expiryDate : '—'}">—</span>
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        <span th:text="${announcement.active ? 'Active' : 'Inactive'}">Active</span>
+                    </p>
+                </div>
+            </header>
+
+            <section class="card-body">
+                <div class="pdf-area">
+                    <div class="pdf-actions">
+                        <a class="btn btn-primary"
+                           th:href="@{/api/announcements/download/{file}(file=${announcement.pdfFileName})}"
+                           target="_blank"
+                           rel="noopener"
+                           th:if="${announcement.pdfFileName != null}">
+                            Download PDF
+                        </a>
+
+                        <span class="note" th:if="${announcement.pdfFileName == null}">No PDF uploaded.</span>
+
+                        <button type="button" th:data-id="${announcement.id}" id="deleteBtn"  class="btn btn-danger">Delete</button>
+                    </div>
+
+                    <div class="pdf-preview" th:if="${announcement.pdfFileName != null}">
+                        <div class="pdf-card">
+                            <div class="pdf-icon">
+                                📄
+                            </div>
+                            <div class="pdf-info">
+                                <h4>Project Document</h4>
+                                <p>
+                                    <span th:text="${announcement.pdfFileName}"></span>
+                                </p>
+                                <a class="pdf-download" 
+                                th:href="@{/api/announcements/download/{file}(file=${announcement.pdfFileName})}">
+                                    ⬇️ Download PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details">
+                    <h3>Details</h3>
+                    <dl>
+                        <dt>ID</dt>
+                        <dd th:text="${announcement.id}">1</dd>
+
+                        <dt>Title</dt>
+                        <dd th:text="${announcement.title}">Title</dd>
+
+                        <dt>Description</dt>
+                        <dd th:utext="${announcement.description}">Description</dd>
+
+                        <dt>File name</dt>
+                        <dd th:text="${announcement.pdfFileName != null ? announcement.pdfFileName : '—'}">file.pdf</dd>
+                    </dl>
+                </div>
+            </section>
+
+            <footer class="card-footer">
+                <a href="/admin" class="link-inline">Back to list</a>
+            </footer>
+        </article>
+
+    </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+</body>
+</html>
